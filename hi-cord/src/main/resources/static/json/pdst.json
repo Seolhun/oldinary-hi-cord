@@ -1,0 +1,204 @@
+{
+	"qnrSeqDescription": [
+		{
+			"seqId": 1,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 과음으로 일상생활을 하는데 지장을 받은 적이 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 2,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술에 취했을 때 생긴 일들을 기억하지 못하는 경우가 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 3,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 현재 술 문제 때문에 직장을 그만 두었음에도 불구하고 술을 마시고 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 4,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 가족이나 친구들에게 버림받았다고 생각한 적이 있다. ",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 5,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나의 가족이나 친구들은 내가 술 마시는 것에 대하여 걱정이나 불평을 한다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 6,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술 때문에 정신과 증상(우울증, 불면증, 불안, 헛것을 보거나 헛것을 들음)이 생겼다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 7,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 스스로 술을 끊어야 한다고 생각할 때가 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 8,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술에서 깨면 혹시 실수하지 않았었나 하는 걱정을 한다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 9,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "술을 마시고 싶은 충동이 일어나면 거의 참을 수가 없다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 10,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술을 조절해서 마시려고 하였지만, 결국 실패해서 많이 마시고야 만다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 11,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술 마시고 해서는 안 될 말이나 행동을 한 적이 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 12,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술 마실 건수를 찾는다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 13,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술을 마시고 싸우거나 물건을 부순 적이 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 14,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술이 깨면서 진땀, 손 떨림이나 불안, 좌절 혹은 불면을 경험한 적이 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 15,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 내 술 문제 때문에 후회해 본 적이 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 16,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 끊임없이 술을 마시고 싶은 욕구가 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 17,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나에게 가장 즐거운 일 중의 하나는 술을 마시는 것이다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 18,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 주변 사람들이 나의 음주에 대하여 잔소리하거나 비난하는 것을 귀찮아 한 적이 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 19,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술이 깨면서 공포(섬망)나 몸이 심하게 떨리는 것을 경험하거나 혹은 헛것을 보거나 헛소리를 들은 적이 있다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		},
+		{
+			"seqId": 20,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "나는 술 때문에 중요한 인간관계가 손상되었다.",
+			"seqAnswers": [
+				"0",
+				"1"
+			]
+		}
+	]
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
+<head>
+  <title>MyInfo</title>
+  <link rel="stylesheet" href="/css/page/price.css"/>
+</head>
+	<div layout:fragment="content">
+		<div>
+	    	<h1>My Information</h1>
+	    </div>
+	    <div class="col-sm-12">
+	    	<div th:if="${#user}==null" class="col-sm-12">
+				<div>가격 서비스가 없습니다.</div> 
+			</div>
+			
+			<div th:object="${user}">
+				<div class="col-sm-3 price-div">
+					<div th:value="*{id}"></div>
+					<div th:text="*{name}"></div>
+					<div th:text="*{phone}"></div>
+				    <div th:text="*{creationDate}"></div>
+					<div th:each="price : *{paidHistoryList}">
+                		<p th:text="${price.id}"></p>
+            		</div>
+				    <!-- 
+				    <div th:object="${paidHistory}">
+				    	<div th:text="${id}"></div>
+				    </div>
+				     -->
+			   </div>
+		   </div>
+	    </div>
+	    <script type="text/javascript" src="/js/page/price.js"></script>
+	</div>
+</html>

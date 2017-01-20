@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
+<head>
+  <title>Sign up</title>
+  <link rel="stylesheet" href="/css/page/user.css"/>
+</head>
+	<div layout:fragment="content">
+	    <link th:replace="/views/user/agree"></link>
+		<form th:object="${user}" th:action="@{/signup}" id="formSignup" method="POST">
+			<div class="col-sm-12 text-center">
+		    	<div class="col-sm-12 margin-bottom-10">
+	   		    	<div>
+	   		    		<b th:text="#{text.email}" class="margin-right-20"></b>
+						<input type="email" name="email" id="email" th:value="${user.email}" class="for-center-input form-control" placeholder="Email."/>
+						<button type="button" id="emailDupl" class="btn btn-info" disabled="disabled"><span th:text="#{text.dupl}"></span></button>
+					</div>
+					<div class="errorMsg" id="emailMsg"></div>
+					<p class="errorMsg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+		    	</div>
+		    	
+		    	<div class="col-sm-12 margin-bottom-10">
+			    	<div>
+			    		<b th:text="#{text.name}" class="margin-right-20"></b>
+						<input type="text" name="name" th:value="${user.name}" class="for-center-input form-control" placeholder="Name."/>
+			    	</div>
+			    </div>
+			    
+	  		    	<div class="col-sm-12 margin-bottom-10">
+			    	<div>
+			    		<b th:text="#{text.password}" class="margin-right-20"></b>
+						<input type="password" name="password" th:value="${user.password}" class="for-center-input form-control" placeholder="Password."/>
+						<p class="erros-red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+			    	</div>
+			    </div>
+			    
+	  		    	<div class="col-sm-12 margin-bottom-10">
+			    	<div>
+			    		<b th:text="#{text.phone}" class="margin-right-20"></b>
+						<input type="text" name="phone" id="phone" th:value="${user.phone}" class="for-center-input form-control" placeholder="Phone."/>
+						<button type="button" id="phoneDupl" class="btn btn-info" disabled="disabled"><span th:text="#{text.dupl}"></span></button>
+			    	</div>
+			    	<div class="errorMsg" id="phoneMsg"></div>
+			    	<p class="errorMsg" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
+			    </div>
+			    
+				<div class="col-sm-12 margin-bottom-20">
+					<p><b><span th:text="#{text.agree}"></span></b></p>
+					<p><b><span th:text="#{text.important}"></span></b><span th:text="#{text.important2}"></span></p>
+		    		<div>
+	    				<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{text.sms}"></span>
+	    				<input type="checkbox" name="receiveEmail" value="1">
+	    				<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{text.email}"></span>
+	    				<input type="checkbox" name="receiveSMS" value="1">
+	    			</div>
+				</div>
+			    <div class="col-sm-12 margin-bottom-10">
+		    		<input type="button" class="btn btn-danger" name="saveUser" value="Save">
+		    	</div>
+		    </div>
+		</form>
+	<script type="text/javascript" src="/js/page/user.js"></script>
+	</div>
+</html>

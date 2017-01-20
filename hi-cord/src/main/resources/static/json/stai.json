@@ -1,0 +1,484 @@
+{
+	"qnrSeqDescription": [
+		{
+			"seqId": 1,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 평안하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 2,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 안정된 느낌이다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 3,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 긴장감을 느낀다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 4,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 심하게 긴장된다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 5,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 마음이 편하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 6,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 속상하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 7,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 불행이 닥칠까 걱정이다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 8,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 흡족하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 9,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 두렵다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 10,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 편안하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 11,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 자신감을 느낀다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 12,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 안절부절 못한다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 13,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 초조하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 14,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": " 지금 나는 무엇을 어찌해야 좋을지 모르겠다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 15,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 느긋한 기분이다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 16,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 만족감을 느낀다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 17,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 불안하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 18,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 혼란스럽다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 19,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 마음이 동요되지 않고 편안하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 20,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "지금 나는 기분이 좋다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"조금 그렇다",
+				"상당히 그렇다",
+				"매우 그렇다"
+			]
+		},
+		{
+			"seqId": 21,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 유쾌하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 22,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 초조하고 안절부절 못한다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 23,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 자신에 만족한다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 24,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 쉽게 불안해지는 사람이다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 25,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 낙오자처럼 느낀다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 26,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 마음이 편하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 27,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 느긋하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 28,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 걱정이 많고 피로하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 29,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 사소한 일에도 너무 걱정한다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 30,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 행복하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 31,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 생각들로 마음이 혼란스럽다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 32,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 자신감이 없다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 33,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 안전하게 느낀다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 34,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 마음이 든든하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 35,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 평온하다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 36,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 만족스럽다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 37,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 대수롭지 않은 일에도 지나치게 괴로워한다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 38,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 낙심하면 심각하게 생각해서 마음에서 떨쳐내지 못한다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 39,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 안정되어 있는 사람이다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		},
+		{
+			"seqId": 40,
+			"seqType": 1,
+			"seqCount": 4,
+			"seqQuestion": "나는 당면한 걱정거리를 생각하면 긴장하거나 혼란스럽다",
+			"seqAnswers": [
+				"전혀 아니다",
+				"때때로 그렇다",
+				"자주 그렇다",
+				"거의 언제나 그렇다"
+			]
+		}
+	]
+}

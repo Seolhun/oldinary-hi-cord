@@ -1,0 +1,592 @@
+{
+	"qnrSeqDescription": [
+		{
+			"seqId": 1,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 슬프지 않다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 2,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 슬프다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 3,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 항상 슬퍼서 그것을 떨쳐버릴 수 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 4,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 너무나 슬프고 불행해서 도저히 견딜 수 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 5,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 앞날에 대해서 별로 낙심하지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 6,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 앞날에 대해서 비관적인 느낌이 든다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 7,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 앞날에 대해 기대할 것이 아무 것도 없다고 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 8,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나의 앞날은 아주 절망적이고 나아질 가망이 없다고 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 9,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 실패자라고 느끼지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 10,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 보통 사람들보다 더 많이 실패한 것 같다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 11,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "내가 살아온 과거를 뒤돌아보면, 생각나는 것은 실패뿐이다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 12,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 인간으로서 완전한 실패자인 것 같다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 13,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전과 같이 일상생활에 만족하고 있다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 14,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나의 일상생활은 예전처럼 즐겁지 않다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 15,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 더 이상 어떤 것에서도 참된 만족을 얻지 못한다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 16,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 모든 것이 다 불만스럽고 지겹다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 17,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 특별히 죄책감을 느끼지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 18,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 죄책감을 느낄 때가 많다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 19,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 거의 언제나 죄책감을 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 20,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 항상 언제나 죄책감을 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 21,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 벌을 받고 있다고 느끼지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 22,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 아마 벌을 받을 것 같다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 23,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 벌을 받아야 한다고 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 24,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 지금 벌을 받고 있다고 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 25,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 나 자신에게 실망하지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 26,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 나 자신에게 실망하고 있다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 27,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 나 자신이 혐오스럽다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 28,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 나 자신을 증오한다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 29,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "내가 다른 사람보다 못한 것 같지는 않다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 30,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 나의 약정이나 실수에 대해서 나 자신을 탓한다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 31,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "내가 한 일이 잘못되었을 때는 언제나 나를 탓한다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 32,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "일어나는 모든 나쁜 일들은 다 내 탓이다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 33,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 자살 같은 것은 생각하지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 34,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 자살할 생각은 하고 있으나, 실제로 하지는 않을 것이다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 35,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 자살하고 싶다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 36,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 기회만 있으면 자살하겠다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 37,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 평소보다 더 울지는 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 38,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 더 많이 운다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 39,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 요즈음 항상 운다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 40,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전에는 울고 싶을 때 울 수 있었지만, 요즈음은 울래야 울 기력조차    없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 41,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 요즈음 평소보다 더 짜증을 내는 편은 아니다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 42,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 더 쉽게 짜증이 나고 귀찮아 진다",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 43,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 요즈음 항상 짜증스럽다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 44,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "전에는 짜증스럽던 일에 요즘은 너무 지쳐서 짜증조차 나지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 45,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 다른 사람들에 대한 관심을 잃지 않고 있다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 46,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 다른 사람들에 대한 관심이 줄었다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 47,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 다른 사람들에 대한 관심이 거의 없어졌다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 48,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 다른 사람들에 대한 관심이 없어졌다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 49,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 평소처럼 결정을 잘 내린다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 50,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 결정을 미루는 때가 전보다 더 많다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 51,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전에 비해 결정 내리는 데에 더 큰 어려움을 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 52,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 더 이상 아무 결정도 내릴 수가 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 53,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 내 모습이 더 나빠졌다고 느끼지 않는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 54,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 나이 들어 보이거나 매력 없어 보일까봐 걱정한다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 55,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 내 모습이 매력 없게 변해 버렸다고 느낀다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 56,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 내가 추하게 보인다고 믿는다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 57,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전처럼 일을 할 수 있다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 58,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "어떤 일을 시작하는 데에 전보다 더 많은 노력이 든다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 59,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "무슨 일이든 하려면 나 자신을 매우 심하게 채찍질해야만 한다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 60,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전혀 아무 일도 할 수가 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 61,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 평소처럼 잠을 잘 수 있다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 62,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전처럼 잠을 자지 못한다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 63,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 한 두 시간 일찍 깨고 다시 잠들기 어렵다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 64,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 평소보다 몇 시간이나 일직 깨고 다시 잠들 수 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 65,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는  평소보다 더 피곤하지는 않다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 66,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 더 쉽게 피곤해진다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 67,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 무엇을 해도 언제나 피곤해진다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 68,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 너무나 피곤해서 아무 일도 할 수 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 69,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "내 식욕은 평소와 다름없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 70,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 요즈음 전보다 식욕이 좋지 않다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 71,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 요즈음 식욕이 많이 떨어졌다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 72,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "요즈음에는 전혀 식욕이 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 73,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "요즈음 체중이 별로 줄지 않았다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 74,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "전보다 몸무게가 2Kg 가량 줄었다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 75,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "전보다 몸무게가 5Kg 가량 줄었다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 76,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "전보다 몸무게가 7Kg 가량 줄었다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 77,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 건강에 대해 전보다 더 염려하고 있지는 않다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 78,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 여러 가지 통증, 소화불량, 변비 등과 같은 신체적 문제로 걱정하고    있다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 79,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 건강이 매우 염려되어 다른 일은 생각하기 힘들다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 80,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 건강이 너무 염려되어 다른 일은 아무 것도 생각할 수 없다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 81,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 요즈음 성(sex)에 대한 관심에 별다른 변화가 있는 것 같지는 않다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 82,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 성(sex)에 대한 관심이 줄었다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 83,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 전보다 성(sex)에 대한 관심이 상당히 줄었다.",
+			"seqAnswers": ""
+		},
+		{
+			"seqId": 84,
+			"seqType": 1,
+			"seqCount": 1,
+			"seqQuestion": "나는 성(sex)에 대한 관심을 완전히 잃었다.",
+			"seqAnswers": ""
+		}
+	]
+}

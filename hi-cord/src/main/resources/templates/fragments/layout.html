@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="keywords" th:content="iSyncBrain">
+		<meta id="csrfToken" th:content="${_csrf.token}" />
+		<meta id="csrfHeader" th:content="${_csrf.headerName}"/>
+		<!--  Each token will be replaced by their respective titles in the resulting page. -->
+		<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">New iSyncBrain</title>
+		<link th:replace="/fragments/style"/>
+	</head>
+	<header th:replace="/fragments/header"></header>
+	<body>
+    	<div class="container content margin-bottom-30">
+			<div class="row">
+				<div layout:fragment="content"></div>
+			</div>
+   		</div>
+	</body>
+	<footer th:replace="/fragments/footer"></footer>
+	<link th:replace="/fragments/js"></link>
+</html>

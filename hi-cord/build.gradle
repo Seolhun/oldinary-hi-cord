@@ -1,0 +1,69 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+
+jar {
+    manifest {
+        attributes  'Title': 'Reqeust And Header Tester', 'Version': 1.0, 'Main-Class': 'hello.Application'
+    }
+    baseName 'hi-cord'
+    dependsOn configurations.runtime
+    from {
+        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven {
+		url "https://repository.jboss.org/nexus/content/repositories/releases"
+	}
+}
+dependencies {
+	//Spring Boot
+    compile ('org.springframework.boot:spring-boot-starter')
+    compile ('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-starter-mail")
+    
+	compile('org.springframework.boot:spring-boot-starter-security')
+	//compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.1.RELEASE'
+	
+	//View Template thymeleaf
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	
+	//JPA
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+	//MariaDB
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	runtime('mysql:mysql-connector-java')
+	
+	//Lombok
+	compile("org.projectlombok:lombok:1.16.12")
+	
+	//Front Compile
+	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
+	compile group: 'org.webjars', name: 'bootstrap', version: '3.3.6'
+	compile group: 'org.webjars', name: 'jquery', version: '2.2.4'
+
+	//for TEST
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+	
+	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+}

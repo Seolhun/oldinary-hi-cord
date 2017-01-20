@@ -1,0 +1,12 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+	<div class="container">
+  		<div class="row">
+  			<div class="col-sm-12">
+	    		<p class="navbar-text"><a href="www.imedisyn.com">iSyncBrain</a> &copy; 
+	    		<put-date th:text=${#dates.year(#dates.createNow())}></put-date> 
+	    		| Connecting Problems & Solutions.</p> 
+	    	</div>
+		</div>
+	</div>
+</nav>

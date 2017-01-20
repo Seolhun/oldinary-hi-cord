@@ -1,0 +1,90 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/layout/layout">
+<head>
+  <title>Spring Boot CRUD Example</title>
+</head>
+<body>
+	<div layout:fragment="content">
+	
+	<!-- 게시판 목록 Data -->
+	   <div class="row"  style="margin-bottom:50px;">
+	      <div class="col-md-offset-2 col-md-8">
+	            <div class="panel panel-success">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">게시판</h3>
+				  </div>
+				  <a th:href="@{|/board/${tableName}/add|}"><button class="btn btn-success">글쓰기</button></a>
+				     <div class="panel-body">
+				              <table class="table table-bordered">
+								<thead>
+								   <tr class="btn-success">
+								     <th>번호</th>
+								     <th>구분</th>
+								     <th>제목</th>
+								     <th>작성자</th>
+								     <th>작성일</th>
+								     <th>조회수</th>
+								     <th></th>
+								   </tr>
+								</thead>
+								<tbody>
+								     <tr th:if="${#lists.isEmpty(boards)}" class="btn-warning">
+								        <td colspan="5" align="center">작성된 글이 없습니다.</td> 
+								     </tr>
+									  <tr th:each="i : ${boards}">
+									    <td th:text="${i.id}"></td>
+									    <td th:text="${i.boardType}"></td>
+									    <td><a th:href="@{|/board/${tableName}/detail/{id}|(id=${i.id})}" th:text="${i.subject}"></a></td>
+									    <td th:text="${i.createdBy}"></td>
+									    <td th:text="${i.creationDate}"></td>
+									    <td th:text="${i.hits}"></td>
+									    <td align="center">
+									       <a th:href="@{|/board/${tableName}/edit/{id}|(id=${i.id})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
+									       <a th:href="@{|/board/${tableName}/delete/{id}|(id=${i.id})}"><span class="glyphicon glyphicon-trash"></span></a>
+									    </td>
+									  </tr>
+								</tbody>
+							</table>
+				      </div>
+				          
+				</div>
+				
+				
+				<div class="panel-footer">
+					<div class="text-center paging">
+						<ul class="pagination text-center" role="navigation" aria-label="Pagination">
+						  <li><a id="first" class="pagination-previous <c:if test="${paging.cPage == 1}">disabled</c:if>" <c:if test="${paging.cPage != 1}">href="${table}/${paging.tableName}?cPage=1"</c:if> aria-label="Previous page">${text['board.start']}</a></li>
+						  <li><a id="previous" class="pagination-previous <c:if test="${paging.cPage == 1}">disabled</c:if>" <c:if test="${paging.cPage != 1}">href="${table}/${paging.tableName}?cPage=${paging.prev_cPage}"</c:if>>${text['board.previous']}</a></li>
+							<c:forEach var="i" begin="${paging.blockStartNo}" end="${paging.blockEndNo}" varStatus="loop">
+								<c:choose>
+									<c:when test="${i == paging.cPage }">
+										 <li >
+											 <a href="${table}/${paging.tableName}?cPage=${i}" id="currentPage">
+												${i}
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										 <li><a href="${table}/${paging.tableName}?cPage=${i}" aria-label="Page ${i}">
+											<span class="cVal">${i}</span>
+										</a></li>
+									</c:otherwise>											
+								</c:choose>
+								<c:if test="${i < paging.blockEndNo}">
+									&nbsp;
+								</c:if>
+							</c:forEach> 				  
+						  <li><a class="pagination-next <c:if test="${paging.cPage >= paging.next_cPage}">disabled</c:if>" id="next" <c:if test="${paging.cPage < paging.next_cPage}">href="${table}/${paging.tableName}?cPage=${paging.next_cPage}"</c:if> aria-label="Next page">${text['board.next']}</a></li>
+						  <li><a class="pagination-next <c:if test="${paging.cPage >= paging.totalBlock}">disabled</c:if>" id="last" <c:if test="${paging.cPage < paging.totalBlock}">href="${table}/${paging.tableName}?cPage=${paging.totalBlock}"</c:if> aria-label="Next page">${text['board.end']}</a></li>  
+						</ul><br>
+					</div>				
+				
+				
+				
+				
+	       </div>
+	   </div>
+   
+	</div>
+</body>
+</html>

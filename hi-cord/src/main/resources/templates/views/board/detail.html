@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
+<head>
+  <title>Spring Boot CRUD Example</title>
+</head>
+<body>
+	<div layout:fragment="content">
+	   <div class="container content">
+		      
+          <div class="panel panel-success">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><span th:text="#{board.datail}"></span></h3>
+			  </div>
+           </div>
+			  <div th:object="${item}">
+			     <div class="panel-body">
+					 번호:<div th:text=*{id}></div>
+					 제목:<div th:text=*{subject}></div>
+					 내용:<div th:utext="*{content}">Description</div>
+					 작성자:<div th:text=*{createdBy}></div>
+					 조회수:<div th:text=*{hits}></div>
+					 작성일:<div th:text=*{creationDate}></div>
+			     </div>
+			       
+			    <div class="panel-footer">
+					<a th:href="@{|/board/${tableName}/edit/{id}|(id=*{id})}" class="btn btn-success">수정</a>
+<!-- 					<a th:href="@{|/board/${tableName}/delete/{id}|(id=*{id})}" class="btn btn-default" id="delBtn">삭제</a> -->
+					<a th:onclick="'javascript:delBtn(\''+ *{id} +'\');'" class="btn btn-default" id="delBtn">삭제</a>
+					<a th:href="@{|/board/${tableName}/reply/{id}|(id=*{id})}" class="btn btn-default">답글</a>
+			    </div> 
+			 </div> 
+		  </div>
+		  
+		  
+		  <!-- 댓글 작성-->
+          <div class="panel panel-success">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><span th:text="댓글"></span></h3>
+			  </div>
+           </div>
+		  
+		  <div class="row">
+			  <form name="formCommentInsert" id="formCommentInsert">
+			  	<div class="col-md-2">
+			  		<input type="text" class="form-control" name="createdBy" id="createdBy" placeholder="작성자 이름." value="홍길동"/>
+			  	</div>
+			  	<div class="col-md-8">
+		         <textarea rows="4" cols="50" name="content" id="content" class="form-control" placeholder="내용을 입력하세요.">댓글</textarea>
+		        </div>
+		        <div class="col-md-2">
+		         <input type="button" class="btn btn-danger pull-right" value="댓글작성" th:onclick="'javascript:commentInsert();'">
+		        </div>
+		       </form>		  	
+		  </div>
+		  <!-- 댓글 끝 -->
+		  
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+		    var messege = [[${editBoard}]];
+		    var tableName = [[${tableName}]];
+		    var id = [[${item.id}]];
+		/*]]>*/
+		</script>
+		<script type="text/javascript" src="/js/page/board_detail.js"></script>
+	</div><!-- end layout.content -->
+</body>
+</html>

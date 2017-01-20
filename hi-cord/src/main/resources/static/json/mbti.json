@@ -1,0 +1,404 @@
+{
+	"qnrSeqDescription": [
+		{
+			"seqId": 1,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "1",
+			"seqAnswers": [
+				"나는 말을 많이 하다 보니 실수할 때가 종종 있다.",
+				"나는 할 말이 없어 주변 사람들이 답답해 할 때가 있다."
+			]
+		},
+		{
+			"seqId": 2,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "2",
+			"seqAnswers": [
+				"나는 새로운 사람을 만나면 기분이 좋아진다.",
+				"나는 모르는 사람을 만나는 일이 피곤하다."
+			]
+		},
+		{
+			"seqId": 3,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "3",
+			"seqAnswers": [
+				"어떤 일에 대해 말하는 도중에 생각하고 대화 도중 결심할 때가 있다.",
+				"어떤 일에 대해 의견을 말하기에 앞서 신중히 생각하는 편이다."
+			]
+		},
+		{
+			"seqId": 4,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "4",
+			"seqAnswers": [
+				"나는 팀으로 일하는 것이 편하다.",
+				"나는 혼자 혹은 다른 사람 한 명 정도와 일하는 것이 편하다."
+			]
+		},
+		{
+			"seqId": 5,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "5",
+			"seqAnswers": [
+				"나는 생각이나 견해를 사람들에게 표현하기를 좋아한다.",
+				"나는 대체로 나의 삶, 생각, 견해를 내 안에 간직하는 편이다."
+			]
+		},
+		{
+			"seqId": 6,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "6",
+			"seqAnswers": [
+				"회의나 모임이 끝나면 말을 너무 많이 한 것 같다고 후회할 때가 있다.",
+				"회합이나 모임이 끝나고 나면 나의 생각을 이야기하지 않은 것을 후회할 때가 있다."
+			]
+		},
+		{
+			"seqId": 7,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "7",
+			"seqAnswers": [
+				"오랜 시간 혼자 일하다 보면 외롭고 지루하고 힘들다.",
+				"혼자 오랜 시간 일해도 외롭다거나 지루하지 않다."
+			]
+		},
+		{
+			"seqId": 8,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "8",
+			"seqAnswers": [
+				"일할 때 적막한 것보다는 어느 정도의 소리가 자극이 되기도 한다.",
+				"나는 시끄러운 환경에서 일을 제대로 할 수 없다."
+			]
+		},
+		{
+			"seqId": 9,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "9",
+			"seqAnswers": [
+				"말이 빠르고 목소리가 큰 편에 속한다.",
+				"목소리가 작고 조용하게 말한다."
+			]
+		},
+		{
+			"seqId": 10,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "10",
+			"seqAnswers": [
+				"나는 활동적인 편이다.",
+				"나는 집에 있는 것이 편하다."
+			]
+		},
+		{
+			"seqId": 11,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "11",
+			"seqAnswers": [
+				"나는 현실적이다.",
+				"나는 미래지향적이다."
+			]
+		},
+		{
+			"seqId": 12,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "12",
+			"seqAnswers": [
+				"나는 과거의 경험으로 판단한다.",
+				"나는 미래의 가능성으로 판단한다."
+			]
+		},
+		{
+			"seqId": 13,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "13",
+			"seqAnswers": [
+				"나는 사실적으로 표현을 잘한다.",
+				"나는 추상적으로 표현을 잘한다."
+			]
+		},
+		{
+			"seqId": 14,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "14",
+			"seqAnswers": [
+				"나는 구체적이다.",
+				"나는 은유적이다."
+			]
+		},
+		{
+			"seqId": 15,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "15",
+			"seqAnswers": [
+				"나는 상식적이다.",
+				"나는 창의적이다."
+			]
+		},
+		{
+			"seqId": 16,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "16",
+			"seqAnswers": [
+				"나는 갔던 길로 가는 것이 편하다.",
+				"나는 새로운 길이 재미있다."
+			]
+		},
+		{
+			"seqId": 17,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "17",
+			"seqAnswers": [
+				"나는 집안 일을 잘 할 줄 아는 편이다.",
+				"나는 집안 일이 서투르다."
+			]
+		},
+		{
+			"seqId": 18,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "18",
+			"seqAnswers": [
+				"나는 한 번 간 길도 잘 기억하는 편이다.",
+				"나는 한 번 간 길은 잘 기억하지 못하는 편이다."
+			]
+		},
+		{
+			"seqId": 19,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "19",
+			"seqAnswers": [
+				"나는 실제 경험을 좋아한다.",
+				"나는 공상을 좋아한다."
+			]
+		},
+		{
+			"seqId": 20,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "20",
+			"seqAnswers": [
+				"나는 침착한 편이다.",
+				"나는 비약하는 편이다."
+			]
+		},
+		{
+			"seqId": 21,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "21",
+			"seqAnswers": [
+				"나는 분석적이다.",
+				"나는 감수성이 풍부하다."
+			]
+		},
+		{
+			"seqId": 22,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "22",
+			"seqAnswers": [
+				"나는 객관적이다.",
+				"나는 공감적이다."
+			]
+		},
+		{
+			"seqId": 23,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "23",
+			"seqAnswers": [
+				"나는 감정에 치우치지 않고 의사결정을 한다.",
+				"나는 상황을 생각하며 의사결정을 한다."
+			]
+		},
+		{
+			"seqId": 24,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "24",
+			"seqAnswers": [
+				"나는 이성과 논리로 행동한다.",
+				"나는 가치관과 느낌으로 행동한다."
+			]
+		},
+		{
+			"seqId": 25,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "25",
+			"seqAnswers": [
+				"나는 능력있다는 소리를 듣기 좋아한다.",
+				"나는 따뜻하다는 소리를 듣기 좋아한다."
+			]
+		},
+		{
+			"seqId": 26,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "26",
+			"seqAnswers": [
+				"나는 경쟁한다.",
+				"나는 양보한다."
+			]
+		},
+		{
+			"seqId": 27,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "27",
+			"seqAnswers": [
+				"나는 직선적인 말이 편하다.",
+				"나는 배려하는 말이 편하다."
+			]
+		},
+		{
+			"seqId": 28,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "28",
+			"seqAnswers": [
+				"나는 사건의 원인과 결과를 쉽게 파악한다.",
+				"나는 사람의 기분을 쉽게 파악한다."
+			]
+		},
+		{
+			"seqId": 29,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "29",
+			"seqAnswers": [
+				"사람들이 나를 차갑다고 하는 편이다.",
+				"사람들이 나를 따뜻하다고 하는 편이다."
+			]
+		},
+		{
+			"seqId": 30,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "30",
+			"seqAnswers": [
+				"나는 할 말은 하는 편이다.",
+				"나는 좋게 생각하는 편이다."
+			]
+		},
+		{
+			"seqId": 31,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "31",
+			"seqAnswers": [
+				"나는 결정에 대해서 잘 변경하지 않는 편이다.",
+				"나는 결정에 대해서 융통성이 있는 편이다."
+			]
+		},
+		{
+			"seqId": 32,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "32",
+			"seqAnswers": [
+				"나는 계획에 의해서 일 처리를 잘 하는 편이다.",
+				"나는 일 처리를 마지막에 벼락치기로 하는 편이다."
+			]
+		},
+		{
+			"seqId": 33,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "33",
+			"seqAnswers": [
+				"나는 계획된 여행이 편하다.",
+				"나는 갑자기 떠나는 여행이 편하다."
+			]
+		},
+		{
+			"seqId": 34,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "34",
+			"seqAnswers": [
+				"나는 팀으로 일하는 것이 편하다.",
+				"나는 혼자서 일하는 것이 편하다."
+			]
+		},
+		{
+			"seqId": 35,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "35",
+			"seqAnswers": [
+				"나는 입장이나 결정에 대해 명확하게 언급하는 것을 좋아한다.",
+				"나는 변화의 가능성을 생각하면서 자신의 입장을 임시적인 것으로 생각한다."
+			]
+		},
+		{
+			"seqId": 36,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "36",
+			"seqAnswers": [
+				"나는 조직적인 분위기에 일이 잘 된다.",
+				"나는 즐거운 분위기에 일이 잘 된다."
+			]
+		},
+		{
+			"seqId": 37,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "37",
+			"seqAnswers": [
+				"나는 계획적이고 조직적이다.",
+				"나는 순발력 있다."
+			]
+		},
+		{
+			"seqId": 38,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "38",
+			"seqAnswers": [
+				"나는 규범을 좋아한다.",
+				"나는 자유로운 것을 좋아한다."
+			]
+		},
+		{
+			"seqId": 39,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "39",
+			"seqAnswers": [
+				"나는 일할 때 친해진다.",
+				"나는 놀 때 친해진다."
+			]
+		},
+		{
+			"seqId": 40,
+			"seqType": 1,
+			"seqCount": 2,
+			"seqQuestion": "40",
+			"seqAnswers": [
+				"내 책상은 정리가 잘 되어 있다.",
+				"내 책상은 이것저것 벌어져 있다."
+			]
+		}
+	]
+}

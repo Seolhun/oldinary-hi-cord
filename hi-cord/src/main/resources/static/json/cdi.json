@@ -1,0 +1,301 @@
+{
+	"qnrSeqDescription": [
+		{
+			"seqId": 1,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "1",
+			"seqAnswers": [
+				"나는 가끔 슬프다.",
+				"나는 자주 슬프다.",
+				"나는 항상 슬프다."
+			]
+		},
+		{
+			"seqId": 2,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "2",
+			"seqAnswers": [
+				"나에게 제대로 되어가는 일이란 없다.",
+				"나는 일이 제대로 되어 갈지 확신할 수 없다.",
+				"나에겐 모든 일이 제대로 되어 갈 것이다."
+			]
+		},
+		{
+			"seqId": 3,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "3",
+			"seqAnswers": [
+				"나는 대체로 무슨 일이든지 웬만큼 한다.",
+				"나는 잘 못하는 일이 많다.",
+				"나는 모든 일을 잘못한다."
+			]
+		},
+		{
+			"seqId": 4,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "4",
+			"seqAnswers": [
+				"나에게는 재미있는 일들이 많다.",
+				"나는 재미있는 일들이 더러 있다.",
+				"나는 어떤 일도 전혀 재미가 없다."
+			]
+		},
+		{
+			"seqId": 5,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "5",
+			"seqAnswers": [
+				"나는 언제나 못된 행동을 한다.",
+				"나는 못된 행동을 할 때가 많다.",
+				"나는 가끔 못된 행동을 한다."
+			]
+		},
+		{
+			"seqId": 6,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "6",
+			"seqAnswers": [
+				"나는 가끔씩 나에게 나쁜 일이 일어나지 않을까 생각한다.",
+				"나는 나에게 나쁜 일이 일어날까 걱정한다.",
+				"나는 나에게 무서운 일이 일어나리라는 것을 확신한다."
+			]
+		},
+		{
+			"seqId": 7,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "7",
+			"seqAnswers": [
+				"나는 나 자신을 미워한다.",
+				"나는 나 자신을 좋아하지 않는다.",
+				"나는 나 자신을 좋아한다."
+			]
+		},
+		{
+			"seqId": 8,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "8",
+			"seqAnswers": [
+				"잘못되는 일은 모두 내 탓이다.",
+				"잘못되는 일 중 내 탓인 것이 많다.",
+				"잘못되는 일은 보통 내 탓이 아니다."
+			]
+		},
+		{
+			"seqId": 9,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "9",
+			"seqAnswers": [
+				"나는 죽을 생각을 하지 않는다.",
+				"나는 죽을 생각은 하지만 그렇게 하지는 않을 것이다.",
+				"나는 죽고 싶다."
+			]
+		},
+		{
+			"seqId": 10,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "10",
+			"seqAnswers": [
+				"나는 매일 울고 싶은 기분이다.",
+				"나는 울고 싶은 기분인 날도 있다.",
+				"나는 때때로 울고 싶은 기분이 든다."
+			]
+		},
+		{
+			"seqId": 11,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "11",
+			"seqAnswers": [
+				"이일 저 일로 해서 늘 성가시다.",
+				"이일 저 일로 해서 성가실 때가 많다.",
+				"간혹 이일 저 일로 해서 성가실 때가 있다."
+			]
+		},
+		{
+			"seqId": 12,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "12",
+			"seqAnswers": [
+				"나는 사람들과 함께 있는 것이 좋다.",
+				"나는 사람들과 함께 있는 것이 싫을 때가 많다.",
+				"나는 사람들과 함께 있는 것을 전혀 원치 않는다."
+			]
+		},
+		{
+			"seqId": 13,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "13",
+			"seqAnswers": [
+				"나는 어떤 일에 대한 결정을 내릴 수가 없다.",
+				"나는 어떤 일에 대한 결정을 내리기가 어렵다.",
+				"나는 쉽게 결정을 내린다."
+			]
+		},
+		{
+			"seqId": 14,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "14",
+			"seqAnswers": [
+				"나는 괜찮게 생겼다.",
+				"나는 못생긴 구석이 약간 있다.",
+				"나는 못생겼다."
+			]
+		},
+		{
+			"seqId": 15,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "15",
+			"seqAnswers": [
+				"나는 학교 공부를 해 내려면 언제나 노력하여야만 한다.",
+				"나는 학교 공부를 해 내려면 많이 노력하여야만 한다.",
+				"나는 별로 어렵지 않게 학교 공부를 해 낼 수 있다."
+			]
+		},
+		{
+			"seqId": 16,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "16",
+			"seqAnswers": [
+				"나는 매일 밤 잠들기가 어렵다.",
+				"나는 잠들기 어려운 밤이 많다.",
+				"나는 잠을 잘 잔다."
+			]
+		},
+		{
+			"seqId": 17,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "17",
+			"seqAnswers": [
+				"나는 가끔 피곤하다.",
+				"나는 자주 피곤하다.",
+				"나는 언제나 피곤하다."
+			]
+		},
+		{
+			"seqId": 18,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "18",
+			"seqAnswers": [
+				"나는 밥맛이 없을 때가 대부분이다.",
+				"나는 밥맛이 없을 때가 많다.",
+				"나는 밥맛이 좋다."
+			]
+		},
+		{
+			"seqId": 19,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "19",
+			"seqAnswers": [
+				"나는 몸이 쑤시고 아프다든지 하는 것에 대해 걱정하지 않는다.",
+				"나는 몸이 쑤시고 아픈 것에 대해 걱정할 때가 많다.",
+				"나는 몸이 쑤시고 아픈 것에 대해 항상 걱정한다."
+			]
+		},
+		{
+			"seqId": 20,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "20",
+			"seqAnswers": [
+				"나는 외롭다고 느낀다.",
+				"나는 자주 외롭다고 느낀다.",
+				"나는 항상 외롭다고 느낀다."
+			]
+		},
+		{
+			"seqId": 21,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "21",
+			"seqAnswers": [
+				"나는 학교 생활이 재미있었던 적이 없다.",
+				"나는 가끔씩 학교 생활이 재미있다.",
+				"나는 학교 생활이 재미있을 때가 많다."
+			]
+		},
+		{
+			"seqId": 22,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "22",
+			"seqAnswers": [
+				"나는 친구가 많다.",
+				"나는 친구가 좀 있지만 더 있었으면 한다.",
+				"나는 친구가 하나도 없다."
+			]
+		},
+		{
+			"seqId": 23,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "23",
+			"seqAnswers": [
+				"나의 학교 성적은 괜찮다.",
+				"나의 학교성적은 예전처럼 좋지는 않다.",
+				"예전에 내가 무척 잘하던 과목도 요즈음에는 성적이 뚝 떨어졌다."
+			]
+		},
+		{
+			"seqId": 24,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "24",
+			"seqAnswers": [
+				"나는 절대로 다른 아이들처럼 착할 수가 없다.",
+				"나는 내가 마음만 먹으면 다른 아이들처럼 착할 수가 있다.",
+				"나는 다른 아이들처럼 착하다."
+			]
+		},
+		{
+			"seqId": 25,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "25",
+			"seqAnswers": [
+				"나를 진심으로 좋아하는 사람은 아무도 없다.",
+				"나를 진심으로 좋아하는 사람이 있을지 확실하지 않다.",
+				"분명히 나를 진심으로 좋아하는 사람이 있다."
+			]
+		},
+		{
+			"seqId": 26,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "26",
+			"seqAnswers": [
+				"나는 나에게 시킨 일을 대체로 한다.",
+				"나는 나에게 시킨 일을 대체로 하지 않는다.",
+				"나는 나에게 시킨 일을 절대로 하지 않는다."
+			]
+		},
+		{
+			"seqId": 27,
+			"seqType": 1,
+			"seqCount": 3,
+			"seqQuestion": "27",
+			"seqAnswers": [
+				"나는 사람들과 사이 좋게 잘 지낸다.",
+				"나는 사람들과 잘 싸운다.",
+				"나는 사람들과 언제나 싸운다."
+			]
+		}
+	]
+}

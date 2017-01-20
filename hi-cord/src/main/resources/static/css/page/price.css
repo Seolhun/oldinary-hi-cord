@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.agree-information {
+	overflow: auto;
+	height: 300px;
+	border: 1px thin gray;
+}
+
+.for-center-input {
+	width: 40%;
+	display: inline;
+}
+
+.price-div {
+	border: solid 1px gray;
+}
+
+.price-div:hover {
+    background-color: #5bc0de;
+}
