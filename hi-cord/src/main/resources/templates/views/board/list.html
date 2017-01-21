@@ -33,13 +33,13 @@
 							  <tr th:each="i : ${boards}">
 							    <td th:text="${i.id}"></td>
 							    <td th:text="${i.boardType}"></td>
-							    <td><a th:href="@{|/board/${tableName}/detail/{id}|(id=${i.id})}" th:text="${i.subject}"></a></td>
+							    <td><a th:href="@{|/talk/${tableName}/detail/{id}|(id=${i.id})}" th:text="${i.subject}"></a></td>
 							    <td th:text="${i.createdBy}"></td>
 							    <td th:text="${i.creationDate}"></td>
 							    <td th:text="${i.hits}"></td>
 							    <td align="center">
-							       <a th:href="@{|/board/${tableName}/edit/{id}|(id=${i.id})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
-							       <a th:href="@{|/board/${tableName}/delete/{id}|(id=${i.id})}"><span class="glyphicon glyphicon-trash"></span></a>
+							       <a th:href="@{|/talk/${tableName}/edit/{id}|(id=${i.id})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
+							       <a th:href="@{|/talk/${tableName}/delete/{id}|(id=${i.id})}"><span class="glyphicon glyphicon-trash"></span></a>
 							    </td>
 <!-- 									    <td th:text="${i.replyListInBoard.content}"></td> -->
 <!-- 											<tr th:if="${#lists.isEmpty(i.replyListInBoard)}" th:each="reply : ${#i.replyListInBoard}"> -->

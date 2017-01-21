@@ -79,10 +79,4 @@ public class UserServiceImpl implements UserService {
 		User user = findByEmail(email);
 		return (user == null || ((email == null && user.getEmail() != email)));
 	}
-
-	@Override
-	public boolean isUserPhoneUnique(String phone) {
-		User user = findByPhone(phone);
-		return (user == null || ((phone == null && user.getPhone() != phone )));
-	}
 }

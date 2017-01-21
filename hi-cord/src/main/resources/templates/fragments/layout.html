@@ -5,8 +5,8 @@
 		<meta id="csrfToken" th:content="${_csrf.token}" />
 		<meta id="csrfHeader" th:content="${_csrf.headerName}"/>
 		<!--  Each token will be replaced by their respective titles in the resulting page. -->
-		<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">New iSyncBrain</title>
-		<link th:replace="/fragments/style"/>
+		<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Hi-Cord</title>
+		<link th:replace="/fragments/resources/style"/>
 	</head>
 	<header th:replace="/fragments/header"></header>
 	<body>
@@ -17,5 +17,5 @@
    		</div>
 	</body>
 	<footer th:replace="/fragments/footer"></footer>
-	<link th:replace="/fragments/js"></link>
+	<link th:replace="/fragments/resources/js"></link>
 </html>

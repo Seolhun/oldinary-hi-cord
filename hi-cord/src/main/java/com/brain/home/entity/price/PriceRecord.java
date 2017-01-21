@@ -22,13 +22,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.brain.home.entity.user.User;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
 @Table(name = "PRICE_RECORD")
-@Getter
-@Setter
+@Data
 public class PriceRecord {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.brain.home.entity.board.Board;
-import com.brain.home.entity.board.Reply;
 import com.brain.home.entity.common.Paging;
 import com.brain.home.repository.board.BoardDAO;
 
@@ -41,7 +40,6 @@ public class BoardServiceImpl implements BoardService {
 			entity.setSubject(board.getSubject());
 			entity.setContent(board.getContent());
 		}
-
 		return entity;
 	}
 

@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,7 +25,7 @@ import com.brain.home.entity.file.FileData;
 import lombok.Data;
 
 @Entity
-@Table(name="BOARD")
+@Table(name = "BOARD")
 @Data
 public class Board {
 	@Id
@@ -37,7 +38,8 @@ public class Board {
 	private String subject;
 
 	@NotEmpty
-	@Column(name = "BOARD_CONTENT", nullable = false, length = 65535, columnDefinition="Text")
+	@Column(name = "BOARD_CONTENT", nullable = false)
+	@Lob
 	private String content;
 
 	@Column(name = "BOARD_HITS", length = 200)
@@ -72,7 +74,7 @@ public class Board {
 	private Date modificationDate;
 
 	@Column(name = "BOARD_DELCHECK")
-	private int delCheck = 1;
+	private int delCheck = 0;
 	
 	@OneToMany(mappedBy="boardInFile", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<FileData> fileListInBoard;

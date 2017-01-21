@@ -58,12 +58,15 @@ dependencies {
 	compile("org.projectlombok:lombok:1.16.12")
 	
 	//Front Compile
+	//WebJar
 	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
 	compile group: 'org.webjars', name: 'bootstrap', version: '3.3.6'
 	compile group: 'org.webjars', name: 'jquery', version: '2.2.4'
+	compile group: 'org.webjars.bower', name: 'angular', version: '1.6.1'
 
 	//for TEST
 	testCompile("org.springframework.boot:spring-boot-starter-test")
+
 	
 	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }

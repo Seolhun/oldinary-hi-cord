@@ -33,16 +33,6 @@
 			    	</div>
 			    </div>
 			    
-	  		    	<div class="col-sm-12 margin-bottom-10">
-			    	<div>
-			    		<b th:text="#{text.phone}" class="margin-right-20"></b>
-						<input type="text" name="phone" id="phone" th:value="${user.phone}" class="for-center-input form-control" placeholder="Phone."/>
-						<button type="button" id="phoneDupl" class="btn btn-info" disabled="disabled"><span th:text="#{text.dupl}"></span></button>
-			    	</div>
-			    	<div class="errorMsg" id="phoneMsg"></div>
-			    	<p class="errorMsg" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
-			    </div>
-			    
 				<div class="col-sm-12 margin-bottom-20">
 					<p><b><span th:text="#{text.agree}"></span></b></p>
 					<p><b><span th:text="#{text.important}"></span></b><span th:text="#{text.important2}"></span></p>

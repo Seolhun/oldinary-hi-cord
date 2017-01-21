@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Data;
 
 @Entity
-@Table(name="REPLY")
+@Table(name = "REPLY")
 @Data
 public class Reply {
 	@Id
@@ -67,7 +67,7 @@ public class Reply {
 	private Date modificationDate;
 
 	@Column(name = "REPLY_DELCHECK")
-	private int delCheck = 1;
+	private int delCheck = 0;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(foreignKey=@ForeignKey(name="REPLY_BOARD_FK"), name="REPLY_BOARD_ID", referencedColumnName="BOARD_ID", nullable = false)

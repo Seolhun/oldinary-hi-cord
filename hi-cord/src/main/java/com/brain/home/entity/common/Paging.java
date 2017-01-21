@@ -1,8 +1,10 @@
 package com.brain.home.entity.common;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Paging {
 	// 현재 페이지
 	private int cPage;
@@ -30,8 +32,6 @@ public class Paging {
 	private int blockEndNo;
 	// 게시판 종류
 	private String entityName;
-	// 게시판 별 해당 게시판 제목
-	private String pfName;
 	private String question;
 	private int prev_cPage;
 	private int next_cPage;
@@ -50,23 +50,12 @@ public class Paging {
 		this.sDate = sDate;
 	}
 
-	public Paging(int currentPage, int sType, String sText, int sDate, int limit, String entityName, String pfName) {
+	public Paging(int currentPage, int sType, String sText, int sDate, int limit, String entityName) {
 		this.cPage = currentPage;
 		this.sType = sType;
 		this.sText = sText;
 		this.sDate = sDate;
 		this.limit = limit;
 		this.entityName = entityName;
-		this.pfName = pfName;
 	}
-	
-	public Paging(int currentPage, int sType, String sText, int sDate, int limit, String pfName) {
-		this.cPage = currentPage;
-		this.sType = sType;
-		this.sText = sText;
-		this.sDate = sDate;
-		this.limit = limit;
-		this.pfName = pfName;
-	}
-
 }

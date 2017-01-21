@@ -27,7 +27,5 @@ public interface UserService {
 	
 	boolean isUserEmailUnique(String email);
 
-	boolean isUserPhoneUnique(String phone);
-
 	int getCount(Paging paging);
 }

@@ -2,8 +2,6 @@ package com.brain.home.repository.board;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
@@ -13,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.brain.home.entity.board.Board;
-import com.brain.home.entity.board.Reply;
 import com.brain.home.entity.common.Paging;
 import com.brain.home.repository.AbstractDao;
 
@@ -56,7 +53,6 @@ public class BoardDAOImpl extends AbstractDao<Integer, Board> implements BoardDA
 		String sText = paging.getSText();
 		int limit = paging.getLimit();
 		String entityName = paging.getEntityName();
-		String pfName = paging.getPfName();
 		
 		// 검색 로직
 		Criteria criteria = createEntityCriteria().addOrder(Order.desc("id")).setFirstResult((cPage - 1) * limit)
@@ -71,10 +67,6 @@ public class BoardDAOImpl extends AbstractDao<Integer, Board> implements BoardDA
 		// 클래스에 객체 명을 따라간다.
 		if (entityName != null) {
 			criteria.add(Restrictions.eq("entityName", entityName));
-		}
-
-		if (pfName != null) {
-			criteria.add(Restrictions.eq("pfName", pfName));
 		}
 
 		if (paging.getSType() != 0 && sType == 1) {

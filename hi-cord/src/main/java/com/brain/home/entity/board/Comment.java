@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Data;
 
 @Entity
-@Table(name="COMMENT")
+@Table(name = "COMMENT")
 @Data
 public class Comment {
 	@Id
@@ -31,7 +31,7 @@ public class Comment {
 	private Long id;
 
 	@NotEmpty
-	@Column(name = "COMMENT_CONTENT", nullable = false, length = 65535, columnDefinition="Text")
+	@Column(name = "COMMENT_CONTENT", nullable = false, length = 300)
 	private String content;
 
 	@Column(name = "COMMENT_LIKES")
@@ -60,7 +60,7 @@ public class Comment {
 	private Date modificationDate;
 
 	@Column(name = "COMMENT_DELCHECK", nullable = false)
-	private int delCheck = 1;
+	private int delCheck = 0;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(foreignKey=@ForeignKey(name="COMMENT_BOARD_FK"), name="COMMENT_BOARD_ID", referencedColumnName="BOARD_ID")

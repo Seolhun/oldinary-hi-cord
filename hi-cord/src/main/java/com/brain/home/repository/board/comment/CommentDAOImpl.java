@@ -53,7 +53,6 @@ public class CommentDAOImpl extends AbstractDao<Integer, Comment> implements Com
 		String sText = paging.getSText();
 		int limit = paging.getLimit();
 		String entityName = paging.getEntityName();
-		String pfName = paging.getPfName();
 		
 		// 검색 로직
 		Criteria criteria = createEntityCriteria().addOrder(Order.desc("id")).setFirstResult((cPage - 1) * limit)
@@ -68,10 +67,6 @@ public class CommentDAOImpl extends AbstractDao<Integer, Comment> implements Com
 		// 클래스에 객체 명을 따라간다.
 		if (entityName != null) {
 			criteria.add(Restrictions.eq("entityName", entityName));
-		}
-
-		if (pfName != null) {
-			criteria.add(Restrictions.eq("pfName", pfName));
 		}
 
 		if (paging.getSType() != 0 && sType == 1) {
