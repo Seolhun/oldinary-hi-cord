@@ -40,9 +40,7 @@ dependencies {
     compile ('org.springframework.boot:spring-boot-starter')
     compile ('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-mail")
-    
 	compile('org.springframework.boot:spring-boot-starter-security')
-	//compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.1.RELEASE'
 	
 	//View Template thymeleaf
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')

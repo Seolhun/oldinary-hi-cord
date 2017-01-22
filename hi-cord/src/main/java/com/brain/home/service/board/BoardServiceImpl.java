@@ -10,24 +10,25 @@ import com.brain.home.entity.board.Board;
 import com.brain.home.entity.common.Paging;
 import com.brain.home.repository.board.BoardDAO;
 
-@Service("boardService")
+
 @Transactional
+@Service("boardService")
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	protected BoardDAO dao;
+	protected BoardDAO boardDao;
 
 	@Override
 	public void save(Board board) {
-		dao.save(board);
+		boardDao.save(board);
 	}
 
 	@Override
 	public Boolean delete(Long id) {
-		Board temp = dao.findById(id);
+		Board temp = boardDao.findById(id);
 		
 		if (temp != null) {
-			dao.delete(temp.getId());
+			boardDao.delete(temp.getId());
 			return true;
 		}
 		return false;
@@ -35,7 +36,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board update(Board board) {
-		Board entity = dao.findById(board.getId());
+		Board entity = boardDao.findById(board.getId());
 		if (entity != null) {
 			entity.setSubject(board.getSubject());
 			entity.setContent(board.getContent());
@@ -45,17 +46,17 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board findById(Long id) {
-		return dao.findById(id);
+		return boardDao.findById(id);
 	}
 
 	@Override
 	public List<Board> findAll(Paging paging) {
-		return dao.findAll(paging);
+		return boardDao.findAll(paging);
 	}
 
 	@Override
 	public int getCount(Paging paging) {
-		return dao.getCount(paging);
+		return boardDao.getCount(paging);
 	}
 
 }

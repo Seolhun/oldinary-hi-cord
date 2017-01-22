@@ -9,10 +9,10 @@
 		      
           <div class="panel panel-success">
 			  <div class="panel-heading">
-			    <h3 class="panel-title"><span th:text="#{board.datail}"></span></h3>
+			    <h3 class="panel-title"><span th:text="#{text.board.datail}"></span></h3>
 			  </div>
            </div>
-			  <div th:object="${item}">
+			  <div th:object="${board}">
 			     <div class="panel-body">
 					 번호:<div th:text=*{id}></div>
 					 제목:<div th:text=*{subject}></div>
@@ -23,10 +23,10 @@
 			     </div>
 			       
 			    <div class="panel-footer">
-					<a th:href="@{|/board/${tableName}/edit/{id}|(id=*{id})}" class="btn btn-success">수정</a>
-<!-- 					<a th:href="@{|/board/${tableName}/delete/{id}|(id=*{id})}" class="btn btn-default" id="delBtn">삭제</a> -->
+					<a th:href="@{|/talk/${tableName}/edit/{id}|(id=*{id})}" class="btn btn-success">수정</a>
+<!-- 					<a th:href="@{|/talk/${tableName}/delete/{id}|(id=*{id})}" class="btn btn-default" id="delBtn">삭제</a> -->
 					<a th:onclick="'javascript:delBtn(\''+ *{id} +'\');'" class="btn btn-default" id="delBtn">삭제</a>
-					<a th:href="@{|/board/${tableName}/reply/{id}|(id=*{id})}" class="btn btn-default">답글</a>
+					<a th:href="@{|/talk/${tableName}/reply/{id}|(id=*{id})}" class="btn btn-default">답글</a>
 			    </div> 
 			 </div> 
 		  </div>
@@ -53,15 +53,6 @@
 		       </form>		  	
 		  </div>
 		  <!-- 댓글 끝 -->
-		  
-		<script th:inline="javascript">
-		/*<![CDATA[*/
-		    var messege = [[${editBoard}]];
-		    var tableName = [[${tableName}]];
-		    var id = [[${item.id}]];
-		/*]]>*/
-		</script>
-		<script type="text/javascript" src="/js/page/board_detail.js"></script>
 	</div><!-- end layout.content -->
 </body>
 </html>

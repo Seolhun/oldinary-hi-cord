@@ -6,6 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Paging {
+	// 참조할 때의 엔티티 키 값
+	private Long id;
+	// 게시판 종류
+	private String tableName;
+
 	// 현재 페이지
 	private int cPage;
 	// 페이지 제한 수
@@ -30,14 +35,11 @@ public class Paging {
 	private int blockStartNo;
 	// 게시물 끝 블록번호
 	private int blockEndNo;
-	// 게시판 종류
-	private String entityName;
+
 	private String question;
 	private int prev_cPage;
 	private int next_cPage;
-	
-	private Long id;
-	
+
 	public Paging() {
 
 	}
@@ -50,12 +52,12 @@ public class Paging {
 		this.sDate = sDate;
 	}
 
-	public Paging(int currentPage, int sType, String sText, int sDate, int limit, String entityName) {
+	public Paging(int currentPage, int sType, String sText, int sDate, int limit, String tableName) {
 		this.cPage = currentPage;
 		this.sType = sType;
 		this.sText = sText;
 		this.sDate = sDate;
 		this.limit = limit;
-		this.entityName = entityName;
+		this.tableName = tableName;
 	}
 }

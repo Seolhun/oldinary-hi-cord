@@ -73,41 +73,38 @@ public class CommonFnImpl implements CommonFn {
 
 	@Override
 	public Paging setPaging(Paging paging) {
-		int cPage = paging.getCPage();
+		int blockLimit = 10; // 페이지 당 보여줄 블록 번호 limit
+								// [1],[2],[3],[4],[5],[6],[7],[8],[9],[10]
+		int totalPage = paging.getTotalPage();
 		int limit = paging.getLimit();
-		int totalCount = paging.getTotalCount();
-		int totalPage = (int) (Math.ceil(totalCount / (double) limit));
+		int cPage = paging.getCPage();
 
-		// 전체 페이지보다 많으면 안되기 때문에 미리 처리한다.
-		cPage = cPage > totalPage ? totalPage : cPage;
-		int blockLimit = 10;
-		int totalPageBlock = (int) (Math.ceil(totalPage / (double) blockLimit));
+		int totalBlock = totalPage / limit + (totalPage % limit > 0 ? 1 : 0); // 전체
+		int currentBlock = cPage / blockLimit + (cPage % blockLimit > 0 ? 1 : 0);// 현재
+		int blockEndNo = currentBlock * blockLimit;
+		int blockStartNo = blockEndNo - (blockLimit - 1);
 
-		// 전체 페이지 블록보다 많으면 안되기 때문에 미리 처리한다.
-		int currentBlock = (int) (Math.ceil(cPage / (double) blockLimit));
-		currentBlock = currentBlock > totalPageBlock ? totalPageBlock : currentBlock;
+		if (blockEndNo > totalBlock) {
+			blockEndNo = totalBlock;
+		}
 
-		int blockStartNo = (currentBlock * 10) - 9 < 0 ? 1 : (currentBlock * 10) - 9;
-		int blockEndNo = currentBlock * 10 > totalPage ? totalPage : currentBlock * 10;
+		int prev_cPage = blockStartNo - blockLimit; // << *[이전]*
+		int next_cPage = blockStartNo + blockLimit; // *[다음]* >>
 
-		paging.setCPage(cPage);
-		paging.setLimit(limit);
-		paging.setTotalCount(totalCount);
-		paging.setTotalPage(totalPage);
+		if (prev_cPage < 1) {
+			prev_cPage = 1;
+		}
+
+		if (next_cPage > totalBlock) {
+			next_cPage = totalBlock / blockLimit * blockLimit + 1;
+		}
 		paging.setBlockLimit(blockLimit);
-		paging.setTotalBlock(totalPageBlock);
 		paging.setCurrentBlock(currentBlock);
+		paging.setTotalBlock(totalBlock);
 		paging.setBlockEndNo(blockEndNo);
 		paging.setBlockStartNo(blockStartNo);
-
-		System.out.println("limit : " + limit);
-		System.out.println("totalCount : " + totalCount);
-		System.out.println("totalPage : " + totalPage);
-		System.out.println("totalPageBlock : " + totalPageBlock);
-		System.out.println("currentBlock : " + currentBlock);
-		System.out.println("blockEndNo : " + blockEndNo);
-		System.out.println("blockStartNo : " + blockStartNo);
-
+		paging.setNext_cPage(next_cPage);
+		paging.setPrev_cPage(prev_cPage);
 		return paging;
 	}
 

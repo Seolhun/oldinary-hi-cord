@@ -2,6 +2,7 @@ package com.brain.home.controller.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -45,7 +46,7 @@ public class BoardController {
 	private CommonFn cFn;
 
 	@RequestMapping(value = { "/{tableName}" }, method = RequestMethod.GET)
-	public String boardList(Model model, HttpServletRequest request, @PathVariable("tableName") String tableName) {
+	public String boardList(Model model, HttpServletRequest request, @PathVariable("tableName") String tableName) throws Exception {
 
 		int currentPage = cFn.checkVDInt(request.getParameter("cPage"), 1);
 		int sType = cFn.checkVDInt(request.getParameter("sType"), -1);
@@ -56,12 +57,12 @@ public class BoardController {
 		Paging paging = new Paging(currentPage, sType, rawQuestion, sDate, limit, tableName);
 		int totalCount = boardService.getCount(paging);
 		paging.setTotalPage(totalCount);
-		setPaging(paging);
+		cFn.setPaging(paging);
 
 		//답글 객체 저장
-		ArrayList<Board> boardList = (ArrayList<Board>) boardService.findAll(paging);
+		List<Board> boardList = (ArrayList<Board>) boardService.findAll(paging);
 		for (int i = 0; i < boardList.size(); i++) {
-			ArrayList<Reply> replyList = (ArrayList<Reply>) replyService.findAll(paging);
+			List<Reply> replyList = (ArrayList<Reply>) replyService.findAll(paging);
 			boardList.get(i).setReplyListInBoard(replyList);
 		}
 		
@@ -69,14 +70,13 @@ public class BoardController {
 		model.addAttribute("boards", boardList);
 		model.addAttribute("tableName", tableName);
 		model.addAttribute("paging", paging);
-		
 		return "views/board/list";
 	}
 	
 	@Secured("SUPERADMIN")
 	@RequestMapping(value = "/{tableName}/detail/{path}", method = RequestMethod.GET)
 	public String boardDetail(Model model, @PathVariable("path") Long path, @PathVariable("tableName") String tableName, HttpServletRequest request, HttpServletResponse response) {
-		Board item = boardService.findById(path);
+		Board board = boardService.findById(path);
 
 		// 저장된 hit 쿠키 불러오기
 		Cookie cookies[] = request.getCookies();
@@ -91,22 +91,20 @@ public class BoardController {
 		}
 
 		// 조회수 증가
-		if (checkHitCookie(item, request, response)) {
-			item.setHits(item.getHits()+1);
-			boardService.update(item);
+		if (checkHitCookie(board, request, response)) {
+			board.setHits(board.getHits()+1);
+			boardService.update(board);
 		}
 
-		model.addAttribute("item", item);
+		model.addAttribute("board", board);
 		model.addAttribute("tableName", tableName);
 		return "views/board/detail";
 	}
 
 	@RequestMapping(value = "/{tableName}/add", method = RequestMethod.GET)
 	public String boardAdd(Model model, @PathVariable("tableName") String tableName) {
-
 		model.addAttribute("board", new Board());
 		model.addAttribute("tableName", tableName);
-
 		return "views/board/add";
 	}
 
@@ -115,17 +113,22 @@ public class BoardController {
 		try {
 			board.setBoardType(tableName);
 			boardService.save(board);
-
 			redirectAttributes.addFlashAttribute("saveBoard", "success");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("saveBoard", "unsuccess");
 		}
-
-		return "redirect:/board/" + tableName + "/";
+		return "redirect:/talk/" + tableName;
 	}
 	
-	@RequestMapping(value = "/edit/{path}", method = RequestMethod.POST)
-	public String boardUpdateIn(Model model, Board board, @PathVariable("path") Long path,
+	@RequestMapping(value = "/{tableName}/edit/{path}", method = RequestMethod.GET)
+	public String boardEditGet(Model model, @PathVariable("path") Long path, @PathVariable("tableName") String tableName) {
+		model.addAttribute("board", new Board());
+		model.addAttribute("tableName", tableName);
+		return "views/board/add";
+	}
+	
+	@RequestMapping(value = "/{tableName}/edit/{path}", method = RequestMethod.POST)
+	public String boardEditPost(Model model, Board board, @PathVariable("path") Long path,
 			@PathVariable("tableName") String tableName, final RedirectAttributes redirectAttributes) {
 		board.setId(path);
 		if (boardService.update(board) != null) {
@@ -137,12 +140,12 @@ public class BoardController {
 		} else {
 			redirectAttributes.addFlashAttribute("editBoard", "unsuccess");
 
-			return "redirect:/board/" + tableName + "/reply/" + path;
+			return "redirect:/talk/" + tableName + "/reply/" + path;
 		}
-		return "redirect:/board/" + tableName + "/detail/" + path;
+		return "redirect:/talk/" + tableName + "/detail/" + path;
 	}
 	
-	@RequestMapping(value = "/delete/ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/{tableName}/delete/ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public String boardAjaxDelete(@RequestBody Board board, HttpServletRequest request){
 		Board temp = boardService.findById(board.getId());
@@ -152,7 +155,7 @@ public class BoardController {
 		return "true";
 	}
 	
-	@RequestMapping(value = "/reply/{path}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{tableName}/reply/{path}", method = RequestMethod.POST)
 	public String replyAddIn(Reply reply, @PathVariable("path") Long path, @PathVariable("tableName") String tableName) {
 		
 		System.out.println(reply.getContent());
@@ -167,11 +170,11 @@ public class BoardController {
 		board.setReplyDepth(board.getReplyDepth()+1);
 		boardService.update(board);
 		
-		return "redirect:/board/" + tableName + "/";
+		return "redirect:/talk/" + tableName + "/";
 	}
 
 	/*----------- 댓글 기능 Start ---------------------------------------------------------------*/
-	@RequestMapping(value = "/comment/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/{tableName}/comment/add", method = RequestMethod.POST)
 	@ResponseBody
 	public void commentAjaxAdd(@RequestBody Comment comment, HttpServletRequest request){
 		System.out.println(comment.getContent());
@@ -180,45 +183,6 @@ public class BoardController {
 	
 	
 	/*----------- end 댓글 ---------------------------------------------------------------------*/
-
-	
-	
-	/*----------- 페이징 메소드 Start ------------------------------------------------------------*/
-	private Paging setPaging(Paging paging) {
-		int blockLimit = 10; // 페이지 당 보여줄 블록 번호 limit
-								// [1],[2],[3],[4],[5],[6],[7],[8],[9],[10]
-		int totalPage = paging.getTotalPage();
-		int limit = paging.getLimit();
-		int cPage = paging.getCPage();
-
-		int totalBlock = totalPage / limit + (totalPage % limit > 0 ? 1 : 0); // 전체
-		int currentBlock = cPage / blockLimit + (cPage % blockLimit > 0 ? 1 : 0);// 현재
-		int blockEndNo = currentBlock * blockLimit;
-		int blockStartNo = blockEndNo - (blockLimit - 1);
-
-		if (blockEndNo > totalBlock) {
-			blockEndNo = totalBlock;
-		}
-
-		int prev_cPage = blockStartNo - blockLimit; // << *[이전]*
-		int next_cPage = blockStartNo + blockLimit; // *[다음]* >>
-
-		if (prev_cPage < 1) {
-			prev_cPage = 1;
-		}
-
-		if (next_cPage > totalBlock) {
-			next_cPage = totalBlock / blockLimit * blockLimit + 1;
-		}
-		paging.setBlockLimit(blockLimit);
-		paging.setCurrentBlock(currentBlock);
-		paging.setTotalBlock(totalBlock);
-		paging.setBlockEndNo(blockEndNo);
-		paging.setBlockStartNo(blockStartNo);
-		paging.setNext_cPage(next_cPage);
-		paging.setPrev_cPage(prev_cPage);
-		return paging;
-	}
 	
 	private boolean checkHitCookie(Board board, HttpServletRequest request, HttpServletResponse response) {
 		// 쿠키에 담을 값을 가져오기 위함.(uri는 테이블 값을 가져오기 위함 - 3번)

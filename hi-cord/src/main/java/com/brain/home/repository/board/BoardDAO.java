@@ -9,14 +9,14 @@ public interface BoardDAO {
 	
 	Board findById(Long id);
 	
-//	User findByEmail(String email);
-	
 	void save(Board board);
 
 	void delete(Long id);
 	
+	List<Board> findAll(Paging paging);
+	
 	int getCount(Paging paging);
 	
-	List<Board> findAll(Paging paging);
+	int getCount2(Paging paging);
 
 }

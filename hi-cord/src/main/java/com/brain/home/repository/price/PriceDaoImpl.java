@@ -50,8 +50,8 @@ public class PriceDaoImpl extends AbstractDao<Integer, Price> implements PriceDa
 	@Override
 	public int getCount(Paging paging) {
 		String condition = "";
-		if (paging.getEntityName() != null) {
-			condition = "WHERE state='" + paging.getEntityName() + "'";
+		if (paging.getTableName() != null) {
+			condition = "WHERE state='" + paging.getTableName() + "'";
 		}
 		Query query = rawQuery("SELECT COUNT(*) FROM PRICE " + condition);
 		return ((Number) query.uniqueResult()).intValue();

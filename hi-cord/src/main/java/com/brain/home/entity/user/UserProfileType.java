@@ -4,17 +4,13 @@ import java.io.Serializable;
 
 public enum UserProfileType implements Serializable{
 	GUEST("gueset"),
-	CUSTOMER("customer"),
-	NURSE("nurse"),
-	DOCTOR("doctor"),
-	LEADER("leader"),
+	PLAYER("player"),
+	CAPTAIN("captain"),
+	DIRECTOR("director"),
 	ADMIN("admin"),
-	SUPERADMIN("superadmin"),
-	CUSTOMER1("customer1"),
-	CUSTOMER2("customer2"),
-	CUSTOMER3("customer3");
+	SUPERADMIN("superadmin");
 	
-	String type;
+	private String type;
 	
 	private UserProfileType(String type){
 		this.type = type;

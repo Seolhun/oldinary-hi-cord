@@ -6,7 +6,7 @@
 </head>
 	<div layout:fragment="content">
 	    <link th:replace="/views/user/agree"></link>
-		<form th:object="${user}" th:action="@{/signup}" id="formSignup" method="POST">
+		<form th:object="${user}" th:action="@{/signup}" id="saveUserFrm" method="POST">
 			<div class="col-sm-12 text-center">
 		    	<div class="col-sm-12 margin-bottom-10">
 	   		    	<div>
@@ -37,10 +37,8 @@
 					<p><b><span th:text="#{text.agree}"></span></b></p>
 					<p><b><span th:text="#{text.important}"></span></b><span th:text="#{text.important2}"></span></p>
 		    		<div>
-	    				<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{text.sms}"></span>
-	    				<input type="checkbox" name="receiveEmail" value="1">
 	    				<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{text.email}"></span>
-	    				<input type="checkbox" name="receiveSMS" value="1">
+	    				<input type="checkbox" name="receiveEmail" value="1">
 	    			</div>
 				</div>
 			    <div class="col-sm-12 margin-bottom-10">

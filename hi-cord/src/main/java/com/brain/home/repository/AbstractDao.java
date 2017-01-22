@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractDao<PK extends Serializable, T> {
@@ -48,9 +49,16 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 	public Query rawQuery(String raw) {
 		Query query=getSession().createSQLQuery(raw);
 		return query;
-	}	
+	}
+	
+	public int count(){
+		getSession().createCriteria("Book").setProjection(Projections.rowCount()).uniqueResult();
+		return 0;
+	}
 
 	protected Criteria createEntityCriteria() {
 		return getSession().createCriteria(persistentClass);
 	}
+	
+	
 }

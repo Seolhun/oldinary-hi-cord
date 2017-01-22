@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.brain.home.common.CommonFn;
-import com.brain.home.entity.common.Paging;
 import com.brain.home.entity.user.User;
 import com.brain.home.entity.user.UserProfile;
 import com.brain.home.entity.user.UserProfileType;
@@ -85,8 +84,8 @@ public class UserController {
 		String email=user.getEmail();
 		String name=user.getName();
 		String mapping = "views/user/signup";
+		// 개인 별로 에러메세지 띄우기 구현 예정(개인별로 해도 메세지가 2개뜨는 문제 발생)
 		if (result.hasErrors()) {
-			// 개인 별로 에러메세지 띄우기 구현 예정(개인별로 해도 메세지가 2개뜨는 문제 발생)
 			return mapping;
 		}
 		
@@ -140,42 +139,5 @@ public class UserController {
 		FieldError error = new FieldError(objectName, fieldName,
 				messageSource.getMessage(messagePropertyName, new String[] { getValue }, request.getLocale()));
 		result.addError(error);
-	}
-	
-	/*----------- 페이징 메소드 Start ------------------------------------------------------------*/
-	private Paging setPaging(Paging paging) {
-		int blockLimit = 10; // 페이지 당 보여줄 블록 번호 limit
-								// [1],[2],[3],[4],[5],[6],[7],[8],[9],[10]
-		int totalPage = paging.getTotalPage();
-		int limit = paging.getLimit();
-		int cPage = paging.getCPage();
-
-		int totalBlock = totalPage / limit + (totalPage % limit > 0 ? 1 : 0); // 전체
-		int currentBlock = cPage / blockLimit + (cPage % blockLimit > 0 ? 1 : 0);// 현재
-		int blockEndNo = currentBlock * blockLimit;
-		int blockStartNo = blockEndNo - (blockLimit - 1);
-
-		if (blockEndNo > totalBlock) {
-			blockEndNo = totalBlock;
-		}
-
-		int prev_cPage = blockStartNo - blockLimit; // << *[이전]*
-		int next_cPage = blockStartNo + blockLimit; // *[다음]* >>
-
-		if (prev_cPage < 1) {
-			prev_cPage = 1;
-		}
-
-		if (next_cPage > totalBlock) {
-			next_cPage = totalBlock / blockLimit * blockLimit + 1;
-		}
-		paging.setBlockLimit(blockLimit);
-		paging.setCurrentBlock(currentBlock);
-		paging.setTotalBlock(totalBlock);
-		paging.setBlockEndNo(blockEndNo);
-		paging.setBlockStartNo(blockStartNo);
-		paging.setNext_cPage(next_cPage);
-		paging.setPrev_cPage(prev_cPage);
-		return paging;
 	}
 }

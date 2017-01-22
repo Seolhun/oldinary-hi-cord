@@ -38,8 +38,8 @@ public class ReplyDAOImpl extends AbstractDao<Integer, Reply> implements ReplyDA
 	@Override
 	public int getCount(Paging paging) {
 		String condition = "";
-		if (paging.getEntityName() != null) {
-			condition = "WHERE REPLY_TYPE='" + paging.getEntityName() + "'";
+		if (paging.getTableName() != null) {
+			condition = "WHERE REPLY_TYPE='" + paging.getTableName() + "'";
 		}
 		Query query = rawQuery("SELECT COUNT(*) FROM " + TABLENAME + " " + condition);
 		return ((Number) query.uniqueResult()).intValue();
@@ -50,7 +50,7 @@ public class ReplyDAOImpl extends AbstractDao<Integer, Reply> implements ReplyDA
 	public List<Reply> findAll(Paging paging) {
 		String sText = paging.getSText();
 		int limit = paging.getLimit();
-		String entityName = paging.getEntityName();
+		String entityName = paging.getTableName();
 		
 //		// 검색 로직
 //		Criteria criteria = createEntityCriteria().addOrder(Order.desc("id")).setFirstResult((cPage - 1) * limit)

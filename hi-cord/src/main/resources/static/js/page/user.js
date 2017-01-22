@@ -149,9 +149,6 @@ $("input[name=saveUser]").click(function(){
 	} else if(emailDupl.disabled){
 		email.focus();
 		return;
-	} else if(phoneDupl.disabled){
-		phone.focus();
-		return;
-	}
-	document.getElementById("formSignup").submit();
+	} 
+	document.getElementById("saveUserFrm").submit();
 });
