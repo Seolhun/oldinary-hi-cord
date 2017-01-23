@@ -59,8 +59,8 @@ public class Comment {
 	@Column(name = "COMMENT_MODIFICATION_DATE")
 	private Date modificationDate;
 
-	@Column(name = "COMMENT_DELCHECK", nullable = false)
-	private int delCheck = 0;
+	@Column(name = "COMMENT_DELCHECK", length=5, nullable=false)
+	private String delCheck;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(foreignKey=@ForeignKey(name="COMMENT_BOARD_FK"), name="COMMENT_BOARD_ID", referencedColumnName="BOARD_ID")

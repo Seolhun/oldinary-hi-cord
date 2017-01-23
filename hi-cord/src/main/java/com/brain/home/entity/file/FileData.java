@@ -62,8 +62,8 @@ public class FileData {
 	@Column(name = "FILE_MODIFICATION_DATE")
 	private Date modificationDate;
 
-	@Column(name = "FILE_DELCHECK", nullable = false)
-	private int delCheck = 0;
+	@Column(name = "FILE_DELCHECK", length=5, nullable=false)
+	private String delCheck;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "FILE_BOARD_FK"), name = "FILE_BOARD_ID", referencedColumnName = "BOARD_ID", nullable = false)

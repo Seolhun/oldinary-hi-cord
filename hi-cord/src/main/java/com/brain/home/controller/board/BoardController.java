@@ -149,7 +149,7 @@ public class BoardController {
 	@ResponseBody
 	public String boardAjaxDelete(@RequestBody Board board, HttpServletRequest request){
 		Board temp = boardService.findById(board.getId());
-		temp.setDelCheck(0);
+		temp.setDelCheck("Y");
 		if(boardService.update(temp) == null);
 			System.out.println(board.getId());
 		return "true";

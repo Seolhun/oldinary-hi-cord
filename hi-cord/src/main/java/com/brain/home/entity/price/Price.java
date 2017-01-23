@@ -59,6 +59,6 @@ public class Price {
 	private Date modificationDate;;
 	
 	// 가격표 사용/미사용 선택시 활용
-	@Column(name = "PRICE_DELCHECK", length = 5)
-	private int delCheck;
+	@Column(name = "PRICE_DELCHECK", length=5, nullable=false)
+	private String delCheck;
 }

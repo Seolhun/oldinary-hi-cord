@@ -31,7 +31,7 @@ public class PriceServiceImpl implements PriceService {
 	@Override
 	public void updatePrice(Price price) {
 		Price dbPrice = pDao.findById(price.getId());
-		if (price.getDelCheck() == 1) {
+		if (price.getDelCheck().equals("N")) {
 			dbPrice.setDelCheck(price.getDelCheck());
 			dbPrice.setId(dbPrice.getId());
 		} else {

@@ -73,8 +73,8 @@ public class Board {
 	@Column(name = "BOARD_MODIFICATION_DATE")
 	private Date modificationDate;
 
-	@Column(name = "BOARD_DELCHECK")
-	private int delCheck = 0;
+	@Column(name = "BOARD_DELCHECK", length=5, nullable=false)
+	private String delCheck;
 	
 	@OneToMany(mappedBy="boardInFile", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<FileData> fileListInBoard;

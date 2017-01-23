@@ -68,8 +68,8 @@ public class Reply {
 	@Column(name = "REPLY_MODIFICATION_DATE")
 	private Date modificationDate;
 
-	@Column(name = "REPLY_DELCHECK")
-	private int delCheck = 0;
+	@Column(name = "REPLY_DELCHECK", length=5, nullable=false)
+	private String delCheck;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(foreignKey=@ForeignKey(name="REPLY_BOARD_FK"), name="REPLY_BOARD_ID", referencedColumnName="BOARD_ID", nullable = false)

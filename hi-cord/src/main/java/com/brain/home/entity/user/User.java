@@ -43,7 +43,6 @@ public class User implements Serializable {
 	
 	@Pattern(regexp="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message="Invalid Email")
 	@Column(name = "USER_EMAIL", unique = true, nullable = false, length = 60)
-	
 	private String email;
 
 	@Column(name = "USER_NAME", nullable = false, length = 30)
@@ -82,7 +81,7 @@ public class User implements Serializable {
 	private Date modificationDate;
 	
 	@Column(name = "USER_DELCHECK", length=5)
-	private int delCheck = 0;
+	private String delCheck;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "USER_PROFILE_REFER",foreignKey=@ForeignKey(name="USER_REFER_FK"),  
@@ -90,6 +89,6 @@ public class User implements Serializable {
 		inverseForeignKey=@ForeignKey(name="USER_PROFILE_REFER_FK"), inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 	
-	@OneToMany(mappedBy="paidByUser", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="paidByUser", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PriceRecord> paidHistoryList;
 }
