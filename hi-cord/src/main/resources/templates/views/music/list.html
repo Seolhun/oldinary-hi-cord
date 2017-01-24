@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/page/user.css"/>
+</head>
+	<div layout:fragment="content">
+		<div>
+	    	<h1>Login</h1>
+	    </div>
+	    <div class="col-sm-12">
+ 			<div class="call-action-v1-in inner-btn page-scroll">
+ 				<!-- @{|/talk/${tableName}/detail/{id}|(id=${i.id})} -->
+				<a href="@{|/music/set}" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-block margin-bottom-5">Add New Music</a>
+				<a href="@{|/music/get}" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-block margin-bottom-5">Get Music Rank</a>
+			</div>
+	    	<div class="margin-bottom-10">
+	    		
+	    	</div>
+	    </div>
+	    <script type="text/javascript" src="/js/page/user.js"></script>
+	</div>
+</html>

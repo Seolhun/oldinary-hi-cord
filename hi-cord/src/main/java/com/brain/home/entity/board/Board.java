@@ -65,13 +65,13 @@ public class Board {
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "BOARD_CREATION_DATE")
-	private Date creationDate;
+	@Column(name = "BOARD_CREATED_DATE")
+	private Date createdDate;
 	
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "BOARD_MODIFICATION_DATE")
-	private Date modificationDate;
+	@Column(name = "BOARD_MODIFIED_DATE")
+	private Date modifiedDate;
 
 	@Column(name = "BOARD_DELCHECK", length=5, nullable=false)
 	private String delCheck;

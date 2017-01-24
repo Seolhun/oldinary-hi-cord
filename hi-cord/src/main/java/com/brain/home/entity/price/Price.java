@@ -49,14 +49,14 @@ public class Price {
 	private Date eventEndDate;
 	
 	@CreationTimestamp
-	@Column(name = "PRICE_CREATION_DATE", nullable = false)
+	@Column(name = "PRICE_CREATED_DATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date creationDate;
+	private Date createdDate;
 	
 	@UpdateTimestamp
-	@Column(name = "PRICE_MODIFICATION_DATE", updatable=true)
+	@Column(name = "PRICE_MODIFIED_DATE", updatable=true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date modificationDate;;
+	private Date modifiedDate;;
 	
 	// 가격표 사용/미사용 선택시 활용
 	@Column(name = "PRICE_DELCHECK", length=5, nullable=false)

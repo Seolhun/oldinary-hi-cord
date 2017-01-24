@@ -55,6 +55,10 @@ dependencies {
 	//Lombok
 	compile("org.projectlombok:lombok:1.16.12")
 	
+	//Jsoup/Json
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	
 	//Front Compile
 	//WebJar
 	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
