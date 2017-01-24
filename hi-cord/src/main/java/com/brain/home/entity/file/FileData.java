@@ -54,13 +54,13 @@ public class FileData {
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FILE_CREATION_DATE", nullable = false)
-	private Date creationDate;
+	@Column(name = "FILE_CREATED_DATE", nullable = false)
+	private Date createdDate;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FILE_MODIFICATION_DATE")
-	private Date modificationDate;
+	@Column(name = "FILE_MODIFIED_DATE")
+	private Date modifiedDate;
 
 	@Column(name = "FILE_DELCHECK", length=5, nullable=false)
 	private String delCheck;

@@ -51,12 +51,12 @@ public class Comment {
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "COMMENT_CREATION_DATE", nullable = false)
-	private Date creationDate;
+	@Column(name = "COMMENT_CREATED_DATE", nullable = false)
+	private Date createdDate;
 	
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "COMMENT_MODIFICATION_DATE")
+	@Column(name = "COMMENT_MODIFIED_DATE")
 	private Date modificationDate;
 
 	@Column(name = "COMMENT_DELCHECK", length=5, nullable=false)

@@ -59,14 +59,14 @@ public class PriceRecord {
 	private Date endDate;
 
 	@CreationTimestamp
-	@Column(name = "PRICE_RECORD_CREATION_DATE", nullable = false)
+	@Column(name = "PRICE_RECORD_CREATED_DATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date creationDate;
+	private Date createdDate;
 
 	@UpdateTimestamp
-	@Column(name = "PRICE_RECORD_MODIFICATION_DATE")
+	@Column(name = "PRICE_RECORD_MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date modificationDate;
+	private Date modifiedDate;
 
 	// 환불 시 사용
 	@Column(name = "PRICE_RECORD_DELCHECK", length = 5, nullable = false)
