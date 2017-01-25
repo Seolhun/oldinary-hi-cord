@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
 
-import javax.validation.Valid;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,8 +23,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -48,61 +44,64 @@ public class MusicController {
 	
 	private static final Logger log = LoggerFactory.getLogger(MusicController.class);
 	
-	private final String UPLOAD_LOCATION = "/Users/HunSeol/Desktop/shooney/file/";
+//	private final String UPLOAD_LOCATION = "/Users/HunSeol/Desktop/shooney/file/";
+	private final String UPLOAD_LOCATION = "/Users/hunseol/Desktop/hooney/music/";
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String listMusics(ModelMap model) {
 		ArrayList<Music> musics = (ArrayList<Music>) musicService.findAllMusics();
 		model.addAttribute("musics", musics);
-		return "vies/music/list";
+		return "views/music/list";
 	}
 
+	// 가수에 여러명이 들어있는것을 가져오지 못함. 수정 필요. 하나의 객체로 수정할 필요있음. 따로받는것이 아니라.
 	@RequestMapping(value = { "/get" }, method = RequestMethod.GET)
 	public String getMusic(ModelMap model) throws IOException {
 		log.info("TEST : 음악파일을 가져옵니다.");
-		JSONObject obj = new JSONObject();
+		JSONObject music = new JSONObject();
 		String domain="";
 		for(MusicType m : MusicType.values()){
 			domain=m.getMusicType();
 			Document doc = Jsoup.connect("http://music.naver.com/listen/top100.nhn?domain="+domain).get();
 			// 태그 혹은 속성 명으로 가져올 수 있다.
-			Elements titleEl = doc.select(".name a .ellipsis");
-			Elements singerEl = doc.select("._artist .ellipsis");
-			Elements imageEl = doc.select(".name a img");
+			Elements title = doc.select(".name a .ellipsis");
+			Elements singer = doc.select("._artist .ellipsis");
+			Elements image = doc.select(".name a img");
 			JSONArray titleList = new JSONArray();
 			JSONArray singerList = new JSONArray();
 			JSONArray imageList = new JSONArray();
-			for (Element e : titleEl) {
+			int a=1;
+			for (Element e : title) {
 				titleList.add(e.html());
-				System.out.println(e.html());
+				log.info("TEST : 제목 : ("+(a++)+")"+e.html());
 			}
-			for (Element e : singerEl) {
+			a=1;
+			for (Element e : singer) {
 				singerList.add(e.html());
-				System.out.println(e.html());
+				log.info("TEST : 가수 : ("+(a++)+")"+e.html());
 			}
-			for (Element e : imageEl) {
+			a=1;
+			for (Element e : image) {
 				if (!e.absUrl("src").substring(e.absUrl("src").length() - 3, e.absUrl("src").length()).equals("gif")) {
 					imageList.add(e.absUrl("src"));
-					System.out.println(e.absUrl("src"));
+					log.info("TEST : ("+(a++)+")"+e.absUrl("src"));
 				}
 			}
-			obj.put("singer", singerList);
-			obj.put("title", titleList);
-			obj.put("image", imageList);
-	
+			music.put("singer", singerList);
+			music.put("title", titleList);
+			music.put("image", imageList);
 			try {
-				SimpleDateFormat formatter =new SimpleDateFormat("yyyy.MM.dd HH:mm",Locale.KOREA);
-				Date currentTime =new Date();
+				SimpleDateFormat formatter =new SimpleDateFormat("yyyy.MM.dd",Locale.KOREA);
+				Date today =new Date();
 				//FileWriter file = new FileWriter("/Users/hunseol/Desktop/test.txt");
-				FileWriter file = new FileWriter(UPLOAD_LOCATION+domain+(currentTime)+".txt");
-				file.write(obj.toJSONString());
+				FileWriter file = new FileWriter(UPLOAD_LOCATION+domain.toUpperCase()+"("+(formatter.format(today))+").txt");
+				file.write(music.toJSONString());
 				file.flush();
 				file.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.print(obj);
 		return "redirect:/music";
 	}
 
@@ -111,21 +110,26 @@ public class MusicController {
 		MusicList music = new MusicList();
 		JSONParser parser = new JSONParser();
 		try {
-			//Object obj = parser.parse(new FileReader("/Users/HunSeol/Desktop/test.txt"));
-			Object obj = parser.parse(new FileReader("/Users/hunseol/Desktop/FileSaver/test.txt"));
-			JSONObject jsonObject = (JSONObject) obj;
-			JSONArray msg1 = (JSONArray) jsonObject.get("singer");
-			JSONArray msg2 = (JSONArray) jsonObject.get("title");
-			JSONArray msg3 = (JSONArray) jsonObject.get("image");
-			Iterator<String> iterator1 = msg1.iterator();
-			Iterator<String> iterator2 = msg2.iterator();
-			Iterator<String> iterator3 = msg3.iterator();
-			while (iterator1.hasNext()) {
-				Music music2 = new Music();
-				music2.setSinger(iterator1.next());
-				music2.setTitle(iterator2.next());
-				music2.setImage(iterator3.next());
-				musicService.saveMusic(music2);
+			SimpleDateFormat formatter =new SimpleDateFormat("yyyy.MM.dd",Locale.KOREA);
+			Date today=new Date();
+			String domain="";
+			for(MusicType m : MusicType.values()){
+				domain=m.getMusicType();
+				Object obj = parser.parse(new FileReader(UPLOAD_LOCATION+domain.toUpperCase()+"("+(formatter.format(today))+").txt"));
+				JSONObject jsonObject = (JSONObject) obj;
+				JSONArray msg1 = (JSONArray) jsonObject.get("singer");
+				JSONArray msg2 = (JSONArray) jsonObject.get("title");
+				JSONArray msg3 = (JSONArray) jsonObject.get("image");
+				Iterator<String> iterator1 = msg1.iterator();
+				Iterator<String> iterator2 = msg2.iterator();
+				Iterator<String> iterator3 = msg3.iterator();
+				while (iterator1.hasNext()) {
+					Music music2 = new Music();
+					music2.setSinger(iterator1.next());
+					music2.setTitle(iterator2.next());
+					music2.setImage(iterator3.next());
+					musicService.saveMusic(music2);
+				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -137,6 +141,6 @@ public class MusicController {
 
 		model.addAttribute("music", music);
 		model.addAttribute("edit", false);
-		return "redirect:/music/list";
+		return "redirect:/music";
 	}
 }

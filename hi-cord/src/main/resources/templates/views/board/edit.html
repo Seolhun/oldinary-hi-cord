@@ -7,7 +7,6 @@
 <body>
 	<div layout:fragment="content">
 	   <div class="container content">
-		      
            <div th:if="${editBoard eq 'unsuccess'}">
               <div class="alert alert-danger alert-dismissible" role="alert">
 				  <strong>Error!</strong> Board Data Not Updated.
@@ -18,7 +17,6 @@
 				  <strong>Success!</strong> Board Data Updated Successfully.
 				</div>
            </div>
-           
           <div class="panel panel-success">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">글 수정</h3>
@@ -41,8 +39,6 @@
 			</div>
 
 		</div>
-		<script type="text/javascript" src="/js/editor/summernote.js"></script>
 	</div>
- <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 </body>
 </html>
