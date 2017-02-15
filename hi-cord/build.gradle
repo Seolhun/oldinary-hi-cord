@@ -65,7 +65,10 @@ dependencies {
 	compile group: 'org.webjars', name: 'bootstrap', version: '3.3.6'
 	compile group: 'org.webjars', name: 'jquery', version: '2.2.4'
 	compile group: 'org.webjars.bower', name: 'angular', version: '1.6.1'
-
+	compile group: 'org.webjars.bower', name: 'angular-sanitize', version: '1.6.1'
+	compile group: 'org.webjars.bower', name: 'angular-animate', version: '1.6.1'
+	compile group: 'org.webjars.bower', name: 'angular-route', version: '1.6.1'
+	
 	//for TEST
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 
