@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Data;
 
 @Entity
-@Table(name="USER_ATTEMPTS")
+@Table(name="TB_USER_ATTEMPTS")
 @Data
 public class UserAttempts implements Serializable{
 	private static final long serialVersionUID = -6645634619910097302L;

@@ -1,6 +1,12 @@
-$(document).ready(function() {
-	var boardType=$("#boardType").val();
+var root , csrfHeader, csrfToken, boardType;
+	root="";
+	csrfHeader=$("#csrfHeader");
+	csrfToken=$("#csrfToken");
+	boardType=$("#boardType");
 	
+$(document).ready(function() {
+	console.log(csrfToken);
+	console.log(csrfHeader);
 	BoardList();
 	function BoardList(){
 		//동적 환자 리스트 DataTable
@@ -26,6 +32,7 @@ $(document).ready(function() {
 
 	        rowClick: function(args) {
 	        	var item = args.item;
+	        	console.log(args.item);
         		
         		//선택한 인원 체크하기.
         		var $row = this.rowByItem(args.item);
@@ -41,9 +48,9 @@ $(document).ready(function() {
 	    		loadData : function(filter) {
 	                 var d = $.Deferred();
 	                 $.ajax({
-	    				type : "GET",
+	    				type : "POST",
 	    				contentType : "application/json; charset=utf-8",
-	    				url : root+"/board/"+boardType+"/list-json", 
+	    				url : "/board/"+boardType+"/list-json", 
 	    				dataType : "json",
 	    				beforeSend: function(xhr) {
 						    xhr.setRequestHeader("Accept", "application/json");
@@ -66,7 +73,7 @@ $(document).ready(function() {
 	    	fields : [{
 	    		name : "id",
 	    		title: "번호",
-	    		type : "text",
+	    		type : "number",
 	    		width : 30,
 	    	}, {
 	    		name : "subject",

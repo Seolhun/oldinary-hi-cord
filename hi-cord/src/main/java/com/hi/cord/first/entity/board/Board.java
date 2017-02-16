@@ -37,19 +37,19 @@ public class Board {
 	private String boardContent;
 
 	@Column(name = "BOARD_HITS", length = 200)
-	private Integer boardHits;
+	private int boardHits;
 
 	@Column(name = "BOARD_LIKES", length = 100)
-	private Integer boardLikes;
+	private int boardLikes;
 	
 	@Column(name = " BOARD_TYPE", nullable = false, length = 10)
 	private String boardType;
 	
 	@Column(name = "BOARD_REPLY_DEPTH", length = 200)
-	private Integer boardReplyDepth;
+	private int boardReplyDepth;
 	
 	@Column(name = "BOARD_COMMENT_DEPTH", length = 200)
-	private Integer boardCommentDepth;
+	private int boardCommentDepth;
 	
 	@Column(name = "BOARD_CREATED_BY", nullable = false, length = 60)
 	private String boardCreatedBy;

@@ -22,31 +22,10 @@ public class BoardDAOImpl extends AbstractDao<Long, Board> implements BoardDAO {
 	@Override
 	public List<Board> findAll(Board board) {
 		log.info("TEST : findAll"+board.toString());
-//		int cPage = paging.getCPage();
-//		int sType = paging.getSType();
-//		String sText = paging.getSText();
-//		int limit = paging.getLimit();
-//		String tableName = paging.getTableName();
-//		
-		// 검색 로직
-//		Criteria criteria = createEntityCriteria().addOrder(Order.desc("id")).setFirstResult((cPage - 1) * limit)
-//				.setMaxResults(limit).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		
-		//where절
-//		criteria.add(Restrictions.eq("boardType", tableName));
-		
-		// 클래스에 객체 명을 따라간다.
-//		if (tableName != null) {
-//			criteria.add(Restrictions.eq("boardType", tableName));
-//		}
-
-//		if (paging.getSType() != 0 && sType == 1) {
-//			criteria.add(Restrictions.like("email", "%" + sText + "%"));
-//		}
-		
 		Criteria criteria = createEntityCriteria().addOrder(Order.desc("boardId")).add(Restrictions.eq("boardDelCheck", 0)).add(Restrictions.eq("boardType", board.getBoardType()))
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Board> boards =criteria.list();
+		log.info("Parameter : "+boards.toString());
 		return boards;
 	}
 	

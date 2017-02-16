@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="USER_PROFILE")
+@Table(name="TB_USER_PROFILE")
 @Data
 public class UserProfile implements Serializable{
 	private static final long serialVersionUID = 3788477180129427170L;

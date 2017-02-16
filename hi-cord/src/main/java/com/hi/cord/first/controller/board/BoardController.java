@@ -1,6 +1,5 @@
 package com.hi.cord.first.controller.board;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,32 +51,15 @@ public class BoardController {
 		return "views/board/board-list";
 	}
 	
-	@RequestMapping(value = { "/{boardType}/list-json" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/{boardType}/list-json" }, method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Board> boardList(Model model, HttpServletRequest request, @PathVariable("boardType") String boardType, Board board) throws Exception {
-
-//		int currentPage = cFn.checkVDInt(request.getParameter("cPage"), 1);
-//		int sType = cFn.checkVDInt(request.getParameter("sType"), -1);
-//		String rawQuestion = request.getParameter("sText");
-//		int sDate = cFn.checkVDInt(request.getParameter("sDate"), 0);
-//		int limit = cFn.checkVDInt(request.getParameter("limit"), 20);
-//
-//		Paging paging = new Paging(currentPage, sType, rawQuestion, sDate, limit, tableName);
-//		int totalCount = boardService.getCount(paging);
-//		paging.setTotalPage(totalCount);
-//		cFn.setPaging(paging);
-
 		//답글 객체 저장
 		board.setBoardType(boardType);
-		List<Board> boardList = (ArrayList<Board>) boardService.findAll(board);
-//		for (int i = 0; i < boardList.size(); i++) {
-//			List<Reply> replyList = (ArrayList<Reply>) replyService.findAll(paging);
-//			boardList.get(i).setReplyListInBoard(replyList);
-//		}
-		log.info("TEST : "+boardList.toString());
+		List<Board> boardList = boardService.findAll(board);
+		System.out.println("Parameter : "+boardList.toString());
+
 		model.addAttribute("boardList", boardList);
-		
-		model.addAttribute("board", board);
 		model.addAttribute("boardType", boardType);
 		return boardList;
 	}
