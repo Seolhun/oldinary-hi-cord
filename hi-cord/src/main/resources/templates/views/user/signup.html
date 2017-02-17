@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
 <head>
   <title>Sign up</title>
-  <link rel="stylesheet" href="/css/page/user.css"/>
+  <link rel="stylesheet" href="/css/page/user/user.css"/>
 </head>
 	<div layout:fragment="content">
 	    <link th:replace="/views/user/agree"></link>
@@ -11,25 +11,25 @@
 		    	<div class="col-sm-12 margin-bottom-10">
 	   		    	<div>
 	   		    		<b th:text="#{text.email}" class="margin-right-20"></b>
-						<input type="email" name="email" id="email" th:value="${user.email}" class="for-center-input form-control" placeholder="Email."/>
+						<input type="email" name="userEmail" id="userEmail" th:value="${user.userEmail}" class="for-center-input form-control" placeholder="Email."/>
 						<button type="button" id="emailDupl" class="btn btn-info" disabled="disabled"><span th:text="#{text.dupl}"></span></button>
 					</div>
 					<div class="errorMsg" id="emailMsg"></div>
-					<p class="errorMsg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+					<p class="errorMsg" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></p>
 		    	</div>
 		    	
 		    	<div class="col-sm-12 margin-bottom-10">
 			    	<div>
 			    		<b th:text="#{text.name}" class="margin-right-20"></b>
-						<input type="text" name="name" th:value="${user.name}" class="for-center-input form-control" placeholder="Name."/>
+						<input type="text" name="userName" th:value="${user.userName}" class="for-center-input form-control" placeholder="Name."/>
 			    	</div>
 			    </div>
 			    
 	  		    	<div class="col-sm-12 margin-bottom-10">
 			    	<div>
 			    		<b th:text="#{text.password}" class="margin-right-20"></b>
-						<input type="password" name="password" th:value="${user.password}" class="for-center-input form-control" placeholder="Password."/>
-						<p class="erros-red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+						<input type="password" name="userPassword" th:value="${user.userPassword}" class="for-center-input form-control" placeholder="Password."/>
+						<p class="erros-red" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></p>
 			    	</div>
 			    </div>
 			    
@@ -46,6 +46,6 @@
 		    	</div>
 		    </div>
 		</form>
-	<script type="text/javascript" src="/js/page/user.js"></script>
+	<script type="text/javascript" src="/js/page/user/user.js"></script>
 	</div>
 </html>
