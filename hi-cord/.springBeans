@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:com.hi.cord.HiCordApplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
