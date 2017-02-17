@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,25 +18,36 @@ import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Data;
 
 @Entity
-@Table(name = "MUSIC_LIST")
+@Table(name = "TB_MUSIC_CHART")
 @Data
-public class MusicList {
+public class MusicChart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "MUSIC_LIST_ID")
+	@Column(name = "MUSIC_CHART_ID")
 	private Long id;
 	
-	@Column(name = "MUSIC_LIST_JSON_DATA")
+	@Column(name = "MUSIC_CHART_JSON_DATA")
 	@Lob
-	private String JsonData;
+	private String jsonData;
 
-	@Column(name = "MUSIC_LIST_CREATED_DATE", nullable = false)
+	@Column(name = "MUSIC_CHART_CREATED_BY", nullable = false, length = 60)
+	private String createdBy;
+	
+	@Column(name = "MUSIC_CHART_MODIFIED_BY", length = 60)
+	private String modifiedBy;
+	
 	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "MUSIC_CHART_CREATED_DATE")
 	private Date createdDate;
 	
-	@Column(name = "MUSIC_LIST_MODIFIED_DATE", nullable = false)
 	@UpdateTimestamp
-	private Date ModifiedDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "MUSIC_CHART_MODIFIED_DATE")
+	private Date modifiedDate;
+
+	@Column(name = "MUSIC_CHART_DELCHECK", length=5, nullable=false)
+	private String delCheck;
 
 //	@Override
 //	public boolean equals(Object obj) {

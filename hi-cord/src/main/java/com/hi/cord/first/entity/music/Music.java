@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,43 +21,54 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Entity
-@Table(name = "MUSIC")
+@Table(name = "TB_MUSIC")
 @Data
 public class Music {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MUSIC_ID")
-	private Long id;
+	private Long musicId;
 	
 	@NotEmpty
 	@Column(name = "MUSIC_IMAGE", nullable = false, length=255)
 	@JsonProperty
-	private String image;
+	private String musicImage;
 
 	@NotEmpty
 	@Column(name = "MUSIC_SINGER", nullable = false, length=50)
 	@JsonProperty
-	private String singer;
+	private String musicSinger;
 
 	@NotEmpty
 	@Column(name = "MUSIC_TITLE", nullable = false, unique=true, length=100)
 	@JsonProperty
-	private String title;
+	private String musicTitle;
 	
 	@Column(name = "MUSIC_LYRICS")
 	@Lob
-	private String lyrics;
+	private String musicLyrics;
 	
 	@Column(name = "MUSIC_URL", length=255)
-	private String url;
-
-	@Column(name = "MUSIC_CREATED_DATE", nullable = false)
-	@CreationTimestamp
-	private Date createdDate;
+	private String musicUrl;
 	
-	@Column(name = "MUSIC_MODIFIED_DATE", nullable = false)
+	@Column(name = "MUSIC_CREATED_BY", nullable = false, length = 60)
+	private String musicCreatedBy;
+	
+	@Column(name = "MUSIC_MODIFIED_BY", length = 60)
+	private String musicModifiedBy;
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "MUSIC_CREATED_DATE")
+	private Date musicCreatedDate;
+	
 	@UpdateTimestamp
-	private Date ModifiedDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "MUSIC_MODIFIED_DATE")
+	private Date musicModifiedDate;
+
+	@Column(name = "MUSIC_DELCHECK", length=5, nullable=false)
+	private String musicDelCheck;
 
 //	@Override
 //	public boolean equals(Object obj) {

@@ -39,52 +39,55 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
-	private Long id;
+	private Long userId;
 	
 	@Pattern(regexp="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message="Invalid Email")
 	@Column(name = "USER_EMAIL", unique = true, nullable = false, length = 60)
-	private String email;
+	private String userEmail;
 
 	@Column(name = "USER_NAME", nullable = false, length = 30)
-	private String name;
+	private String userName;
 	
 	//@Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+=-~`]).{8,20})", message="Invalid Password")
 	@Column(name = "USER_PASSWORD", nullable = false, length = 100)
-	private String password;
+	private String userPassword;
 	
 	@Column(name = "USER_RECEIVE_MAIL", length = 1)
-	private int receiveEmail;
+	private int userReceiveEmail;
 	
 	@Column(name = "USER_STATE", nullable = false, length = 20)
-	private String state = State.ACTIVE.getState();
+	private String userState = State.ACTIVE.getState();
 	
 	//휴면 계좌 체크
 	@Column(name = "USER_ACCOUNT_NON_EXPIRED", length = 1)
-	private int accountNonExpired;
+	private int userAccountNonExpired;
 	
 	//비밀번호 오류 체크
 	@Column(name = "USER_CREDENTIALS_NON_EXPIRED", length = 1)
-	private int credentialsNonExpired;
+	private int userCredentialsNonExpired;
 	
 	//잠겨있는지 확인
 	@Column(name = "USER_ACCOUNT_NON_LOCKED", length = 1)
-	private int accountNonLocked;
+	private int userAccountNonLocked;
+	
+	@Column(name = "USER_MODIFIED_BY", length = 60)
+	private String userModifiedBy;
 	
 	@CreationTimestamp
-	@Column(name = "USER_CREATION_DATE")
+	@Column(name = "USER_CREATED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date creationDate;
+	private Date userCreatedDate;
 	
 	@UpdateTimestamp
-	@Column(name = "USER_MODIFICATION_DATE")
+	@Column(name = "USER_MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date modificationDate;
+	private Date userModifiedDate;
 	
 	@Column(name = "USER_DELCHECK", length=5)
-	private String delCheck;
+	private int userDelCheck;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name = "USER_PROFILE_REFER",foreignKey=@ForeignKey(name="USER_REFER_FK"),  
+	@JoinTable(name = "TB_USER_PROFILE_REFER",foreignKey=@ForeignKey(name="USER_REFER_FK"),  
 		joinColumns = { @JoinColumn(name = "USER_ID", columnDefinition="BIGINT(20)") }, 
 		inverseForeignKey=@ForeignKey(name="USER_PROFILE_REFER_FK"), inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();

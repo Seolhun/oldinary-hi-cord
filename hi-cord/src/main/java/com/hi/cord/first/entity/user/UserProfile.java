@@ -20,24 +20,9 @@ public class UserProfile implements Serializable{
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "USER_PROFILE_ID")
-	private Integer id;	
+	private Integer userProfileId;	
 
 	@Column(name="USER_PROFILE_TYPE", length=15, unique=true, nullable=false)
-	private String type = UserProfileType.GUEST.getUserProfileType();
+	private String userProfileType = UserProfileType.GUEST.getUserProfileType();
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 }

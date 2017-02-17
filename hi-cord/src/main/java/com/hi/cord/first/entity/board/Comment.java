@@ -28,39 +28,39 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="COMMENT_ID")
-	private Long id;
+	private Long commentId;
 
 	@NotEmpty
 	@Column(name = "COMMENT_CONTENT", nullable = false, length = 300)
-	private String content;
+	private String commentContent;
 
 	@Column(name = "COMMENT_LIKES")
-	private int likes;
+	private int commentLkes;
 	
 	@Column(name = "COMMENT_COMMENT_DEPTH", nullable = false)
 	private int commentDepth;
 	
 	@Column(name = " COMMENT_TYPE", nullable = false, length=10)
-	private String type;
+	private String commentType;
 	
-	@Column(name = "COMMENT_CREATED_BY", nullable = false, length = 30)
-	private String createdBy;
+	@Column(name = "COMMENT_CREATED_BY", nullable = false, length = 60)
+	private String commentCreatedBy;
 	
-	@Column(name = "COMMENT_MODIFIED_BY", length = 30)
-	private String modifiedBy;
+	@Column(name = "COMMENT_MODIFIED_BY", length = 60)
+	private String commentModifiedBy;
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "COMMENT_CREATED_DATE", nullable = false)
-	private Date createdDate;
+	private Date commentCreatedDate;
 	
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "COMMENT_MODIFIED_DATE")
-	private Date modificationDate;
+	private Date commentModifiedDate;
 
 	@Column(name = "COMMENT_DELCHECK", length=5, nullable=false)
-	private String delCheck;
+	private String commentDelCheck;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(foreignKey=@ForeignKey(name="COMMENT_BOARD_FK"), name="COMMENT_BOARD_ID", referencedColumnName="BOARD_ID")

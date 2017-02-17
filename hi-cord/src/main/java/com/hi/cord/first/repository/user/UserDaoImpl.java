@@ -17,8 +17,7 @@ import com.hi.cord.first.repository.AbstractDao;
 
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
-
-	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+	static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
 
 	public User findById(Long id) {
 		User user = getByKeyByLong(id);
@@ -29,9 +28,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	public User findByEmail(String email) {
-		logger.info("email : {}", email);
+		log.info("Parameter : {}", email);
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("email", email));
+		crit.add(Restrictions.eq("userEmail", email));
 		User user = (User) crit.uniqueResult();
 		if (user != null) {
 			Hibernate.initialize(user.getUserProfiles());
@@ -40,9 +39,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	}
 
 	public User findByPhone(String phone) {
-		logger.info("phone : {}", phone);
+		log.info("Parameter : {}", phone);
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("phone", phone));
+		crit.add(Restrictions.eq("userPhone", phone));
 		User user = (User) crit.uniqueResult();
 		if (user != null) {
 			Hibernate.initialize(user.getUserProfiles());
@@ -53,6 +52,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	// Criteria는 무엇인가?
 	@SuppressWarnings("unchecked")
 	public List<User> findAllUsers(Paging paging) {
+		log.info("Parameter : {}", paging);
 		int cPage = paging.getCPage();
 		int sType = paging.getSType();
 		String sText = paging.getSText();
@@ -60,7 +60,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		String entityName = paging.getTableName();
 
 		// 검색 로직
-		Criteria criteria = createEntityCriteria().addOrder(Order.desc("id")).setFirstResult((cPage - 1) * limit)
+		Criteria criteria = createEntityCriteria().addOrder(Order.desc("userId")).setFirstResult((cPage - 1) * limit)
 				.setMaxResults(limit).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<User> users = (List<User>) criteria.list();
 
@@ -70,20 +70,22 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		}
 
 		if (paging.getSType() != 0 && sType == 1) {
-			criteria.add(Restrictions.like("email", "%" + sText + "%"));
+			criteria.add(Restrictions.like("userEmail", "%" + sText + "%"));
 		} else if (paging.getSType() != 0 && sType == 2) {
-			criteria.add(Restrictions.like("nickname", "%" + sText + "%"));
+			criteria.add(Restrictions.like("userNickname", "%" + sText + "%"));
 		} 
 
 		return users;
 	}
 
 	public void save(User user) {
+		log.info("Parameter : {}", user.toString());
 		persist(user);
 	}
 	
 	@Override
 	public int getCount(Paging paging) {
+		log.info("Parameter : {}", paging.toString());
 		String condition = "";
 		if (paging.getTableName() != null) {
 			condition = "WHERE state='" + paging.getTableName() + "'";
@@ -94,8 +96,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	
 	// Criteria는 무엇인가?
 	public void deleteByEmail(String email) {
+		log.info("Parameter : {}", email);
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("email", email));
+		crit.add(Restrictions.eq("userEmail", email));
 		User user = (User) crit.uniqueResult();
 		delete(user);
 	}

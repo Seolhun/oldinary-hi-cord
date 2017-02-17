@@ -17,11 +17,11 @@ import com.hi.cord.first.repository.AbstractDao;
 @Repository("tokenRepositoryDao")
 @Transactional
 public class HibernateTokenRepositoryImpl extends AbstractDao<String, PersistentLogin> implements PersistentTokenRepository {
-	static final Logger logger = LoggerFactory.getLogger(HibernateTokenRepositoryImpl.class);
+	static final Logger log = LoggerFactory.getLogger(HibernateTokenRepositoryImpl.class);
 
 	@Override
 	public void createNewToken(PersistentRememberMeToken token) {
-		logger.info("Creating Token for user : {}", token.getUsername());
+		log.info("Creating Token for user : {}", token.getUsername());
 		PersistentLogin persistentLogin = new PersistentLogin();
 		persistentLogin.setEmail(token.getUsername());
 		persistentLogin.setSeries(token.getSeries());
@@ -33,7 +33,7 @@ public class HibernateTokenRepositoryImpl extends AbstractDao<String, Persistent
 	// persistent Login 부
 	@Override
 	public PersistentRememberMeToken getTokenForSeries(String seriesId) {
-		logger.info("Fetch Token if any for seriesId : {}", seriesId);
+		log.info("Fetch Token if any for seriesId : {}", seriesId);
 		try {
 			Criteria crit = createEntityCriteria();
 			crit.add(Restrictions.eq("series", seriesId));
@@ -41,26 +41,26 @@ public class HibernateTokenRepositoryImpl extends AbstractDao<String, Persistent
 
 			return new PersistentRememberMeToken(persistentLogin.getEmail(), persistentLogin.getSeries(), persistentLogin.getToken(), persistentLogin.getLatestdate());
 		} catch (Exception e) {
-			logger.info("Token not found...");
+			log.info("Token not found...");
 			return null;
 		}
 	}
 
 	@Override
 	public void removeUserTokens(String email) {
-		logger.info("Removing Token if any for user : {}", email);
+		log.info("Removing Token if any for user : {}", email);
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("email", email));
 		PersistentLogin persistentLogin = (PersistentLogin) crit.uniqueResult();
 		if (persistentLogin != null) {
-			logger.info("rememberMe was selected");
+			log.info("rememberMe was selected");
 			delete(persistentLogin);
 		}
 	}
 
 	@Override
 	public void updateToken(String seriesId, String tokenValue, Date lastUsed) {
-		logger.info("Updating Token for seriesId : {}", seriesId);
+		log.info("Updating Token for seriesId : {}", seriesId);
 		PersistentLogin persistentLogin = getByKey(seriesId);
 		persistentLogin.setToken(tokenValue);
 		persistentLogin.setLatestdate(lastUsed);

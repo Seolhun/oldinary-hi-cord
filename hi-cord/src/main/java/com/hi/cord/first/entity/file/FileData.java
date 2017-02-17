@@ -24,46 +24,46 @@ import com.hi.cord.first.entity.board.Board;
 import lombok.Data;
 
 @Entity
-@Table(name = "FILE_DATA")
+@Table(name = "TB_FILE_DATA")
 @Data
 public class FileData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "FILE_ID")
-	private Long id;
+	private Long fileDataId;
 
 	@NotEmpty
 	@Column(name = "FILE_ORIGIN_NAME", nullable = false, length = 100)
-	private String originName;
+	private String fileDataOriginName;
 
 	@NotEmpty
 	@Column(name = "FILE_SAVED_NAME", nullable = false, length = 200)
-	private String savedName;
+	private String fileDataSavedName;
 
 	@Column(name = "FILE_SAVED_DIR", nullable = false, length = 200)
-	private String savedDir;
+	private String fileDataSavedDir;
 
 	@Column(name = " FILE_TYPE", nullable = false, length = 20)
-	private String Type;
+	private String fileDataType;
 
-	@Column(name = "FILE_CREATED_BY", nullable = false, length = 30)
-	private String createdBy;
+	@Column(name = "FILE_CREATED_BY", nullable = false, length = 60)
+	private String fileDataCreatedBy;
 
-	@Column(name = "FILE_MODIFIED_BY", length = 30)
-	private String modifiedBy;
+	@Column(name = "FILE_MODIFIED_BY", length = 60)
+	private String fileDataModifiedBy;
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FILE_CREATED_DATE", nullable = false)
-	private Date createdDate;
+	private Date fileDataCreatedDate;
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FILE_MODIFIED_DATE")
-	private Date modifiedDate;
+	private Date fileDataModifiedDate;
 
 	@Column(name = "FILE_DELCHECK", length=5, nullable=false)
-	private String delCheck;
+	private String fileDataDelCheck;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "FILE_BOARD_FK"), name = "FILE_BOARD_ID", referencedColumnName = "BOARD_ID", nullable = false)

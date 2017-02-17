@@ -25,7 +25,7 @@ import com.hi.cord.first.entity.user.User;
 import lombok.Data;
 
 @Entity
-@Table(name = "PRICE_RECORD")
+@Table(name = "TB_PRICE_RECORD")
 @Data
 public class PriceRecord {
 	@Id
@@ -38,39 +38,39 @@ public class PriceRecord {
 	private Price priceValueFromPrice;
 
 	@Column(name = "PRICE_RECORD_NAME", nullable = false, length = 50)
-	private String name;
+	private String priceRecordName;
 
 	@Column(name = "PRICE_RECORD_ORIGINAL_VALUE", nullable = false, length = 40)
-	private int originalPrice;
+	private int priceRecordOriginalPrice;
 
 	@Column(name = "PRICE_RECORD_DISCOUNT_RATE", length = 20)
-	private String discountRate;
+	private String priceRecordDiscountRate;
 
 	@Column(name = "PRICE_RECORD_DISCOUNTED_VALUE", length = 40)
-	private int discountedPrice;
+	private int priceRecordDiscountedPrice;
 
 	@Column(name = "PRICE_RECORD_ALLOW_STATE", nullable = false, length = 10)
 	@Enumerated(EnumType.STRING)
-	private PriceRecordState allowState;
+	private PriceRecordState priceRecordAllowState;
 
 	@CreationTimestamp
 	@Column(name = "PRICE_RECORD_END_DATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date endDate;
+	private Date priceRecordEndDate;
 
 	@CreationTimestamp
 	@Column(name = "PRICE_RECORD_CREATED_DATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
+	private Date priceRecordCreatedDate;
 
 	@UpdateTimestamp
 	@Column(name = "PRICE_RECORD_MODIFIED_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifiedDate;
+	private Date priceRecordModifiedDate;
 
 	// 환불 시 사용
 	@Column(name = "PRICE_RECORD_DELCHECK", length = 5, nullable = false)
-	private String delCheck;
+	private String priceRecordDelCheck;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRICE_RECORD_PAID_BY_USER", foreignKey = @ForeignKey(name = "PRICE_USER_FK"), referencedColumnName = "USER_ID", nullable = false)

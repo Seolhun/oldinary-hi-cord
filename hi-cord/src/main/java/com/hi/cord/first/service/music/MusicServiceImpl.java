@@ -25,11 +25,11 @@ public class MusicServiceImpl implements MusicService {
 	}
 
 	public void updateMusic(Music music) {
-		Music entity = dao.findById(music.getId());
+		Music entity = dao.findById(music.getMusicId());
 		if (entity != null) {
-			entity.setSinger(music.getSinger());
-			entity.setTitle(music.getTitle());
-			entity.setCreatedDate(music.getCreatedDate());
+			entity.setMusicSinger(music.getMusicSinger());
+			entity.setMusicTitle(music.getMusicTitle());
+			entity.setMusicCreatedDate(music.getMusicCreatedDate());
 		}
 	}
 

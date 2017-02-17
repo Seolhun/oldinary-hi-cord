@@ -168,7 +168,7 @@ public class BoardController {
 	@RequestMapping(value = "/{tableName}/comment/add", method = RequestMethod.POST)
 	@ResponseBody
 	public void commentAjaxAdd(@RequestBody Comment comment, HttpServletRequest request){
-		System.out.println(comment.getContent());
+		System.out.println(comment.getCommentContent());
 //			commentService.save(comment);
 	}	
 	

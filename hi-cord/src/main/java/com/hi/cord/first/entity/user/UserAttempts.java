@@ -25,26 +25,23 @@ public class UserAttempts implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="USER_ATTEMPTS_ID")
-	private Integer id;
+	private Long userAttemptsId;
 	
-	@Column(name = "USER_EMAIL", nullable = false)
+	@Column(name = "USER_ATTEMPTS_EMAIL", nullable = false)
 	@NotEmpty
-	private String email;
+	private String userAttemptsEmail;
 	
-	@Column(name = "USER_ATTEMPTS", nullable = false)
+	@Column(name = "USER_ATTEMPTS_ATTEMPT", nullable = false)
 	@NotEmpty
-	private int attempts;
+	private int userAttemptsAttempts;
 
-	@Column(name = "USER_LATESTDATE", nullable = false)
+	@Column(name = "USER_ATTEMPTS_LATESTDATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date latestDate;
+	private Date userAttemptsLatestDate;
 	
-	@Column(name = "USER_LOGIN_IP")
-	private String logIp;
+	@Column(name = "USER_ATTEMPTS_LOGIN_IP")
+	private String userAttemptsLoginIp;
 	
-	@Column(name = "USER_SUCCESS_FLAG")
-	private int successFlag;
-	
-	@Column(name = "USER_VALIDATION")
-	private String validation;
+	@Column(name = "USER_ATTEMPTS_SUCCESS_FLAG")
+	private int userAttemptsSuccessFlag;
 }

@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
 		Comment temp = dao.findById(id);
 		
 		if (temp != null) {
-			dao.delete(temp.getId());
+			dao.delete(temp.getCommentId());
 			return true;
 		}
 		return false;
@@ -35,9 +35,9 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment update(Comment comment) {
-		Comment entity = dao.findById(comment.getId());
+		Comment entity = dao.findById(comment.getCommentId());
 		if (entity != null) {
-			entity.setContent(comment.getContent());
+			entity.setCommentContent(comment.getCommentContent());
 		}
 		return entity;
 	}

@@ -61,12 +61,12 @@ public class Reply {
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "REPLY_CREATION_DATE", nullable = false)
-	private Date creationDate;
+	private Date createdDate;
 	
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "REPLY_MODIFICATION_DATE")
-	private Date modificationDate;
+	private Date modifiedDate;
 
 	@Column(name = "REPLY_DELCHECK", length=5, nullable=false)
 	private String delCheck;

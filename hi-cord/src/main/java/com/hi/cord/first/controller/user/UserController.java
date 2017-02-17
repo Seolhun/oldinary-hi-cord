@@ -81,8 +81,8 @@ public class UserController {
 	
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
 	public String signupDo(@Valid User user, BindingResult result, ModelMap model, HttpServletRequest request) throws Exception {
-		String email=user.getEmail();
-		String name=user.getName();
+		String email=user.getUserEmail();
+		String name=user.getUserName();
 		String mapping = "views/user/signup";
 		// 개인 별로 에러메세지 띄우기 구현 예정(개인별로 해도 메세지가 2개뜨는 문제 발생)
 		if (result.hasErrors()) {
@@ -95,14 +95,14 @@ public class UserController {
 		
 		// 유저 권한 넣기(프론트에서 값을 받지 않기때문에 백엔드에서 넣어준다.)
 		if (!userService.isUserEmailUnique(email)) {
-			validCheckAndSendError(messageSource, result, request, email, "user", "email", "non.unique.email");
+			validCheckAndSendError(messageSource, result, request, email, "user", "userEmail", "non.unique.email");
 			return mapping;
 		}
 		
 		Set<UserProfile> upSet = new HashSet<>();
 		UserProfile up = new UserProfile();
-		up.setId(UserProfileType.GUEST.ordinal() + 1);
-		up.setType(UserProfileType.GUEST.getType());
+		up.setUserProfileId(UserProfileType.GUEST.ordinal() + 1);
+		up.setUserProfileType(UserProfileType.GUEST.getType());
 		upSet.add(up);
 		user.setUserProfiles(upSet);
 		userService.saveUser(user);
@@ -112,7 +112,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = { "/signup/duplicate/email" }, method = RequestMethod.POST)
 	public String emailduDupl(@RequestBody User user, HttpServletRequest request, BindingResult result) {
-		String email=user.getEmail();
+		String email=user.getUserEmail();
 		if (!userService.isUserEmailUnique(email)) {
 			return "false";
 		} 
@@ -134,8 +134,7 @@ public class UserController {
 		return authenticationTrustResolver.isAnonymous(authentication);
 	}
 
-	void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request,
-			String getValue, String objectName, String fieldName, String messagePropertyName) {
+	void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String getValue, String objectName, String fieldName, String messagePropertyName) {
 		FieldError error = new FieldError(objectName, fieldName,
 				messageSource.getMessage(messagePropertyName, new String[] { getValue }, request.getLocale()));
 		result.addError(error);

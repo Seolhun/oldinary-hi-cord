@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hi.cord.common.CommonFn;
 import com.hi.cord.first.entity.music.Music;
-import com.hi.cord.first.entity.music.MusicList;
+import com.hi.cord.first.entity.music.MusicChart;
 import com.hi.cord.first.entity.music.MusicType;
 import com.hi.cord.first.service.music.MusicService;
 
@@ -107,7 +107,7 @@ public class MusicController {
 
 	@RequestMapping(value = { "/set" }, method = RequestMethod.GET)
 	public String newMusics(ModelMap model) {
-		MusicList music = new MusicList();
+		MusicChart music = new MusicChart();
 		JSONParser parser = new JSONParser();
 		try {
 			SimpleDateFormat formatter =new SimpleDateFormat("yyyy.MM.dd",Locale.KOREA);
@@ -125,9 +125,9 @@ public class MusicController {
 				Iterator<String> iterator3 = msg3.iterator();
 				while (iterator1.hasNext()) {
 					Music music2 = new Music();
-					music2.setSinger(iterator1.next());
-					music2.setTitle(iterator2.next());
-					music2.setImage(iterator3.next());
+					music2.setMusicSinger(iterator1.next());
+					music2.setMusicTitle(iterator2.next());
+					music2.setMusicImage(iterator3.next());
 					musicService.saveMusic(music2);
 				}
 			}
