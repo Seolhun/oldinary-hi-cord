@@ -6,16 +6,27 @@
 		<meta id="csrfHeader" th:content="${_csrf.headerName}"/>
 		<!--  Each token will be replaced by their respective titles in the resulting page. -->
 		<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Hi-Cord</title>
-		<link th:replace="/fragments/resources/style"/>
+		<link th:replace="/fragments/style"/>
 	</head>
-	<header th:replace="/fragments/header"></header>
+	<!-- Start Header -->
+	<header th:replace="/fragments/header">
+	
+	</header>
+	<!-- End Header -->
+	
+	<!-- Body Start -->
 	<body>
-    	<div class="container content margin-bottom-30">
-			<div class="row">
-				<div layout:fragment="content"></div>
-			</div>
+    	<div class="container content margin-bottom-30" layout:fragment="content">
+    		
    		</div>
 	</body>
-	<footer th:replace="/fragments/footer"></footer>
-	<link th:replace="/fragments/resources/js"></link>
+	<!-- Body End -->
+	
+	<!-- Footer Start -->
+	<footer th:replace="/fragments/footer">
+	
+	</footer>
+	<!-- Footer End -->
+	
+	<link th:replace="/fragments/js"></link>
 </html>

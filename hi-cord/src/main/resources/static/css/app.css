@@ -2,6 +2,7 @@
 	display: inline;
 	margin-right: 10px;
 }
+
 .survey-select {
 	width: 11%;
 	height: 34px;
@@ -2186,6 +2187,14 @@ img.image-md {
 	min-height: 150px;
 }
 
+.max-height-100 {
+	max-height: 100px;
+}
+
+.max-height-150 {
+	max-height: 150px;
+}
+
 .max-height-200 {
 	max-height: 200px;
 }
@@ -2403,8 +2412,82 @@ img.image-md {
 	}
 }
 
+.margin-top-5, .margin-top-10, .margin-top-15, .margin-top-20,
+	.margin-top-25, .margin-top-30, .margin-top-35, .margin-top-40,
+	.margin-top-45, .margin-top-50, .margin-top-55, .margin-top-60,
+	.margin-top-100 {
+	clear: both;
+}
+
+.margin-top-5 {
+	margin-top: 5px;
+}
+
+.margin-top-10 {
+	margin-top: 10px;
+}
+
+.margin-top-15 {
+	margin-top: 15px;
+}
+
 .margin-top-20 {
 	margin-top: 20px;
+}
+
+.margin-top-25 {
+	margin-top: 25px;
+}
+
+.margin-top-30 {
+	margin-top: 30px;
+}
+
+.margin-top-35 {
+	margin-top: 35px;
+}
+
+.margin-top-40 {
+	margin-top: 40px;
+}
+
+.margin-top-45 {
+	margin-top: 45px;
+}
+
+.margin-top-50 {
+	margin-top: 50px;
+}
+
+.margin-top-55 {
+	margin-top: 55px;
+}
+
+.margin-top-60 {
+	margin-top: 60px;
+}
+
+.margin-top-70 {
+	margin-top: 70px;
+}
+
+.margin-top-80 {
+	margin-top: 80px;
+}
+
+.margin-top-90 {
+	margin-top: 90px;
+}
+
+.margin-top-100 {
+	margin-top: 100px;
+}
+
+.margin-left-5, .margin-left-10, .margin-left-15, .margin-left-20,
+	.margin-left-25, .margin-left-30, .margin-left-35, .margin-left-40,
+	.margin-left-45, .margin-left-50, .margin-left-55, .margin-left-60,
+	.margin-left-100 {
+	clear: both;
 }
 
 .margin-left-5 {
@@ -2415,8 +2498,67 @@ img.image-md {
 	margin-left: 10px;
 }
 
-.margin-right-3 {
-	margin-right: 3px;
+.margin-left-15 {
+	margin-left: 15px;
+}
+
+.margin-left-20 {
+	margin-left: 20px;
+}
+
+.margin-left-25 {
+	margin-left: 25px;
+}
+
+.margin-left-30 {
+	margin-left: 30px;
+}
+
+.margin-left-35 {
+	margin-left: 35px;
+}
+
+.margin-left-40 {
+	margin-left: 40px;
+}
+
+.margin-left-45 {
+	margin-left: 45px;
+}
+
+.margin-left-50 {
+	margin-left: 50px;
+}
+
+.margin-left-55 {
+	margin-left: 55px;
+}
+
+.margin-left-60 {
+	margin-left: 60px;
+}
+
+.margin-left-70 {
+	margin-left: 70px;
+}
+
+.margin-left-80 {
+	margin-left: 80px;
+}
+
+.margin-left-90 {
+	margin-left: 90px;
+}
+
+.margin-left-100 {
+	margin-left: 100px;
+}
+
+.margin-right-5, .margin-right-10, .margin-right-15, .margin-right-20,
+	.margin-right-25, .margin-right-30, .margin-right-35, .margin-right-40,
+	.margin-right-45, .margin-right-50, .margin-right-55, .margin-right-60,
+	.margin-right-100 {
+	clear: both;
 }
 
 .margin-right-5 {
@@ -2427,8 +2569,60 @@ img.image-md {
 	margin-right: 10px;
 }
 
+.margin-right-15 {
+	margin-right: 15px;
+}
+
 .margin-right-20 {
 	margin-right: 20px;
+}
+
+.margin-right-25 {
+	margin-right: 25px;
+}
+
+.margin-right-30 {
+	margin-right: 30px;
+}
+
+.margin-right-35 {
+	margin-right: 35px;
+}
+
+.margin-right-40 {
+	margin-right: 40px;
+}
+
+.margin-right-45 {
+	margin-right: 45px;
+}
+
+.margin-right-50 {
+	margin-right: 50px;
+}
+
+.margin-right-55 {
+	margin-right: 55px;
+}
+
+.margin-right-60 {
+	margin-right: 60px;
+}
+
+.margin-right-70 {
+	margin-right: 70px;
+}
+
+.margin-right-80 {
+	margin-right: 80px;
+}
+
+.margin-right-90 {
+	margin-right: 90px;
+}
+
+.margin-right-100 {
+	margin-right: 100px;
 }
 
 .padding-xs {
@@ -2847,21 +3041,33 @@ img.img-center, .img-center img {
 opacity
 
 
+
+
 :
+
+
 
 
 0;
 transform
 
 
+
+
 :translateY(36px)
+
+
 
 
 ;
 -webkit-transform
 
 
+
+
 :translateY(36px)
+
+
 
 
 ;
@@ -2871,35 +3077,48 @@ transform
 keyframes scroll { 0%{
 	opacity: 1;
 }
+
 100%{
 opacity
 
 
+
+
 :
+
+
 
 
 0;
 transform
 
 
+
+
 :translateY(36px)
+
+
 
 
 ;
 -webkit-transform
 
 
+
+
 :translateY(36px)
+
+
 
 
 ;
 }
 }
-
 div#addBindingGroupModal {
 	top: 30%;
 }
 
+/* Deafult Font */
 .font-26 {
 	font-size: 26px;
 }
@@ -2920,6 +3139,64 @@ div#addBindingGroupModal {
 	font-size: 18px;
 }
 
+.font-16 {
+	font-size: 16px;
+}
+
 .font-14 {
 	font-size: 16px;
+}
+
+.font-12 {
+	font-size: 12px;
+}
+
+.font-10 {
+	font-size: 10px;
+}
+
+/* Font Bold */
+.font-26b {
+	font-size: 26px;
+	font-weight: 500;
+}
+
+.font-24b {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.font-22b {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.font-20b {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.font-18b {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.font-16b {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.font-14b {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.font-12b {
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.font-10b {
+	font-size: 10px;
+	font-weight: 500;
 }

@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
-<head>
-  <title>Sign up</title>
-  <link rel="stylesheet" href="/css/page/user/user.css"/>
-</head>
 	<div layout:fragment="content">
+		<link rel="stylesheet" href="/css/page/user/user.css"/>
 	    <link th:replace="/views/user/agree"></link>
 		<form th:object="${user}" th:action="@{/signup}" id="saveUserFrm" method="POST">
 			<div class="col-sm-12 text-center">
 		    	<div class="col-sm-12 margin-bottom-10">
 	   		    	<div>
-	   		    		<b th:text="#{text.email}" class="margin-right-20"></b>
+	   		    		<b class="margin-right-20" th:text="#{TEXT.EMAIL}"></b>
 						<input type="email" name="userEmail" id="userEmail" th:value="${user.userEmail}" class="for-center-input form-control" placeholder="Email."/>
-						<button type="button" id="emailDupl" class="btn btn-info" disabled="disabled"><span th:text="#{text.dupl}"></span></button>
+						<button type="button" id="emailDupl" class="btn btn-info" disabled="disabled">
+						<span th:text="#{TEXT.DUPL}"></span></button>
 					</div>
 					<div class="errorMsg" id="emailMsg"></div>
 					<p class="errorMsg" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></p>
@@ -20,24 +18,24 @@
 		    	
 		    	<div class="col-sm-12 margin-bottom-10">
 			    	<div>
-			    		<b th:text="#{text.name}" class="margin-right-20"></b>
+			    		<b th:text="#{TEXT.NAME}" class="margin-right-20"></b>
 						<input type="text" name="userName" th:value="${user.userName}" class="for-center-input form-control" placeholder="Name."/>
 			    	</div>
 			    </div>
 			    
 	  		    	<div class="col-sm-12 margin-bottom-10">
 			    	<div>
-			    		<b th:text="#{text.password}" class="margin-right-20"></b>
+			    		<b th:text="#{TEXT.PASSWORD}" class="margin-right-20"></b>
 						<input type="password" name="userPassword" th:value="${user.userPassword}" class="for-center-input form-control" placeholder="Password."/>
 						<p class="erros-red" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></p>
 			    	</div>
 			    </div>
 			    
 				<div class="col-sm-12 margin-bottom-20">
-					<p><b><span th:text="#{text.agree}"></span></b></p>
-					<p><b><span th:text="#{text.important}"></span></b><span th:text="#{text.important2}"></span></p>
+					<p><b><span th:text="#{TEXT.AGREE}"></span></b></p>
+					<p><b><span th:text="#{TEXT.IMPORTANT}"></span></b><span th:text="#{TEXT.IMPORTANT2}"></span></p>
 		    		<div>
-	    				<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{text.email}"></span>
+	    				<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{TEXT.EMAIL}"></span>
 	    				<input type="checkbox" name="receiveEmail" value="1">
 	    			</div>
 				</div>

@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class AjaxResult {
-	private Object result;
+	private String result;
 	private String errorMsg;
 	private List<Object> resultList;
 }

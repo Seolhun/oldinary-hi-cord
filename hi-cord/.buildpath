@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="src/main/java"/>
+	<buildpathentry kind="src" path="src/main/resources"/>
+	<buildpathentry kind="src" path="src/test/java"/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER"/>
+	<buildpathentry kind="con" path="org.eclipse.vjet.eclipse.core.JSNATIVE_CONTAINER/JS Native Types"/>
+	<buildpathentry kind="con" path="org.eclipse.vjet.eclipse.core.BROWSER_CONTAINER/Browser SDK"/>
+	<buildpathentry external="true" kind="lib" path="/Users/HunSeol/.gradle/caches/modules-2/files-2.1/org.webjars.bower/angular-animate/1.6.1/8822a1eb2318d3ae7f9417a437e6ca913344eb26/angular-animate-1.6.1.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/HunSeol/.gradle/caches/modules-2/files-2.1/org.webjars.bower/angular-route/1.6.1/ff8228c73c0752ffb0cc69e1df025527c7a14815/angular-route-1.6.1.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/HunSeol/.gradle/caches/modules-2/files-2.1/org.webjars.bower/angular-sanitize/1.6.1/a0347d86310962193bde210d3c543e450d2f31ab/angular-sanitize-1.6.1.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/HunSeol/.gradle/caches/modules-2/files-2.1/org.webjars.bower/angular/1.6.1/f4b86e5efb4134dd29a19abf2153464624c59f59/angular-1.6.1.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/HunSeol/.gradle/caches/modules-2/files-2.1/org.webjars/bootstrap/3.3.6/1360e2bcd3016ce44a273d2a3b6569963bb0bd68/bootstrap-3.3.6.jar"/>
+	<buildpathentry external="true" kind="lib" path="/Users/HunSeol/.gradle/caches/modules-2/files-2.1/org.webjars/jquery/2.2.4/c3dc40b1b5f24c56afa36fd9a463bb9f378ac4ab/jquery-2.2.4.jar"/>
+</buildpath>

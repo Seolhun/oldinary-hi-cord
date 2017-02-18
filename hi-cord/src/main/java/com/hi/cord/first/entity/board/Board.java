@@ -1,13 +1,17 @@
 package com.hi.cord.first.entity.board;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,6 +19,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.hi.cord.first.entity.file.FileData;
 
 import lombok.Data;
 
@@ -68,10 +74,10 @@ public class Board {
 	private Date boardModifiedDate;
 
 	@Column(name = "BOARD_DELCHECK", length=5, nullable=false)
-	private String boardDelCheck;
+	private int boardDelCheck;
 	
-//	@OneToMany(mappedBy="boardInFile", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-//	private List<FileData> fileListInBoard;
+	@OneToMany(mappedBy="boardInFile", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<FileData> boardWithFileList;
 //	
 //	@OneToMany(mappedBy="boardInReply", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 //	private List<Reply> replyListInBoard;

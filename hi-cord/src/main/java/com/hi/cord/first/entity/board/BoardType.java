@@ -2,9 +2,9 @@ package com.hi.cord.first.entity.board;
 
 public enum BoardType {
 	//향후 더 추가예정 /PathVariable에 쓸 수 있는 객체들을 사용한다.
-	NOTICE("notice"),
-	QNA("qna"),
-	FREEBOARD("freeboard");
+	Notice("notice"),
+	QnA("qna"),
+	Freeboard("freeboard");
 	
 	private String type;
 	

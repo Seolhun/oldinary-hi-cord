@@ -1,33 +1,31 @@
 var root , csrfHeader, csrfToken, boardType;
 	root="";
-	csrfHeader=$("#csrfHeader");
-	csrfToken=$("#csrfToken");
-	boardType=$("#boardType");
+	csrfHeader=document.getElementById("csrfHeader").content;
+	csrfToken=document.getElementById("csrfToken").content;
+	boardType=$("#bType").val();
 	
 $(document).ready(function() {
-	console.log(csrfToken);
-	console.log(csrfHeader);
 	BoardList();
 	function BoardList(){
 		//동적 환자 리스트 DataTable
 	    $("#boardJsGrid").jsGrid({
 	    	height : "600",
-	    	width : "100%",
+	    	width : "96%",
 	    	selecting : true,
 	    	autoload : true,
 	    	filtering: true,
 	        editing: true,
 	        sorting : true,
-        	paging : true,
-            pagerContainer: null,
-            pageIndex: 1,
-            pageSize: 10,
-            pageButtonCount: 15,
-            pagerFormat: "Pages: {prev} {pages} {next} : {pageIndex} of {pageCount}",
-            pagePrevText: "Prev",
-            pageNextText: "Next",
-            pageNavigatorNextText: "...",
-            pageNavigatorPrevText: "...",
+        	paging : true, 
+        	pagerContainer: null,
+        	pageIndex: 1,
+        	pageSize: 10,
+        	pageButtonCount: 15,
+    		pagerFormat: "Pages: {prev} {pages} {next} : {pageIndex} of {pageCount}",
+        	pagePrevText: "Prev",
+        	pageNextText: "Next",
+        	pageNavigatorNextText: "...",
+        	pageNavigatorPrevText: "...",
 	        noDataContent : "현재 게시물이 없습니다.",
 
 	        rowClick: function(args) {
@@ -48,7 +46,7 @@ $(document).ready(function() {
 	    		loadData : function(filter) {
 	                 var d = $.Deferred();
 	                 $.ajax({
-	    				type : "POST",
+	    				type : "GET",
 	    				contentType : "application/json; charset=utf-8",
 	    				url : "/board/"+boardType+"/list-json", 
 	    				dataType : "json",
@@ -107,3 +105,16 @@ $(document).ready(function() {
 		});
 	}
 });
+//
+//$(function() {
+//	// 최상단 체크박스 클릭
+//	$("#allCheck").click(function() {
+//		if ($("#allCheck").prop("checked")) {
+//			// input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+//			$("input[name=check]").prop("checked", true);
+//		} else {
+//			// input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+//			$("input[name=check]").prop("checked", false);
+//		}
+//	})
+//});

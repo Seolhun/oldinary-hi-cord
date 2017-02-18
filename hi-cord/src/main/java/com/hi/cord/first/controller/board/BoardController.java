@@ -12,19 +12,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hi.cord.common.CommonFn;
+import com.hi.cord.common.model.AjaxResult;
 import com.hi.cord.first.entity.board.Board;
+import com.hi.cord.first.entity.board.BoardType;
 import com.hi.cord.first.entity.board.Comment;
 import com.hi.cord.first.entity.board.Reply;
 import com.hi.cord.first.service.board.BoardService;
@@ -42,31 +50,234 @@ public class BoardController {
 	private ReplyService replyService;
 	@Autowired
 	private CommonFn cFn;
-
-	@RequestMapping(value = { "/{boardType}" }, method = RequestMethod.GET)
-	public String moveBoardList(Model model, HttpServletRequest request, @PathVariable("boardType") String boardType, Board board) throws Exception {
+	@Autowired
+	private PlatformTransactionManager txManager;
+	
+	/**
+	 * 게시판 이동.
+	 * @param String boardType
+	 * @return String - view
+	 * @throws Exception
+	 */
+	@RequestMapping(value = { "/{bType}" }, method = RequestMethod.GET)
+	public String moveBoardList(Model model, HttpServletRequest request, @PathVariable("bType") String bType) throws Exception {
 		model.addAttribute("whereIs", "Board");
-		model.addAttribute("board", board);
-		model.addAttribute("boardType", boardType);
+		model.addAttribute("board", new Board());
+		model.addAttribute("bType", bType);
 		return "views/board/board-list";
 	}
 	
-	@RequestMapping(value = { "/{boardType}/list-json" }, method = RequestMethod.GET, produces="application/json")
+	/**
+	 * 게시판 Json 리스트 출력.
+	 * @param Board board
+	 * @return List<Board>
+	 * @throws Exception
+	 */
+	@RequestMapping(value = { "/{bType}/list-json" }, method = RequestMethod.GET)
 	@ResponseBody
-	public List<Board> boardList(Model model, HttpServletRequest request, @PathVariable("boardType") String boardType, Board board) throws Exception {
+	public List<Board> boardList(Model model, HttpServletRequest request, @PathVariable("bType") String bType, Board board) throws Exception {
 		//답글 객체 저장
-		board.setBoardType(boardType);
+		board.setBoardType(bType);
 		List<Board> boardList = boardService.findAll(board);
-		System.out.println("Parameter : "+boardList.toString());
 
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("boardType", boardType);
+		model.addAttribute("bType", bType);
 		return boardList;
 	}
 	
+	/**
+	 * Board Data Insert 
+	 * @param Board board
+	 * @return List<Board>
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/{bType}/write", method = RequestMethod.GET)
+	public String boardAdd(Model model, @PathVariable("bType") String bType, Authentication auth) {
+		model.addAttribute("board", new Board());
+		model.addAttribute("boardTypes", BoardType.values());
+		model.addAttribute("bType", bType);
+		return "views/board/board-write";
+	}
+
+	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxResult boardAddIn(@RequestBody Board board, @PathVariable("bType") String bType, RedirectAttributes redirect, MultipartHttpServletRequest multipart, AjaxResult ajaxResult) {
+		//Transaction 선언		
+		DefaultTransactionDefinition txDefinition = new DefaultTransactionDefinition();
+		TransactionStatus status = txManager.getTransaction(txDefinition);
+		
+		//파일 가져오기.
+		//1 MB = 1024 * 1024 Bytes || 1 GB = 1024 * 1024 * 1024 Bytes.
+		List<MultipartFile> multiFiles =multipart.getFiles("fileInfo");
+		int sum = 0;
+		for (int i = 0; i < multiFiles.size(); i++) {
+			if (multiFiles.get(i).getSize() > 1024*1024*30) {
+				ajaxResult.setResult("over");
+				return ajaxResult;
+			}
+			sum += multiFiles.get(i).getSize();
+		}
+
+		//파일크기 계산
+		if (sum > 1024*1024*30) {
+			ajaxResult.setResult("over");
+			return ajaxResult;
+		}
+		
+		try {
+			board.setBoardType(bType);
+			boardService.save(board);
+			redirect.addFlashAttribute("saveBoard", "success");
+		} catch (Exception e) {
+			redirect.addFlashAttribute("saveBoard", "unsuccess");
+		}
+		
+		ajaxResult.setResult("success");
+		return ajaxResult;
+	}
+	
+//	@RequestMapping(value = "/recruit", method = RequestMethod.POST)
+//	public ModelAndView setAddIn(@Valid @ModelAttribute("application") Application application, BindingResult bindingResult, ModelMap model, 
+//		HttpServletRequest request, MultipartHttpServletRequest mhsq, HttpServletResponse res, HttpSession session) throws Exception {
+//		ModelAndView result = new ModelAndView();
+//		Language language = cFn.setLanguageData(text_ko, text_en, request);
+//		
+//		if(language.getLanguage_code().equals("kr")){
+//			session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.KOREA);
+//		}else if(language.getLanguage_code().equals("en")) {
+//			session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.ENGLISH);
+//		}
+//
+//		// 기본 설정
+//		String target = "application";
+//		String targetName = "common.main.application";
+//		cFn.setDefaultSetting(model, language, target, targetName);
+//
+//		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+//		TransactionStatus status = transactionManager_db.getTransaction(def);
+//
+//		// 다중 파일 지원
+//		List<MultipartFile> multiFiles = mhsq.getFiles("fileInfo");
+//		int sum = 0;
+//		for (int i = 0; i < multiFiles.size(); i++) {
+//			if (multiFiles.get(i).getSize() > 20971520) {
+//				model.addAttribute("errMsg", "file.MaxUploadException");
+//				result.setViewName("recruit/recruit");
+//				return result;
+//			}
+//			sum += multiFiles.get(i).getSize();
+//		}
+//
+//		if (sum > 20971520) {
+//			model.addAttribute("errMsg", "file.MaxUploadException");
+//			result.setViewName("recruit/recruit");
+//			return result;
+//		}
+//
+//		// 유효성 검증
+//		if (bindingResult.hasErrors()) {
+//			model.addAttribute("application", application);
+//			model.addAttribute("errorMsg", "errors");
+//			result.setViewName("recruit/recruit");
+//		} else if (multiFiles.get(0).getOriginalFilename().equals("")) {
+//			model.addAttribute("errMsg", "file.notUpload");
+//
+//			result.setViewName("recruit/recruit");
+//
+//			return result;
+//		} else {
+//			try {
+//				// 1. application 테이블에 값 insert
+//				applicationDAO.insertData("application", application);
+//				// System.out.println("지원자 첨부파일 총갯수:" + multiFiles.size());
+//
+//				Application recentAppl = null;
+//
+//				// 파일 업로드 프로세스
+//				for (int i = 0; i < multiFiles.size(); i++) {
+//					BoardInfo fileInfo = new BoardInfo();
+//					fileInfo.setTableName("FILE");
+//					Files fileItem = new Files();
+//
+//					String originalfileName = multiFiles.get(i).getOriginalFilename();// 본래
+//																						// 파일명
+//					// 업로드 파일명 변환
+//					String randomId = UUID.randomUUID().toString();
+//					long nowTime = System.currentTimeMillis();
+//
+//					String fileSavedName = nowTime + randomId + originalfileName; // 저장되는
+//																					// 파일명
+//					String savePath = filePath + fileSavedName; // 저장경로
+//
+//					fileItem.setFileOriginName(originalfileName);
+//					fileItem.setFileSavedName(fileSavedName);
+//					fileItem.setFileSavedDir(savePath);
+//
+//					recentAppl = applicationDAO.getMaxItem("application", application);
+//					fileItem.setFileUploader_id(recentAppl.getApplId());
+//
+//					File uploadedFile = new File(savePath);
+//					multiFiles.get(i).transferTo(uploadedFile); // 파일 저장
+//
+//					// 파일 ContentType 검색 (Apache Tika)
+//					String mimeType = null;
+//					Tika tika = new Tika();
+//					mimeType = tika.detect(uploadedFile);
+//					System.err.println(mimeType);
+//					fileItem.setFileType(mimeType);
+//
+//					// 2. FILE 테이블 값 insert
+//					filesDAO.insertData(fileInfo, fileItem);
+//
+//					Files recentFile = filesDAO.getMaxItem("FILE", recentAppl);
+//					ItemAttachedFiles itemFiles = new ItemAttachedFiles();
+//					itemFiles.setFileId(recentFile.getFileId());
+//					itemFiles.setItemId(recentAppl.getApplId());
+//					itemFiles.setParameterName(fileInfo.getTableName());
+//
+//					// 3. ITEM_ATTACHED_FILES 테이블 값 insert
+//					filesDAO.insertItemAttachedData("ITEM_ATTACHED_FILES", itemFiles);
+//				} // end for문
+//
+//				transactionManager_db.commit(status);
+//
+//				// 성공 시 프로세스 진행 부분
+//				String movingPath = "/recruit";
+//				model.addAttribute("movingPath", movingPath);
+//				model.addAttribute("msg", "application.processMsg.success");
+//				model.addAttribute("headMsg", "common.main.application");
+//
+//				// applicationSendMail(res, session, application.getApplType(),
+//				// application.getApplJob(),
+//				// application.getApplName());
+//			} catch (Exception e) {
+//				transactionManager_db.rollback(status);
+//
+//				// 성공 시 프로세스 진행 부분
+//				String movingPath = "/recruit";
+//				model.addAttribute("movingPath", movingPath);
+//				model.addAttribute("fail", "fail");
+//				model.addAttribute("msg", "application.processMsg.fail");
+//				model.addAttribute("headMsg", "common.main.application");
+//			}
+//
+//			// jsp 설정
+//			result.setViewName("error/process");
+//
+//		} // end else (유효성 검증)
+//
+//		return result;
+//	}
+	
+	/**
+	 * 게시판 상세보기 출력.
+	 * @param Board board
+	 * @return List<Board>
+	 * @throws Exception
+	 */
 	@Secured("SUPERADMIN")
-	@RequestMapping(value = "/{tableName}/detail/{path}", method = RequestMethod.GET)
-	public String boardDetail(Model model, @PathVariable("path") Long path, @PathVariable("tableName") String tableName, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/{bType}/detail/{path}", method = RequestMethod.GET)
+	public String boardDetail(Model model, @PathVariable("path") Long path, @PathVariable("bType") String bType, HttpServletRequest request, HttpServletResponse response) {
 		Board board = boardService.findById(path);
 
 		// 저장된 hit 쿠키 불러오기
@@ -88,29 +299,10 @@ public class BoardController {
 		}
 
 		model.addAttribute("board", board);
-		model.addAttribute("tableName", tableName);
+		model.addAttribute("bType", bType);
 		return "views/board/detail";
 	}
 
-	@RequestMapping(value = "/{tableName}/add", method = RequestMethod.GET)
-	public String boardAdd(Model model, @PathVariable("tableName") String tableName) {
-		model.addAttribute("board", new Board());
-		model.addAttribute("tableName", tableName);
-		return "views/board/add";
-	}
-
-	@RequestMapping(value = "/{tableName}/add", method = RequestMethod.POST)
-	public String boardAddIn(Board board, @PathVariable("tableName") String tableName, final RedirectAttributes redirectAttributes) {
-		try {
-			board.setBoardType(tableName);
-			boardService.save(board);
-			redirectAttributes.addFlashAttribute("saveBoard", "success");
-		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("saveBoard", "unsuccess");
-		}
-		return "redirect:/talk/" + tableName;
-	}
-	
 	@RequestMapping(value = "/{tableName}/edit/{path}", method = RequestMethod.GET)
 	public String boardEditGet(Model model, @PathVariable("path") Long path, @PathVariable("tableName") String tableName) {
 		model.addAttribute("board", new Board());
@@ -140,7 +332,7 @@ public class BoardController {
 	@ResponseBody
 	public String boardAjaxDelete(@RequestBody Board board, HttpServletRequest request){
 		Board temp = boardService.findById(board.getBoardId());
-		temp.setBoardDelCheck("Y");
+		temp.setBoardDelCheck(0);
 		if(boardService.update(temp) == null);
 			System.out.println(board.getBoardId());
 		return "true";

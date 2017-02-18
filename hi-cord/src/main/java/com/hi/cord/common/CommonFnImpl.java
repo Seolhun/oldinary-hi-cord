@@ -3,20 +3,14 @@ package com.hi.cord.common;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.Properties;
 
-import javax.mail.internet.MimeMessage;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -24,14 +18,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hi.cord.common.model.Language;
 import com.hi.cord.common.model.Paging;
 
 @Repository
 public class CommonFnImpl implements CommonFn {
-
-	@Autowired
-	private JavaMailSender mailSender;
+	
+	static final Logger log = LoggerFactory.getLogger(CommonFnImpl.class);
 
 	@Override
 	public int checkVDInt(String parameter, int default_value) {
@@ -129,45 +121,6 @@ public class CommonFnImpl implements CommonFn {
 	}
 
 	@Override
-	public Language setLanguageData(Properties text_ko, Properties text_en, HttpServletRequest request) {
-		String serverName = request.getContextPath();
-		Language Language = new Language();
-		// setDefault Values
-		String language_code = "kr";
-		Properties text = text_ko;
-		if (serverName.contains("/kr")) {
-			language_code = "kr";
-			text = text_ko;
-		} else if (serverName.contains("/en")) {
-			language_code = "en";
-			text = text_en;
-		}
-		Language.setLanguage_code(language_code);
-		Language.setText(text);
-		return Language;
-	}
-
-	@Override
-	public void setDefaultSetting(ModelMap model, Language language, String target, String targetName) {
-		// 기본 설정
-		String companyName = language.getText().getProperty("common.company.name");
-		String dwblank = language.getText().getProperty("common.text.blank");
-		model.addAttribute("language_code", language.getLanguage_code());
-		// 매핑 설정
-		String title;
-		if (target.equals("home")) {
-			title = companyName;
-		} else {
-			title = targetName + dwblank + companyName;
-		}
-
-		model.addAttribute("target", target);
-		model.addAttribute("title", title);
-		model.addAttribute("targetName", targetName);
-	}
-
-	//
-	@Override
 	public String getUserIP() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 				.getRequest();
@@ -191,86 +144,20 @@ public class CommonFnImpl implements CommonFn {
 	}
 
 	@Override
-	// POST 메소드에서는 가져오지 못함.
-	public boolean checkValidConnectPage(String email) {
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetails) {
-			userName = ((UserDetails) principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		if (email.equals(userName)) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public String getPrincipal() {
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetails) {
-			userName = ((UserDetails) principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		return userName;
-	}
-
-	public void applicationSendMail(ServletResponse res, HttpSession session, String type, String job, String name) {
-		new Thread() {
-			public void run() {
-				try {
-					MimeMessage message = mailSender.createMimeMessage();
-					// true로서 멀티파트 메세지라는 의미
-					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-					messageHelper.setFrom("Shooney");
-					messageHelper.setTo("shun10114@gmail.com");
-					messageHelper.setSubject("이력서 접수 알림");
-
-					int authentication = (int) (Math.random() * 1000000);
-					session.setAttribute("authentication", authentication);
-
-					String tp = "";
-					String jb = "";
-					if (type.equals("exp")) {
-						tp = "경력";
-					} else {
-						tp = "신입";
-					}
-
-					if (job.equals("d")) {
-						jb = "디자이너";
-					} else if (job.equals("pg")) {
-						jb = "개발자";
-					} else if (job.equals("pb")) {
-						jb = "퍼블리셔";
-					} else if (job.equals("m")) {
-						jb = "기술영업";
-					} else {
-						jb = "기타";
-					}
-
-					messageHelper.setText(
-							"" + "<html><body><div><h3>새로운 이력서가 <span style='color:#74b45f;'>접수</span>되었습니다.</h3><br>"
-									+ "지원 정보<br><table style='font-size:13px;width:380px;border-top: 2px solid #74b45f;border-bottom: 1px solid #ccc;margin-top: 10px;text-indent: 1.2em;'>"
-									+ "<tr><td style='width: 40%;'>지원분야</td><td>" + jb + "</td></tr><tr><td>분류</td><td>"
-									+ tp + "</td></tr><tr><td>지원자명</td><td>" + name + "</td></tr>"
-									+ "</table><br><br><button style='background:#74b45f;color:white; border-style: none;width:150px;height:40px;font-size:12px;margin-left: 114px;'>"
-									+ "아이메디신 홈페이지로 이동</button><br><br><div style='border: 1px solid #ccc;padding:10px;font-size:11px;color: #8C8C8C;width: 380px;'>"
-									+ "본 메일은 발신 전용 메일입니다. 문의는 imedisyndev@gmail.com에 접수바랍니다.<br>TEL. 02-742-7422 | FAX. 02-745-7422 | E-mail. imedisyndev@gmail.com	"
-									+ "</div></div></body></html>",
-							true);
-
-					mailSender.send(message);
-
-					System.out.println("메일 전송 완료");
-				} catch (Exception e) {
-					e.printStackTrace();
+	public boolean getLoginAuthValidation(Authentication auth, String authNameYouWant) {
+		boolean valid=false;
+		try {
+			for (GrantedAuthority authority: auth.getAuthorities()) {
+				String authName=authority.getAuthority();
+				if(authName.equals(authNameYouWant)){
+					valid=true;
 				}
-			}
-		}.start();
+			}	
+		} catch (NullPointerException e) {
+			log.error("ERROR NullPointException - getLoginAuthValidation = "+valid);
+		}
+		log.info("TEST : getLoginAuthValidation = "+valid);
+		return valid;
 	}
 
 	@Override
