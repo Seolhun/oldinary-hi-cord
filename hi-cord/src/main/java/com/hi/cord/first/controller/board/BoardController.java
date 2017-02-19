@@ -99,17 +99,22 @@ public class BoardController {
 		return "views/board/board-write";
 	}
 
-	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST)
+	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public AjaxResult boardAddIn(@RequestBody Board board, @PathVariable("bType") String bType, RedirectAttributes redirect, MultipartHttpServletRequest multipart, AjaxResult ajaxResult) {
 		//Transaction 선언		
 		DefaultTransactionDefinition txDefinition = new DefaultTransactionDefinition();
 		TransactionStatus status = txManager.getTransaction(txDefinition);
 		
+		log.info("param : "+ board.toString());
+		
 		//파일 가져오기.
 		//1 MB = 1024 * 1024 Bytes || 1 GB = 1024 * 1024 * 1024 Bytes.
-		List<MultipartFile> multiFiles =multipart.getFiles("fileInfo");
+		List<MultipartFile> multiFiles =multipart.getFiles("boardWithFileList");
+		log.info("param : "+ multiFiles.toString());
 		int sum = 0;
+		
+		//파일크기 계산
 		for (int i = 0; i < multiFiles.size(); i++) {
 			if (multiFiles.get(i).getSize() > 1024*1024*30) {
 				ajaxResult.setResult("over");
@@ -118,12 +123,12 @@ public class BoardController {
 			sum += multiFiles.get(i).getSize();
 		}
 
-		//파일크기 계산
 		if (sum > 1024*1024*30) {
 			ajaxResult.setResult("over");
 			return ajaxResult;
 		}
 		
+		//
 		try {
 			board.setBoardType(bType);
 			boardService.save(board);
