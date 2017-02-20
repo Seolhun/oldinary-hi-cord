@@ -7,7 +7,7 @@
 				<label class="panel-title font-20b" th:text="#{TEXT.BOARD.WRITE}"></label>
 			</div>
 			<div class="panel-body">
-				<form th:object="${board}" th:action="@{|/board/${bType}/write|}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+				<form th:object="${board}" th:action="@{|/board/${bType}/write|}" id="boardForm" method="POST" enctype="multipart/form-data">
 					<div class="row margin-bottom-20">
 						<div class="col-sm-8">
 							<input type="text" class="form-control" th:field="*{boardSubject}" name="boardSubject" id="boardSubject" th:placeholder="#{TEXT.BPH.SUBJECT}"/>
