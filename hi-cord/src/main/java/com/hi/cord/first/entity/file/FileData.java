@@ -40,8 +40,8 @@ public class FileData {
 	@Column(name = "FILE_SAVED_NAME", nullable = false, length = 200)
 	private String fileDataSavedName;
 
-	@Column(name = "FILE_SAVED_DIR", nullable = false, length = 200)
-	private String fileDataSavedDir;
+	@Column(name = "FILE_SAVED_PATH", nullable = false, length = 200)
+	private String fileDataSavedPath;
 
 	@Column(name = " FILE_TYPE", nullable = false, length = 20)
 	private String fileDataType;

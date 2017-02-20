@@ -41,8 +41,17 @@ $(document).ready(function() {
 			success : function(data) {
 				if (data.result === "success") {
 					console.log('Success');
-					swal("", "파일전송 성공", "success");
+					swal("", "게시판 등록 성공", "success");
 					return;
+				} else if(data.reult==="over"){
+					console.log('Over');
+					swal("", "파일 용량이 초과되었습니다.", "warning");
+				} else if(data.reult==="invalid"){
+					console.log('Invalid');
+					swal("", "파일 형식이 올바르지 않습니다.\n(.은 하나만 존재해야 합니다.)", "warning");
+				} else {
+					console.log('Invalid');
+					swal("", "게시물 저장이 실패되었습니다.", "danger");
 				}
 			},
 			error : function(e) {

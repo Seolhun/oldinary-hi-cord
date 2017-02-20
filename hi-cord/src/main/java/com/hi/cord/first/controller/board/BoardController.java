@@ -1,7 +1,9 @@
 package com.hi.cord.first.controller.board;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,8 +34,10 @@ import com.hi.cord.first.entity.board.Board;
 import com.hi.cord.first.entity.board.BoardType;
 import com.hi.cord.first.entity.board.Comment;
 import com.hi.cord.first.entity.board.Reply;
+import com.hi.cord.first.entity.file.FileData;
 import com.hi.cord.first.service.board.BoardService;
 import com.hi.cord.first.service.board.reply.ReplyService;
+import com.hi.cord.first.service.file.FileDataService;
 
 @Controller
 @RequestMapping("/board")
@@ -46,7 +49,14 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 	@Autowired
+	private FileDataService fileDataService;
+	@Autowired
 	private CommonFn cFn;
+	@Autowired
+	private BCryptPasswordEncoder bCrypt;
+	
+	
+	private final String FILE_PATH = "/Users/HunSeol/Desktop/file/";
 	
 	/**
 	 * 게시판 이동.
@@ -94,11 +104,9 @@ public class BoardController {
 		return "views/board/board-write";
 	}
 
-	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxResult boardAddIn(Board board, @PathVariable("bType") String bType, RedirectAttributes redirect, MultipartHttpServletRequest multipart, AjaxResult ajaxResult) {
-		log.info("param : "+ board.toString());
-		
 		log.info("param : "+ board.toString());
 		
 		//파일 가져오기.
@@ -121,13 +129,60 @@ public class BoardController {
 			return ajaxResult;
 		}
 		
-		//
+		//파일 저장				
+		List<FileData> fileDataList=new ArrayList<>();
+		for (int i = 0; i < multiFiles.size(); i++) {
+			FileData fileData=new FileData();
+			
+			String orginalFileName=multiFiles.get(i).getOriginalFilename();
+			
+			
+			String splitName[]=orginalFileName.split(".");
+			
+			if(splitName.length>2){
+				ajaxResult.setResult("invalid");
+				return ajaxResult;
+			}
+			fileData.setFileDataOriginName(splitName[0]);
+			fileData.setFileDataType(splitName[1]);
+			
+			String contentType=multiFiles.get(i).getContentType();
+			log.info("TEST : "+contentType);
+//			fileData.setFileDataType(contentType);
+			
+			String encryptFileName=bCrypt.encode(orginalFileName);
+			String savedPath=FILE_PATH+encryptFileName;
+			
+			fileData.setFileDataSavedName(encryptFileName);
+			fileData.setFileDataSavedPath(savedPath);
+			
+			//File Upload			
+			File uploadFile=new File(savedPath);
+			try {
+				multiFiles.get(i).transferTo(uploadFile);
+			} catch (IllegalStateException e) {
+				log.debug("File Catch IllegalStateException");
+				e.printStackTrace();
+			} catch (IOException e) {
+				log.debug("File Catch IOException");
+				e.printStackTrace();
+			}
+			
+			//이상 없을시 파일리스트에 담는다.
+			fileDataList.add(fileData);
+		}
+		//FileDB저장
+		for (int i = 0; i < fileDataList.size(); i++) {
+			fileDataService.save(fileDataList.get(i));	
+		}
+		
+		//게시판 저장.
 		try {
 			board.setBoardType(bType);
 			boardService.save(board);
-			redirect.addFlashAttribute("saveBoard", "success");
 		} catch (Exception e) {
-			redirect.addFlashAttribute("saveBoard", "unsuccess");
+			ajaxResult.setResult("fail");
+			return ajaxResult;
 		}
 		
 		ajaxResult.setResult("success");
