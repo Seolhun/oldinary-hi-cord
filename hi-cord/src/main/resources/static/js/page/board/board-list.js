@@ -10,7 +10,7 @@ $(document).ready(function() {
 		//동적 환자 리스트 DataTable
 	    $("#boardJsGrid").jsGrid({
 	    	height : "600",
-	    	width : "96%",
+	    	width : "97%",
 	    	selecting : true,
 	    	autoload : true,
 	    	filtering: true,

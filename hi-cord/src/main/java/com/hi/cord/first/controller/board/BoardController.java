@@ -1,6 +1,7 @@
 package com.hi.cord.first.controller.board;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +37,6 @@ import com.hi.cord.first.service.board.BoardService;
 import com.hi.cord.first.service.board.reply.ReplyService;
 
 @Controller
-@Transactional(propagation = Propagation.REQUIRED, transactionManager = "txManager", noRollbackFor = {NullPointerException.class })
 @RequestMapping("/board")
 public class BoardController {
 	static final Logger log = LoggerFactory.getLogger(BoardController.class);
@@ -50,8 +47,6 @@ public class BoardController {
 	private ReplyService replyService;
 	@Autowired
 	private CommonFn cFn;
-	@Autowired
-	private PlatformTransactionManager txManager;
 	
 	/**
 	 * 게시판 이동.
@@ -99,13 +94,9 @@ public class BoardController {
 		return "views/board/board-write";
 	}
 
-	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxResult boardAddIn(@RequestBody Board board, @PathVariable("bType") String bType, RedirectAttributes redirect, MultipartHttpServletRequest multipart, AjaxResult ajaxResult) {
-		//Transaction 선언		
-		DefaultTransactionDefinition txDefinition = new DefaultTransactionDefinition();
-		TransactionStatus status = txManager.getTransaction(txDefinition);
-		
+	public AjaxResult boardAddIn(Board board, @PathVariable("bType") String bType, RedirectAttributes redirect, MultipartHttpServletRequest multipart, AjaxResult ajaxResult) {
 		log.info("param : "+ board.toString());
 		
 		//파일 가져오기.
