@@ -1,8 +1,5 @@
 package com.hi.cord.first.controller.board;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hi.cord.common.CommonFn;
@@ -34,54 +28,51 @@ import com.hi.cord.first.entity.board.Board;
 import com.hi.cord.first.entity.board.BoardType;
 import com.hi.cord.first.entity.board.Comment;
 import com.hi.cord.first.entity.board.Reply;
-import com.hi.cord.first.entity.file.FileData;
 import com.hi.cord.first.service.board.BoardService;
 import com.hi.cord.first.service.board.reply.ReplyService;
-import com.hi.cord.first.service.file.FileDataService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	static final Logger log = LoggerFactory.getLogger(BoardController.class);
-	
+
 	@Autowired
 	private BoardService boardService;
 	@Autowired
 	private ReplyService replyService;
 	@Autowired
-	private FileDataService fileDataService;
-	@Autowired
 	private CommonFn cFn;
-	@Autowired
-	private BCryptPasswordEncoder bCrypt;
-	
-	
-	private final String FILE_PATH = "/Users/HunSeol/Desktop/file/";
-	
+
 	/**
 	 * 게시판 이동.
-	 * @param String boardType
+	 * 
+	 * @param String
+	 *            boardType
 	 * @return String - view
 	 * @throws Exception
 	 */
 	@RequestMapping(value = { "/{bType}" }, method = RequestMethod.GET)
-	public String moveBoardList(Model model, HttpServletRequest request, @PathVariable("bType") String bType) throws Exception {
+	public String moveBoardList(Model model, HttpServletRequest request, @PathVariable("bType") String bType)
+			throws Exception {
 		model.addAttribute("whereIs", "Board");
 		model.addAttribute("board", new Board());
 		model.addAttribute("bType", bType);
 		return "views/board/board-list";
 	}
-	
+
 	/**
 	 * 게시판 Json 리스트 출력.
-	 * @param Board board
+	 * 
+	 * @param Board
+	 *            board
 	 * @return List<Board>
 	 * @throws Exception
 	 */
 	@RequestMapping(value = { "/{bType}/list-json" }, method = RequestMethod.GET)
 	@ResponseBody
-	public List<Board> boardList(Model model, HttpServletRequest request, @PathVariable("bType") String bType, Board board) throws Exception {
-		//답글 객체 저장
+	public List<Board> boardList(Model model, HttpServletRequest request, @PathVariable("bType") String bType,
+			Board board) throws Exception {
+		// 답글 객체 저장
 		board.setBoardType(bType);
 		List<Board> boardList = boardService.findAll(board);
 
@@ -89,10 +80,12 @@ public class BoardController {
 		model.addAttribute("bType", bType);
 		return boardList;
 	}
-	
+
 	/**
-	 * Board Data Insert 
-	 * @param Board board
+	 * Board Data Insert
+	 * 
+	 * @param Board
+	 *            board
 	 * @return List<Board>
 	 * @throws Exception
 	 */
@@ -104,80 +97,14 @@ public class BoardController {
 		return "views/board/board-write";
 	}
 
-	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST)
+	@RequestMapping(value = "/{bType}/write", method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
-	public AjaxResult boardAddIn(Board board, @PathVariable("bType") String bType, RedirectAttributes redirect, MultipartHttpServletRequest multipart, AjaxResult ajaxResult) {
+	public AjaxResult boardAddIn(@RequestBody Board board, @PathVariable("bType") String bType, AjaxResult ajaxResult, Authentication auth) throws Exception{
 		log.info("param : "+ board.toString());
-		
-		//파일 가져오기.
-		//1 MB = 1024 * 1024 Bytes || 1 GB = 1024 * 1024 * 1024 Bytes.
-		List<MultipartFile> multiFiles =multipart.getFiles("boardWithFileList");
-		log.info("param : "+ multiFiles.toString());
-		int sum = 0;
-		
-		//파일크기 계산
-		for (int i = 0; i < multiFiles.size(); i++) {
-			if (multiFiles.get(i).getSize() > 1024*1024*30) {
-				ajaxResult.setResult("over");
-				return ajaxResult;
-			}
-			sum += multiFiles.get(i).getSize();
-		}
-
-		if (sum > 1024*1024*30) {
-			ajaxResult.setResult("over");
-			return ajaxResult;
-		}
-		
-		//파일 저장				
-		List<FileData> fileDataList=new ArrayList<>();
-		for (int i = 0; i < multiFiles.size(); i++) {
-			FileData fileData=new FileData();
-			
-			String orginalFileName=multiFiles.get(i).getOriginalFilename();
-			
-			
-			String splitName[]=orginalFileName.split(".");
-			
-			if(splitName.length>2){
-				ajaxResult.setResult("invalid");
-				return ajaxResult;
-			}
-			fileData.setFileDataOriginName(splitName[0]);
-			fileData.setFileDataType(splitName[1]);
-			
-			String contentType=multiFiles.get(i).getContentType();
-			log.info("TEST : "+contentType);
-//			fileData.setFileDataType(contentType);
-			
-			String encryptFileName=bCrypt.encode(orginalFileName);
-			String savedPath=FILE_PATH+encryptFileName;
-			
-			fileData.setFileDataSavedName(encryptFileName);
-			fileData.setFileDataSavedPath(savedPath);
-			
-			//File Upload			
-			File uploadFile=new File(savedPath);
-			try {
-				multiFiles.get(i).transferTo(uploadFile);
-			} catch (IllegalStateException e) {
-				log.debug("File Catch IllegalStateException");
-				e.printStackTrace();
-			} catch (IOException e) {
-				log.debug("File Catch IOException");
-				e.printStackTrace();
-			}
-			
-			//이상 없을시 파일리스트에 담는다.
-			fileDataList.add(fileData);
-		}
-		//FileDB저장
-		for (int i = 0; i < fileDataList.size(); i++) {
-			fileDataService.save(fileDataList.get(i));	
-		}
 		
 		//게시판 저장.
 		try {
+			loginNameSetToObject(board, auth);
 			board.setBoardType(bType);
 			boardService.save(board);
 		} catch (Exception e) {
@@ -189,148 +116,18 @@ public class BoardController {
 		return ajaxResult;
 	}
 	
-//	@RequestMapping(value = "/recruit", method = RequestMethod.POST)
-//	public ModelAndView setAddIn(@Valid @ModelAttribute("application") Application application, BindingResult bindingResult, ModelMap model, 
-//		HttpServletRequest request, MultipartHttpServletRequest mhsq, HttpServletResponse res, HttpSession session) throws Exception {
-//		ModelAndView result = new ModelAndView();
-//		Language language = cFn.setLanguageData(text_ko, text_en, request);
-//		
-//		if(language.getLanguage_code().equals("kr")){
-//			session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.KOREA);
-//		}else if(language.getLanguage_code().equals("en")) {
-//			session.setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.ENGLISH);
-//		}
-//
-//		// 기본 설정
-//		String target = "application";
-//		String targetName = "common.main.application";
-//		cFn.setDefaultSetting(model, language, target, targetName);
-//
-//		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-//		TransactionStatus status = transactionManager_db.getTransaction(def);
-//
-//		// 다중 파일 지원
-//		List<MultipartFile> multiFiles = mhsq.getFiles("fileInfo");
-//		int sum = 0;
-//		for (int i = 0; i < multiFiles.size(); i++) {
-//			if (multiFiles.get(i).getSize() > 20971520) {
-//				model.addAttribute("errMsg", "file.MaxUploadException");
-//				result.setViewName("recruit/recruit");
-//				return result;
-//			}
-//			sum += multiFiles.get(i).getSize();
-//		}
-//
-//		if (sum > 20971520) {
-//			model.addAttribute("errMsg", "file.MaxUploadException");
-//			result.setViewName("recruit/recruit");
-//			return result;
-//		}
-//
-//		// 유효성 검증
-//		if (bindingResult.hasErrors()) {
-//			model.addAttribute("application", application);
-//			model.addAttribute("errorMsg", "errors");
-//			result.setViewName("recruit/recruit");
-//		} else if (multiFiles.get(0).getOriginalFilename().equals("")) {
-//			model.addAttribute("errMsg", "file.notUpload");
-//
-//			result.setViewName("recruit/recruit");
-//
-//			return result;
-//		} else {
-//			try {
-//				// 1. application 테이블에 값 insert
-//				applicationDAO.insertData("application", application);
-//				// System.out.println("지원자 첨부파일 총갯수:" + multiFiles.size());
-//
-//				Application recentAppl = null;
-//
-//				// 파일 업로드 프로세스
-//				for (int i = 0; i < multiFiles.size(); i++) {
-//					BoardInfo fileInfo = new BoardInfo();
-//					fileInfo.setTableName("FILE");
-//					Files fileItem = new Files();
-//
-//					String originalfileName = multiFiles.get(i).getOriginalFilename();// 본래
-//																						// 파일명
-//					// 업로드 파일명 변환
-//					String randomId = UUID.randomUUID().toString();
-//					long nowTime = System.currentTimeMillis();
-//
-//					String fileSavedName = nowTime + randomId + originalfileName; // 저장되는
-//																					// 파일명
-//					String savePath = filePath + fileSavedName; // 저장경로
-//
-//					fileItem.setFileOriginName(originalfileName);
-//					fileItem.setFileSavedName(fileSavedName);
-//					fileItem.setFileSavedDir(savePath);
-//
-//					recentAppl = applicationDAO.getMaxItem("application", application);
-//					fileItem.setFileUploader_id(recentAppl.getApplId());
-//
-//					File uploadedFile = new File(savePath);
-//					multiFiles.get(i).transferTo(uploadedFile); // 파일 저장
-//
-//					// 파일 ContentType 검색 (Apache Tika)
-//					String mimeType = null;
-//					Tika tika = new Tika();
-//					mimeType = tika.detect(uploadedFile);
-//					System.err.println(mimeType);
-//					fileItem.setFileType(mimeType);
-//
-//					// 2. FILE 테이블 값 insert
-//					filesDAO.insertData(fileInfo, fileItem);
-//
-//					Files recentFile = filesDAO.getMaxItem("FILE", recentAppl);
-//					ItemAttachedFiles itemFiles = new ItemAttachedFiles();
-//					itemFiles.setFileId(recentFile.getFileId());
-//					itemFiles.setItemId(recentAppl.getApplId());
-//					itemFiles.setParameterName(fileInfo.getTableName());
-//
-//					// 3. ITEM_ATTACHED_FILES 테이블 값 insert
-//					filesDAO.insertItemAttachedData("ITEM_ATTACHED_FILES", itemFiles);
-//				} // end for문
-//
-//				transactionManager_db.commit(status);
-//
-//				// 성공 시 프로세스 진행 부분
-//				String movingPath = "/recruit";
-//				model.addAttribute("movingPath", movingPath);
-//				model.addAttribute("msg", "application.processMsg.success");
-//				model.addAttribute("headMsg", "common.main.application");
-//
-//				// applicationSendMail(res, session, application.getApplType(),
-//				// application.getApplJob(),
-//				// application.getApplName());
-//			} catch (Exception e) {
-//				transactionManager_db.rollback(status);
-//
-//				// 성공 시 프로세스 진행 부분
-//				String movingPath = "/recruit";
-//				model.addAttribute("movingPath", movingPath);
-//				model.addAttribute("fail", "fail");
-//				model.addAttribute("msg", "application.processMsg.fail");
-//				model.addAttribute("headMsg", "common.main.application");
-//			}
-//
-//			// jsp 설정
-//			result.setViewName("error/process");
-//
-//		} // end else (유효성 검증)
-//
-//		return result;
-//	}
-	
 	/**
 	 * 게시판 상세보기 출력.
-	 * @param Board board
+	 * 
+	 * @param Board
+	 *            board
 	 * @return List<Board>
 	 * @throws Exception
 	 */
 	@Secured("SUPERADMIN")
 	@RequestMapping(value = "/{bType}/detail/{path}", method = RequestMethod.GET)
-	public String boardDetail(Model model, @PathVariable("path") Long path, @PathVariable("bType") String bType, HttpServletRequest request, HttpServletResponse response) {
+	public String boardDetail(Model model, @PathVariable("path") Long path, @PathVariable("bType") String bType,
+			HttpServletRequest request, HttpServletResponse response) {
 		Board board = boardService.findById(path);
 
 		// 저장된 hit 쿠키 불러오기
@@ -347,7 +144,7 @@ public class BoardController {
 
 		// 조회수 증가
 		if (checkHitCookie(board, request, response)) {
-			board.setBoardHits(board.getBoardHits()+1);
+			board.setBoardHits(board.getBoardHits() + 1);
 			boardService.update(board);
 		}
 
@@ -357,12 +154,13 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/{tableName}/edit/{path}", method = RequestMethod.GET)
-	public String boardEditGet(Model model, @PathVariable("path") Long path, @PathVariable("tableName") String tableName) {
+	public String boardEditGet(Model model, @PathVariable("path") Long path,
+			@PathVariable("tableName") String tableName) {
 		model.addAttribute("board", new Board());
 		model.addAttribute("tableName", tableName);
 		return "views/board/add";
 	}
-	
+
 	@RequestMapping(value = "/{tableName}/edit/{path}", method = RequestMethod.POST)
 	public String boardEditPost(Model model, Board board, @PathVariable("path") Long path,
 			@PathVariable("tableName") String tableName, final RedirectAttributes redirectAttributes) {
@@ -380,20 +178,22 @@ public class BoardController {
 		}
 		return "redirect:/talk/" + tableName + "/detail/" + path;
 	}
-	
+
 	@RequestMapping(value = "/{tableName}/delete/ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public String boardAjaxDelete(@RequestBody Board board, HttpServletRequest request){
+	public String boardAjaxDelete(@RequestBody Board board, HttpServletRequest request) {
 		Board temp = boardService.findById(board.getBoardId());
 		temp.setBoardDelCheck(0);
-		if(boardService.update(temp) == null);
-			System.out.println(board.getBoardId());
+		if (boardService.update(temp) == null)
+			;
+		System.out.println(board.getBoardId());
 		return "true";
 	}
-	
+
 	@RequestMapping(value = "/{tableName}/reply/{path}", method = RequestMethod.POST)
-	public String replyAddIn(Reply reply, @PathVariable("path") Long path, @PathVariable("tableName") String tableName) {
-		
+	public String replyAddIn(Reply reply, @PathVariable("path") Long path,
+			@PathVariable("tableName") String tableName) {
+
 		System.out.println(reply.getContent());
 		Board board = new Board();
 		board.setBoardId(path);
@@ -401,34 +201,34 @@ public class BoardController {
 		reply.setBoardInReply(board);
 		replyService.save(reply);
 
-		//게시판 ReplyDepth 증가
+		// 게시판 ReplyDepth 증가
 		board = boardService.findById(path);
-		board.setBoardReplyDepth(board.getBoardReplyDepth()+1);
+		board.setBoardReplyDepth(board.getBoardReplyDepth() + 1);
 		boardService.update(board);
-		
+
 		return "redirect:/talk/" + tableName + "/";
 	}
 
 	/*----------- 댓글 기능 Start ---------------------------------------------------------------*/
 	@RequestMapping(value = "/{tableName}/comment/add", method = RequestMethod.POST)
 	@ResponseBody
-	public void commentAjaxAdd(@RequestBody Comment comment, HttpServletRequest request){
+	public void commentAjaxAdd(@RequestBody Comment comment, HttpServletRequest request) {
 		System.out.println(comment.getCommentContent());
-//			commentService.save(comment);
-	}	
-	
-	
+		// commentService.save(comment);
+	}
+
 	/*----------- end 댓글 ---------------------------------------------------------------------*/
-	
+
 	private boolean checkHitCookie(Board board, HttpServletRequest request, HttpServletResponse response) {
 		// 쿠키에 담을 값을 가져오기 위함.(uri는 테이블 값을 가져오기 위함 - 3번)
 		boolean validHit = false;
 		String id = board.getBoardId().toString();
 		String[] tableNames = request.getRequestURI().split("/");
 		String tableName = tableNames[2];
-//		System.out.println("**************" + request.getRemoteAddr() + "**************");
-//		System.out.println(tableName);
-//		System.out.println(id);
+		// System.out.println("**************" + request.getRemoteAddr() +
+		// "**************");
+		// System.out.println(tableName);
+		// System.out.println(id);
 		// 쿠키 이름값 보안처리하기
 		tableName = cFn.buildSHA256(tableName).substring(0, 5);
 
@@ -462,5 +262,11 @@ public class BoardController {
 		response.addCookie(cookie);
 		validHit = true;
 		return validHit;
+	}
+	
+	private Board loginNameSetToObject(Board board, Authentication auth){
+		String loginName=auth.getName();
+		board.setBoardCreatedBy(loginName);
+		return board;
 	}
 }

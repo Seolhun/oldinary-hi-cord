@@ -69,33 +69,34 @@ $(document).ready(function() {
     			}
 	    	},
 	    	fields : [{
-	    		name : "id",
+	    		name : "boardId",
 	    		title: "번호",
 	    		type : "number",
 	    		width : 30,
+	    		align : "center"
 	    	}, {
-	    		name : "subject",
+	    		name : "boardSubject",
 	    		title: "제목",
 	    		type : "text",
 	    		width : 200,
-	    		align : "center"
+	    		align : "left"
 	    	},  {
-	    		name : "createdBy",
+	    		name : "boardCreatedBy",
 	    		title: "글쓴이",
 	    		type : "text",
 	    		width : 60,
 	    		align : "center",
 	    	},  {
-	    		name : "createdDate",
+	    		name : "boardCreatedDate",
 	    		title: "등록일",
 	    		type : "text",
 	    		width : 60,
-	    		align : "center"
-//	    		itemTemplate: function(value, item) {
-//	                return moment(value).format('YYYY-MM-DD HH:mm');
-//	    		}
+	    		align : "center",
+	    		itemTemplate: function(value, item) {
+	                return moment(value).format('YYYY-MM-DD HH:mm');
+	    		}
 	    	},  {
-	    		name : "hits",
+	    		name : "boardHits",
 	    		title: "조회수",
 	    		type : "date",
 	    		width : 60,

@@ -92,6 +92,6 @@ public class User implements Serializable {
 		inverseForeignKey=@ForeignKey(name="USER_PROFILE_REFER_FK"), inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 	
-	@OneToMany(mappedBy="paidByUser", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="paidByUser", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<PriceRecord> paidHistoryList;
 }
