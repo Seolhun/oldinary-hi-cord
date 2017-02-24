@@ -20,6 +20,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	protected BoardDAO boardDao;
+	
+	@Override
+	public void save(Board board) {
+		log.info("param : "+board.toString());
+		boardDao.save(board);
+	}
 
 	@Override
 	public List<Board> findAll(Board board) {
@@ -37,12 +43,6 @@ public class BoardServiceImpl implements BoardService {
 		Board board=boardDao.findById(id);
 		log.info("return : "+board.toString());
 		return board;
-	}
-	
-	@Override
-	public void save(Board board) {
-		log.info("param : "+board.toString());
-		boardDao.save(board);
 	}
 
 	@Override

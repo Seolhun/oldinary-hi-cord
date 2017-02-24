@@ -107,11 +107,11 @@ public class BoardController {
 			loginNameSetToObject(board, auth);
 			board.setBoardType(bType);
 			boardService.save(board);
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
+			log.error("ERROR : NullPointerException");
 			ajaxResult.setResult("fail");
 			return ajaxResult;
 		}
-		
 		ajaxResult.setResult("success");
 		return ajaxResult;
 	}

@@ -10,12 +10,11 @@ import com.hi.cord.common.model.Paging;
 
 @Transactional(propagation=Propagation.REQUIRED, transactionManager="txManager", noRollbackFor={NullPointerException.class})
 public interface BoardService {
+	public void save(Board board);
 
 	public List<Board> findAll(Board board);
 	
 	public Board findById(Long id);
-
-	public void save(Board board);
 
 	public Board update(Board board);
 

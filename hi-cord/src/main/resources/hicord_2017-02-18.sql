@@ -1,14 +1,3 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4541
-#
-# http://www.sequelpro.com/
-# https://github.com/sequelpro/sequelpro
-#
-# Host: 127.0.0.1 (MySQL 5.5.5-10.1.19-MariaDB)
-# Database: hicord
-# Generation Time: 2017-02-18 05:57:55 +0000
-# ************************************************************
 INSERT INTO `TB_USER_PROFILE` (`USER_PROFILE_ID`, `USER_PROFILE_TYPE`)
 VALUES
 	(5,'ADMIN'),
