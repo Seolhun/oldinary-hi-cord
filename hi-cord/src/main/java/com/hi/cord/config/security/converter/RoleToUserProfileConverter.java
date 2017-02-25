@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.hi.cord.first.entity.user.UserProfile;
-import com.hi.cord.first.service.user.UserProfileService;
+import com.hi.cord.first.user.entity.UserProfile;
+import com.hi.cord.first.user.servie.UserProfileService;
 
 /**
  * A converter class used in views to map id's to actual userProfile objects.

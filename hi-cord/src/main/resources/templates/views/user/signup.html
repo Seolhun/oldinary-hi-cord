@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
 	<div layout:fragment="content">
-		<link rel="stylesheet" href="/css/page/user/user.css"/>
-	    <link th:replace="/views/user/agree"></link>
+		<link href="/css/page/user/user.css" rel="stylesheet"/>
+	    <link th:replace="/views/user/agree"/>
 		<form th:object="${user}" th:action="@{/signup}" id="saveUserFrm" method="POST">
-			<div class="col-sm-12 text-center">
+			<div class="row">
 		    	<div class="col-sm-12 margin-bottom-10">
-	   		    	<div>
-	   		    		<b class="margin-right-20" th:text="#{TEXT.EMAIL}"></b>
-						<input type="email" name="userEmail" id="userEmail" th:value="${user.userEmail}" class="for-center-input form-control" placeholder="Email."/>
-						<button type="button" id="emailDupl" class="btn btn-info" disabled="disabled">
-						<span th:text="#{TEXT.DUPL}"></span></button>
+		    		<div>
+		    			<b class="margin-right-20" th:text="#{TEXT.EMAIL}"></b>
+						<input class="for-center-input form-control" type="email" id="userEmail" name="userEmail" placeholder="Email." th:value="${user.userEmail}"/>
+						<button class="btn btn-info" id="emailDupl" type="button" th:text="#{TEXT.DUPL}" disabled="disabled"></button>
+						<div class="errorMsg" id="emailMsg"></div>
 					</div>
-					<div class="errorMsg" id="emailMsg"></div>
 					<p class="errorMsg" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></p>
+		    	</div>
+		    	
+		    	<div class="col-sm-12 margin-bottom-10">
+		    		<div>
+		    			<b class="margin-right-20" th:text="#{TEXT.PHONE}"></b>
+						<input class="for-center-input form-control" type="text" id="userPhone" name="userPhone" placeholder="Phone" th:value="${user.userPhone}"/>
+						<button class="btn btn-info" id="phoneDupl" type="button" disabled="disabled" th:text="#{TEXT.DUPL}"></button>
+						<div class="errorMsg" id="phoneMsg"></div>
+					</div>
+					<p class="errorMsg" th:if="${#fields.hasErrors('userPhone')}" th:errors="*{userPhone}"></p>
 		    	</div>
 		    	
 		    	<div class="col-sm-12 margin-bottom-10">
@@ -23,7 +32,7 @@
 			    	</div>
 			    </div>
 			    
-	  		    	<div class="col-sm-12 margin-bottom-10">
+			    <div class="col-sm-12 margin-bottom-10">
 			    	<div>
 			    		<b th:text="#{TEXT.PASSWORD}" class="margin-right-20"></b>
 						<input type="password" name="userPassword" th:value="${user.userPassword}" class="for-center-input form-control" placeholder="Password."/>
@@ -31,12 +40,46 @@
 			    	</div>
 			    </div>
 			    
-				<div class="col-sm-12 margin-bottom-20">
-					<p><b><span th:text="#{TEXT.AGREE}"></span></b></p>
-					<p><b><span th:text="#{TEXT.IMPORTANT}"></span></b><span th:text="#{TEXT.IMPORTANT2}"></span></p>
+			    <div class="col-sm-12 margin-bottom-10">
+			    	<div>
+						<b class="margin-right-20" th:text="#{TEXT.NATIONCODE}"></b>
+						<input class="for-center-input form-control" type="text" name="userNationCode" placeholder="NationCode" th:value="${user.userNationCode}"/>
+						<div class="errorMsg" id="nationCodeMsg"></div>
+					</div>
+					
+					<p class="errorMsg" th:if="${#fields.hasErrors('userNationCode')}" th:errors="*{userNationCode}"></p>
+		    	</div>
+			    
+		    	<div class="col-sm-12 margin-bottom-10">
+		    		<div class="margin-bottom-10">
+		    			<b class="margin-right-20" th:text="#{TEXT.ZIPCODE}"></b>
+						<input class="for-center-input form-control" type="text" name="userZipCode" placeholder="ZipCode" th:value="${user.userZipCode}"/>
+						<button class="btn btn-info" id="checkZipCode" type="button" th:text="#{TEXT.ZIPCODE}"></button>
+						<div class="errorMsg" id="zipCodeMsg"></div>
+					</div>
+					<p class="errorMsg" th:if="${#fields.hasErrors('userZipCode')}" th:errors="*{userZipCode}"></p>
+					
+					<div class="margin-bottom-10">
+						<b class="margin-right-20" th:text="#{TEXT.ADDRESS}"></b>
+						<input class="for-center-input form-control" type="text" name="userAddress" placeholder="Address" th:value="${user.userAddress}"/>
+						<div class="errorMsg" id="addressMsg"></div>
+					</div>
+					<p class="errorMsg" th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}"></p>
+		    	</div>
+			    
+				<div class="col-sm-12 margin-top-20 margin-bottom-20">
+					<p>
+						<b><span th:text="#{TEXT.AGREE}"></span></b>
+					</p>
+					<div>
+						<span th:text="#{TEXT.IMPORTANT}"></span>
+					</div>
 		    		<div>
-	    				<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{TEXT.EMAIL}"></span>
-	    				<input type="checkbox" name="receiveEmail" value="1">
+    					<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{TEXT.EMAIL}"></span>
+    					<input type="checkbox" name="receiveEmail" value="1">
+	    					
+    					<span class="glyphicon glyphicon-ok-circle margin-right-5 margin-left-10"></span><span th:text="#{TEXT.PHONE}"></span>
+    					<input type="checkbox" name="receivePhone" value="1">
 	    			</div>
 				</div>
 			    <div class="col-sm-12 margin-bottom-10">
@@ -44,6 +87,6 @@
 		    	</div>
 		    </div>
 		</form>
-	<script type="text/javascript" src="/js/page/user/user.js"></script>
+	<script type="text/javascript" src="/js/page/user/user-signup.js"></script>
 	</div>
 </html>
