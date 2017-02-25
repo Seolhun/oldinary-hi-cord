@@ -136,6 +136,14 @@ public class User implements Serializable {
 	// User, Boolean account is NON_LOCKED or not.
 	@Column(name = "USER_ACCOUNT_NON_LOCKED", length = 1, nullable = true)
 	private Integer userAccountNonLocked=0;
+	
+	// User, Boolean account is NON_LOCKED or not.
+	@Column(name = "USER_PRIVATE_AGREE", length = 1, nullable = true)
+	private Integer userPrivateAgree=0;
+	
+	// User, Boolean account is NON_LOCKED or not.
+	@Column(name = "USER_SERVICE_AGREE", length = 1, nullable = true)
+	private Integer userServiceAgree=0;
 
 	// User, How many have Privileges.
 	@ManyToMany(fetch = FetchType.LAZY)

@@ -3200,3 +3200,9 @@ div#addBindingGroupModal {
 	font-size: 10px;
 	font-weight: 500;
 }
+
+.error {
+	font-size: 14px;
+	font-weight: 500;
+	color: red;
+}

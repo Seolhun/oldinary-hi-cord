@@ -203,7 +203,12 @@
 		<div>
 			<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
 			<span th:text="#{TEXT.AGREE.USE}"></span>
-			<input type="checkbox" name="signAgree" value="0">
+			<span th:if="${user.userServiceAgree==1}">
+				<input type="checkbox" class="signAgree" name="userServiceAgree" value="1" checked="checked"/>
+			</span>
+			<span th:if="${user.userServiceAgree!=1}">
+				<input type="checkbox" class="signAgree" name="userServiceAgree" value="1"/>
+			</span>
 		</div>
 	</div>
 	<div class="col-sm-6">
@@ -230,7 +235,12 @@
 		<div>
 			<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
 			<span th:text="#{TEXT.AGREE.PRIVATE}"></span> 
-			<input type="checkbox" name="signAgree" value="1">
+			<span th:if="${user.userServiceAgree==1}">
+				<input type="checkbox" class="signAgree" name="userPrivateAgree" value="1" checked="checked"/>
+			</span>
+			<span th:if="${user.userServiceAgree!=1}">
+				<input type="checkbox" class="signAgree" name="userPrivateAgree" value="1"/>
+			</span>
 		</div>
 	</div>
 </div>

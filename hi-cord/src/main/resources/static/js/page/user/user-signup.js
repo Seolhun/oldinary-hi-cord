@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 	//Validate Agree of sign up
 	function agreeCheck() {
-		var checked = $("[name='signAgree']");
+		var checked = $(".signAgree");
 		for (var i = 0; i < checked.length; i++) {
 			if (!checked[i].checked) {
 				checked[i].focus();
@@ -27,28 +27,28 @@ $(document).ready(function(){
 	}
 
 	$('#userEmail').on("keyup",function(){
-		var inputEmail = $("#userEmail").val();
-		if (!validateEmail(inputEmail)) {
-			$("#emailMsg").text(inputEmail + " is not valid");
+		var userEmail = $("#userEmail").val();
+		if (!validateEmail(userEmail)) {
+			$("#emailMsg").text(userEmail + " is not valid");
 			$("#emailMsg").css("color", "red");
 			$("#emailDupl").prop("disabled", true);
 			return;
 		} else {
-			$("#emailMsg").text(inputEmail + " is valid");
+			$("#emailMsg").text(userEmail + " is valid");
 			$("#emailMsg").css("color", "blue");
 			$("#emailDupl").prop("disabled", false);
 		}
 	});
 	
 	$('#userPhone').on("keyup",function(){
-		var inputPhone = $("#userPhone").val();
-		if (!validatePhone(inputPhone)) {
-			$("#phoneMsg").text(inputPhone + " is not valid");
+		var userPhone = $("#userPhone").val();
+		if (!validatePhone(userPhone)) {
+			$("#phoneMsg").text(userPhone + " is not valid");
 			$("#phoneMsg").css("color", "red");
 			$("#phoneDupl").prop("disabled", true);
 			return;
 		} else {
-			$("#phoneMsg").text(inputPhone + " is valid");
+			$("#phoneMsg").text(userPhone + " is valid");
 			$("#phoneMsg").css("color", "blue");
 			$("#phoneDupl").prop("disabled", false);
 		}

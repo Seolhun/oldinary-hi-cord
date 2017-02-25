@@ -2,17 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
 	<div layout:fragment="content">
 		<link href="/css/page/user/user.css" rel="stylesheet"/>
-	    <link th:replace="/views/user/agree"/>
 		<form th:object="${user}" th:action="@{/signup}" id="saveUserFrm" method="POST">
+			<link th:replace="/views/user/agree"/>
 			<div class="row">
 		    	<div class="col-sm-12 margin-bottom-10">
 		    		<div>
 		    			<b class="margin-right-20" th:text="#{TEXT.EMAIL}"></b>
 						<input class="for-center-input form-control" type="email" id="userEmail" name="userEmail" placeholder="Email." th:value="${user.userEmail}"/>
 						<button class="btn btn-info" id="emailDupl" type="button" th:text="#{TEXT.DUPL}" disabled="disabled"></button>
-						<div class="errorMsg" id="emailMsg"></div>
 					</div>
-					<p class="errorMsg" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></p>
+					<div class="error" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></div>
+					<div class="error" id="emailMsg"></div>
 		    	</div>
 		    	
 		    	<div class="col-sm-12 margin-bottom-10">
@@ -20,9 +20,9 @@
 		    			<b class="margin-right-20" th:text="#{TEXT.PHONE}"></b>
 						<input class="for-center-input form-control" type="text" id="userPhone" name="userPhone" placeholder="Phone" th:value="${user.userPhone}"/>
 						<button class="btn btn-info" id="phoneDupl" type="button" disabled="disabled" th:text="#{TEXT.DUPL}"></button>
-						<div class="errorMsg" id="phoneMsg"></div>
 					</div>
-					<p class="errorMsg" th:if="${#fields.hasErrors('userPhone')}" th:errors="*{userPhone}"></p>
+					<div class="error" th:if="${#fields.hasErrors('userPhone')}" th:errors="*{userPhone}"></div>
+					<div class="error" id="phoneMsg"></div>
 		    	</div>
 		    	
 		    	<div class="col-sm-12 margin-bottom-10">
@@ -30,6 +30,7 @@
 			    		<b th:text="#{TEXT.NAME}" class="margin-right-20"></b>
 						<input type="text" name="userName" th:value="${user.userName}" class="for-center-input form-control" placeholder="Name."/>
 			    	</div>
+			    	<div class="error" id="nameMsg"></div>
 			    </div>
 			    
 			    <div class="col-sm-12 margin-bottom-10">
@@ -38,16 +39,17 @@
 						<input type="password" name="userPassword" th:value="${user.userPassword}" class="for-center-input form-control" placeholder="Password."/>
 						<p class="erros-red" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></p>
 			    	</div>
+					<div class="error" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></div>
+					<div class="error" id="passwordMsg"></div>
 			    </div>
 			    
 			    <div class="col-sm-12 margin-bottom-10">
 			    	<div>
 						<b class="margin-right-20" th:text="#{TEXT.NATIONCODE}"></b>
 						<input class="for-center-input form-control" type="text" name="userNationCode" placeholder="NationCode" th:value="${user.userNationCode}"/>
-						<div class="errorMsg" id="nationCodeMsg"></div>
 					</div>
-					
-					<p class="errorMsg" th:if="${#fields.hasErrors('userNationCode')}" th:errors="*{userNationCode}"></p>
+					<div class="error" th:if="${#fields.hasErrors('userNationCode')}" th:errors="*{userNationCode}"></div>
+					<div class="error" id="nationCodeMsg"></div>
 		    	</div>
 			    
 		    	<div class="col-sm-12 margin-bottom-10">
@@ -55,16 +57,16 @@
 		    			<b class="margin-right-20" th:text="#{TEXT.ZIPCODE}"></b>
 						<input class="for-center-input form-control" type="text" name="userZipCode" placeholder="ZipCode" th:value="${user.userZipCode}"/>
 						<button class="btn btn-info" id="checkZipCode" type="button" th:text="#{TEXT.ZIPCODE}"></button>
-						<div class="errorMsg" id="zipCodeMsg"></div>
 					</div>
-					<p class="errorMsg" th:if="${#fields.hasErrors('userZipCode')}" th:errors="*{userZipCode}"></p>
+					<div class="error" th:if="${#fields.hasErrors('userZipCode')}" th:errors="*{userZipCode}"></div>
+					<div class="error" id="zipCodeMsg"></div>
 					
 					<div class="margin-bottom-10">
 						<b class="margin-right-20" th:text="#{TEXT.ADDRESS}"></b>
 						<input class="for-center-input form-control" type="text" name="userAddress" placeholder="Address" th:value="${user.userAddress}"/>
-						<div class="errorMsg" id="addressMsg"></div>
 					</div>
-					<p class="errorMsg" th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}"></p>
+					<div class="error" th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}"></div>
+					<div class="error" id="addressMsg"></div>
 		    	</div>
 			    
 				<div class="col-sm-12 margin-top-20 margin-bottom-20">
@@ -75,11 +77,24 @@
 						<span th:text="#{TEXT.IMPORTANT}"></span>
 					</div>
 		    		<div>
-    					<span class="glyphicon glyphicon-ok-circle margin-right-5"></span><span th:text="#{TEXT.EMAIL}"></span>
-    					<input type="checkbox" name="userReceiveEmail" value="1">
-	    					
-    					<span class="glyphicon glyphicon-ok-circle margin-right-5 margin-left-10"></span><span th:text="#{TEXT.PHONE}"></span>
-    					<input type="checkbox" name="userReceivePhone" value="1">
+    					<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
+    					<span th:text="#{TEXT.EMAIL}"></span>
+    					<span th:if="${user.userReceiveEmail==1}">
+    						<input type="checkbox" name="userReceiveEmail" value="1" checked="checked">
+    					</span>
+    					<span th:if="${user.userReceiveEmail!=1}">
+    						<input type="checkbox" name="userReceiveEmail" value="1">
+    					</span>
+    					
+    					
+    					<span class="glyphicon glyphicon-ok-circle margin-right-5 margin-left-10"></span>
+    					<span th:text="#{TEXT.PHONE}"></span>
+    					<span th:if="${user.userReceivePhone==1}">
+    						<input type="checkbox" name="userReceivePhone" value="1" checked="checked">
+    					</span>
+    					<span th:if="${user.userReceivePhone!=1}">
+    						<input type="checkbox" name="userReceivePhone" value="1">
+   						</span>
 	    			</div>
 				</div>
 			    <div class="col-sm-12 margin-bottom-10">
