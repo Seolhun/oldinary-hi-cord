@@ -47,8 +47,8 @@ public class StadiumAvailableTracks implements Serializable {
 	private String stadiumTracksDescription;
 	
 	@Column(name = "STADIUM_TRACKS_CAPACITY", nullable = false, length = 10)
-	private Integer stadiumTracksCapacity;
+	private int stadiumTracksCapacity;
 
 	@Column(name = "STADIUM_TRACKS_PRICE", nullable = false, length = 20)
-	private Integer stadiumTracksPrice;
+	private int stadiumTracksPrice;
 }

@@ -67,13 +67,13 @@ $(document).ready(function(){
 			$("#emailMsg").css("color", "red");
 			return;
 		}
-		var data = {}
-		data["userEmail"] = userEmail;
+		var user = {}
+		user["userEmail"] = userEmail;
 		$.ajax({
 			url : "signup/duplicate/email",
 			type : 'POST',
 			timeout : 60000,
-			data : JSON.stringify(data),
+			data : JSON.stringify(user),
 			dataType : 'json',
 			dataType : "json",
 			beforeSend: function(xhr) {
@@ -109,13 +109,13 @@ $(document).ready(function(){
 			$("#phoneMsg").css("color", "red");
 			return;
 		}
-		var data = {}
-		data["userPhone"] = userPhone;
+		var user = {}
+		user["userPhone"] = userPhone;
 		$.ajax({
 			url : "signup/duplicate/phone",
 			type : 'POST',
 			timeout : 60000,
-			data : JSON.stringify(data),
+			data : JSON.stringify(user),
 			dataType : 'json',
 			dataType : "json",
 			beforeSend: function(xhr) {
@@ -140,11 +140,16 @@ $(document).ready(function(){
 
 	$("input[name=saveUser]").click(function(){
 		var emailDupl=$("#emailDupl");
-		var email=$("#userEmail");
+		var phoneDupl=$("#phoneDupl");
+		var userEmail=$("#userEmail");
+		var userPhone=$("#userPhone");
 		if(!agreeCheck()){
 			return;
-		} else if(emailDupl.disabled){
-			email.focus();
+		} else if(userEmail.disabled){
+			userEmail.focus();
+			return;
+		}  else if(userPhone.disabled){
+			userPhone.focus();
 			return;
 		} 
 		$("#saveUserFrm").submit();

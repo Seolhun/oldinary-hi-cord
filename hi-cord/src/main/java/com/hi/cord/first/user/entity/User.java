@@ -26,6 +26,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hi.cord.common.model.State;
 import com.hi.cord.first.price.entity.PriceRecord;
 import com.hi.cord.first.stadium.model.Stadium;
@@ -53,85 +54,88 @@ public class User implements Serializable {
 
 	// User UK Email
 	@Pattern(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message = "Invalid Email")
-	@Column(name = "USER_EMAIL", unique = true, nullable = false, length = 60)
+	@Column(name = "USER_EMAIL", length = 60, unique = true, nullable = false)
+	@JsonProperty("userEmail")
 	private String userEmail;
 
 	// User UK Value
-	@Column(name = "USER_PHONE", unique = true, nullable = false, length = 30)
+	@Column(name = "USER_PHONE", length = 30, unique = true, nullable = false)
+	@JsonProperty("userPhone")
 	private String userPhone;
 
 	// User Name
-	@Column(name = "USER_NAME", nullable = false, length = 30)
+	@Column(name = "USER_NAME", length = 30, nullable = false)
+	@JsonProperty("userName")
 	private String userName;
 
 //	// User Photo to show others
-	@Column(name = "USER_IMAGE_LIST", length = 100)
+	@Column(name = "USER_IMAGE_LIST", length = 100, nullable = true)
 	private String imageList;
 
 	// @Pattern(regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+=-~`]).{8,20})",
 	// message="Invalid Password")
 	// User Bcrypt encod Password
-	@Column(name = "USER_PASSWORD", nullable = false, length = 100)
+	@Column(name = "USER_PASSWORD", length = 100, nullable = false)
 	private String userPassword;
 
-	@Column(name = "USER_ZIP_CODE", nullable = false, length = 20)
+	@Column(name = "USER_ZIP_CODE", length = 20, nullable = false)
 	private String userZipCode;
 
-	@Column(name = "USER_ADDRESS", nullable = false, length = 100)
+	@Column(name = "USER_ADDRESS", length = 100, nullable = false)
 	private String userAddress;
 
-	@Column(name = "USER_NATION_CODE", nullable = false, length = 10)
+	@Column(name = "USER_NATION_CODE", length = 10, nullable = false)
 	private String userNationCode;
 
-	@Column(name = "USER_ACTIVE_POINT", length = 10)
-	private Integer userActivePoint;
+	@Column(name = "USER_ACTIVE_POINT", length = 10, nullable = true)
+	private Integer userActivePoint=0;
 
-	@Column(name = "USER_PAID_POINT", length = 10)
-	private Integer userPaidPoint;
+	@Column(name = "USER_PAID_POINT", length = 10, nullable = true)
+	private Integer userPaidPoint=0;
 
 	// User boolean if receive mail or not through the Email
-	@Column(name = "USER_RECEIVE_MAIL", length = 1)
-	private Integer userReceiveEmail;
+	@Column(name = "USER_RECEIVE_MAIL", length = 1, nullable = true)
+	private Integer userReceiveEmail=0;
 
 	// User boolean if receive message or not through the Phone
-	@Column(name = "USER_RECEIVE_PHONE", length = 1)
-	private Integer userReceivePhone;
+	@Column(name = "USER_RECEIVE_PHONE", length = 1, nullable = true)
+	private Integer userReceivePhone=0;
 
 	// User, Who did their's data modified?
-	@Column(name = "USER_MODIFIED_BY", length = 60)
+	@Column(name = "USER_MODIFIED_BY", length = 60, nullable = true)
 	private String userModifiedBy;
 
 	// User, When did their's data is registerd?
 	@CreationTimestamp
-	@Column(name = "USER_CREATED_DATE")
+	@Column(name = "USER_CREATED_DATE", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date userCreatedDate;
 
 	// User, When did their's data is modified?
 	@UpdateTimestamp
-	@Column(name = "USER_MODIFIED_DATE")
+	@Column(name = "USER_MODIFIED_DATE", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date userModifiedDate;
 
 	// User, Boolean account is deleted or not
-	@Column(name = "USER_DELCHECK", length = 1)
-	private Integer userDelCheck;
+	@Column(name = "USER_DELCHECK", length = 1, nullable = true)
+	private Integer userDelCheck=0;
 
 	// User, about Account state
-	@Column(name = "USER_STATE", nullable = false, length = 20)
+	@Column(name = "USER_STATE", length = 20, nullable = false)
 	private String userState = State.ACTIVE.getState();
 
 	// User, Boolean account is NON_EXPIRED or not.
-	@Column(name = "USER_ACCOUNT_NON_EXPIRED", length = 1)
-	private Integer userAccountNonExpired;
+	@Column(name = "USER_ACCOUNT_NON_EXPIRED", length = 1, nullable = true)
+	private Integer userAccountNonExpired=0;
 
 	// User, Boolean account is CREDENTIALS_NON_EXPIRED or not.
-	@Column(name = "USER_CREDENTIALS_NON_EXPIRED", length = 1)
-	private Integer userCredentialsNonExpired;
+	@Column(name = "USER_CREDENTIALS_NON_EXPIRED", length = 1, nullable = true)
+	private Integer userCredentialsNonExpired=0;
 
 	// User, Boolean account is NON_LOCKED or not.
-	@Column(name = "USER_ACCOUNT_NON_LOCKED", length = 1)
-	private Integer userAccountNonLocked;
+	@Column(name = "USER_ACCOUNT_NON_LOCKED", length = 1, nullable = true)
+	private Integer userAccountNonLocked=0;
 
 	// User, How many have Privileges.
 	@ManyToMany(fetch = FetchType.LAZY)

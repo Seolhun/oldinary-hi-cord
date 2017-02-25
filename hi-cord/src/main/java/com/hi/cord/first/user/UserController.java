@@ -82,20 +82,28 @@ public class UserController {
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
 	public String signupDo(@Valid User user, BindingResult result, ModelMap model, HttpServletRequest request) throws Exception {
 		String email=user.getUserEmail();
+		String phone=user.getUserPhone();
 		String name=user.getUserName();
 		String mapping = "views/user/signup";
+		
 		// 개인 별로 에러메세지 띄우기 구현 예정(개인별로 해도 메세지가 2개뜨는 문제 발생)
+		model.addAttribute("user", user);
 		if (result.hasErrors()) {
 			return mapping;
-		}
-		
-		if (name==null || name.length()==0) {
+		} else if (email==null || email.length()==0) {
+			return mapping;
+		} else if(phone==null || phone.length()==0){
+			return mapping;
+		} else if(name==null || name.length()==0){
 			return mapping;
 		}
 		
 		// 유저 권한 넣기(프론트에서 값을 받지 않기때문에 백엔드에서 넣어준다.)
 		if (!userService.isUserEmailUnique(user)) {
-			validCheckAndSendError(messageSource, result, request, email, "user", "userEmail", "non.unique.email");
+			validCheckAndSendError(messageSource, result, request, email, "user", "userEmail", "NON.UNIQUE.EMAIL");
+			return mapping;
+		} else if (!userService.isUserPhoneUnique(user)) {
+			validCheckAndSendError(messageSource, result, request, phone, "user", "userPhone", "NON.UNIQUE.PHONE");
 			return mapping;
 		}
 		
@@ -106,6 +114,7 @@ public class UserController {
 		upSet.add(up);
 		user.setUserProfiles(upSet);
 		userService.saveUser(user);
+		
 		return "redirect:/";
 	}
 
@@ -142,6 +151,7 @@ public class UserController {
 		return authenticationTrustResolver.isAnonymous(authentication);
 	}
 
+	//@Valid로 검사시 중복값 리다이렉트해주기.
 	void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String getValue, String objectName, String fieldName, String messagePropertyName) {
 		FieldError error = new FieldError(objectName, fieldName,
 				messageSource.getMessage(messagePropertyName, new String[] { getValue }, request.getLocale()));

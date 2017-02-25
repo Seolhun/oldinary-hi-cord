@@ -81,20 +81,20 @@ public class Stadium implements Serializable {
 
 	//Point written by User
 	@Column(name = "STADIUM_AVERAGE_POINT", nullable = false, length = 150)
-	private Integer stadiumAveragePoint;
+	private int stadiumAveragePoint;
 
 	@Column(name = "STADIUM_REPLY_DETPH", nullable = false, length = 100)
-	private Integer stadiumReplyDepth;
+	private int stadiumReplyDepth;
 	
 	@Column(name = "STADIUM_TRACKS_DETPH", nullable = false, length = 10)
-	private Integer stadiumTracksDepth;
+	private int stadiumTracksDepth;
 	
 	@Column(name = "STADIUM_LIKES", nullable = false, length = 150)
-	private Integer stadiumLikes;
+	private int stadiumLikes;
 	
 	// stadium boolean if receive mail or not through the Email
 	@Column(name = "STADIUM_RECEIVE_MAIL", length = 1)
-	private Integer stadiumReceiveEmail;
+	private int stadiumReceiveEmail;
 
 	// stadium, Who did their's data modified?
 	@Column(name = "STADIUM_CREATED_BY", length = 60)
@@ -127,7 +127,7 @@ public class Stadium implements Serializable {
 
 	// stadium, Boolean account is deleted or not
 	@Column(name = "STADIUM_DELCHECK", length = 1)
-	private Integer stadiumDelCheck;
+	private int stadiumDelCheck;
 
 	// stadium, about Account state
 	@Column(name = "STADIUM_STATE", nullable = false, length = 20)
