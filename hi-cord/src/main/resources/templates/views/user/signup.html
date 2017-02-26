@@ -52,23 +52,28 @@
 					<div class="error" id="nationCodeMsg"></div>
 		    	</div>
 			    
+			    <!-- Address && ZipCod -->
 		    	<div class="col-sm-12 margin-bottom-10">
 		    		<div class="margin-bottom-10">
 		    			<b class="margin-right-20" th:text="#{TEXT.ZIPCODE}"></b>
-						<input class="for-center-input form-control" type="text" name="userZipCode" placeholder="ZipCode" th:value="${user.userZipCode}"/>
-						<button class="btn btn-info" id="checkZipCode" type="button" th:text="#{TEXT.ZIPCODE}"></button>
+						<input class="for-center-input form-control" type="text" id="userZipCode" name="userZipCode" placeholder="ZipCode" th:value="${user.userZipCode}"/>
+						<button class="btn btn-info" id="checkZipCode" type="button" onclick="sample4_execDaumPostcode()" th:text="#{TEXT.ZIPCODE}"></button>
 					</div>
 					<div class="error" th:if="${#fields.hasErrors('userZipCode')}" th:errors="*{userZipCode}"></div>
 					<div class="error" id="zipCodeMsg"></div>
 					
-					<div class="margin-bottom-10">
-						<b class="margin-right-20" th:text="#{TEXT.ADDRESS}"></b>
-						<input class="for-center-input form-control" type="text" name="userAddress" placeholder="Address" th:value="${user.userAddress}"/>
+					<div class="col-sm-12 margin-bottom-10">	
+						<div class="margin-bottom-10">
+							<b class="margin-right-20" th:text="#{TEXT.ADDRESS}"></b>
+							<input class="for-center-input form-control" type="text" name="userAddress" id="userAddress" placeholder="New Address" th:value="${user.userAddress}"/>
+							<input class="for-center-input form-control" type="text" name="userAddress2" id="userAddress2" placeholder="Detail Address" th:value="${user.userAddress2}"/>
+						</div>
+						<div class="error" th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}"></div>
+						<div class="error" id="addressMsg"></div>
 					</div>
-					<div class="error" th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}"></div>
-					<div class="error" id="addressMsg"></div>
 		    	</div>
 			    
+			    <!-- Get message or Not -->
 				<div class="col-sm-12 margin-top-20 margin-bottom-20">
 					<p>
 						<b><span th:text="#{TEXT.AGREE}"></span></b>
@@ -102,6 +107,7 @@
 		    	</div>
 		    </div>
 		</form>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript" src="/js/page/user/user-signup.js"></script>
 	</div>
 </html>

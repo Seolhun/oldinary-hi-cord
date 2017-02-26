@@ -83,6 +83,9 @@ public class User implements Serializable {
 
 	@Column(name = "USER_ADDRESS", length = 100, nullable = false)
 	private String userAddress;
+	
+	@Column(name = "USER_ADDRESS2", length = 100, nullable = false)
+	private String userAddress2;
 
 	@Column(name = "USER_NATION_CODE", length = 10, nullable = false)
 	private String userNationCode;
