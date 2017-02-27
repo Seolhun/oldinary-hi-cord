@@ -128,6 +128,13 @@ public class UserRestController {
 		return ajaxResult;
 	}
 	
+	/**
+	 * User email duplication Check
+	 * 
+	 * @param User
+	 * @return AjaxResult
+	 * @throws Exception
+	 */
 	@RequestMapping(value = { "/signup/duplicate/email" }, method = RequestMethod.POST)
 	public AjaxResult emailduDupl(@RequestBody User user, HttpServletRequest request, AjaxResult ajaxResult) {
 		if (!userService.isUserEmailUnique(user)) {
@@ -138,6 +145,13 @@ public class UserRestController {
 		return ajaxResult;
 	}
 	
+	/**
+	 * User phone duplication Check
+	 * 
+	 * @param User
+	 * @return AjaxResult
+	 * @throws Exception
+	 */
 	@RequestMapping(value = { "/signup/duplicate/phone" }, method = RequestMethod.POST)
 	public AjaxResult phoneduDupl(@RequestBody User user, HttpServletRequest request, AjaxResult ajaxResult) {
 		if (!userService.isUserPhoneUnique(user)) {
