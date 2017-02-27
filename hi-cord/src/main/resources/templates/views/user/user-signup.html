@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
 	<div layout:fragment="content">
-		<link href="/css/page/user/user.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="/css/page/user/user.css"/>
 		<form th:object="${user}" th:action="@{/signup}" id="saveUserFrm" method="POST">
-			<link th:replace="/views/user/agree"/>
+			<link th:replace="/views/user/user-agree"/>
 			<div class="row">
 		    	<div class="col-sm-12 margin-bottom-10">
 		    		<div>

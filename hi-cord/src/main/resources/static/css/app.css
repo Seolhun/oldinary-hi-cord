@@ -2179,14 +2179,6 @@ img.image-md {
 	padding-left: 15px;
 }
 
-.height-100 {
-	min-height: 100px;
-}
-
-.height-150 {
-	min-height: 150px;
-}
-
 .max-height-100 {
 	max-height: 100px;
 }
@@ -2199,31 +2191,39 @@ img.image-md {
 	max-height: 200px;
 }
 
-.height-200 {
+.min-height-100 {
+	min-height: 100px;
+}
+
+.min-height-150 {
+	min-height: 150px;
+}
+
+.min-height-200 {
 	min-height: 200px;
 }
 
-.height-250 {
+.min-height-250 {
 	min-height: 250px;
 }
 
-.height-300 {
+.min-height-300 {
 	min-height: 300px;
 }
 
-.height-350 {
+.min-height-350 {
 	min-height: 350px;
 }
 
-.height-400 {
+.min-height-400 {
 	min-height: 400px;
 }
 
-.height-450 {
+.min-height-450 {
 	min-height: 450px;
 }
 
-.height-500 {
+.min-height-500 {
 	min-height: 500px !important;
 }
 
@@ -3205,4 +3205,8 @@ div#addBindingGroupModal {
 	font-size: 14px;
 	font-weight: 500;
 	color: red;
+}
+
+.grid-border {
+	border: solid 1px black;
 }

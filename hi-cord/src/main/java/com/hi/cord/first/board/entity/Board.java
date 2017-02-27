@@ -76,8 +76,8 @@ public class Board {
 	@Column(name = "BOARD_DELCHECK", length=5, nullable=false)
 	private int boardDelCheck;
 	
-//	@OneToMany(mappedBy="boardInFile", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-//	private List<FileData> boardWithFileList;
+	@OneToMany(mappedBy="boardInFile", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<FileData> boardWithFileList;
 //	
 //	@OneToMany(mappedBy="boardInReply", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 //	private List<Reply> replyListInBoard;

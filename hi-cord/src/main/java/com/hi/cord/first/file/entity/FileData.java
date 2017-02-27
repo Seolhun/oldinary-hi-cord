@@ -32,9 +32,9 @@ public class FileData {
 	@Column(name = "FILE_ID")
 	private Long fileDataId;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(foreignKey = @ForeignKey(name = "FILE_BOARD_FK"), name = "FILE_BOARD_ID", referencedColumnName = "BOARD_ID", nullable = false)
-//	private Board boardInFile;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(foreignKey = @ForeignKey(name = "FILE_BOARD_FK"), name = "FILE_BOARD_ID", referencedColumnName = "BOARD_ID", nullable = false)
+	private Board boardInFile;
 
 	@NotEmpty
 	@Column(name = "FILE_ORIGIN_NAME", nullable = false, length = 100)

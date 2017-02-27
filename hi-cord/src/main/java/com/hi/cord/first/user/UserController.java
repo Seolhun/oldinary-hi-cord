@@ -21,10 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hi.cord.common.service.CommonService;
 import com.hi.cord.first.price.service.PriceRecordService;
@@ -65,7 +63,7 @@ public class UserController {
 	public String loginPage(ModelMap model) throws Exception {
 		log.info("loginPage");
 		if (isCurrentAuthenticationAnonymous()) {
-			return "views/user/login";
+			return "views/user/user-login";
 		} else {
 			return "redirect:/";
 		}
@@ -76,7 +74,7 @@ public class UserController {
 		User user = new User();
 		model.addAttribute("user", user);
 		model.addAttribute("edit", false);
-		return "views/user/signup";
+		return "views/user/user-signup";
 	}
 	
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
@@ -84,7 +82,7 @@ public class UserController {
 		String email=user.getUserEmail();
 		String phone=user.getUserPhone();
 		String name=user.getUserName();
-		String mapping = "views/user/signup";
+		String mapping = "views/user/user-signup";
 		
 		// 개인 별로 에러메세지 띄우기 구현 예정(개인별로 해도 메세지가 2개뜨는 문제 발생)
 		model.addAttribute("user", user);
