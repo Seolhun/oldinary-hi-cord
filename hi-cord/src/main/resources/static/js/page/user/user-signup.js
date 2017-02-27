@@ -29,8 +29,8 @@ $(document).ready(function(){
 	$('#userEmail').on("keyup",function(){
 		var userEmail = $("#userEmail").val();
 		if (!validateEmail(userEmail)) {
-			$("#emailMsg").text(userEmail + " is not valid");
-			$("#emailMsg").css("color", "red");
+			$('#emailMsg').text(userEmail + " is not valid");
+			$('#emailMsg').css("color", "red");
 			$("#emailDupl").prop("disabled", true);
 			return;
 		} else {
@@ -70,11 +70,10 @@ $(document).ready(function(){
 		var user = {}
 		user["userEmail"] = userEmail;
 		$.ajax({
-			url : "signup/duplicate/email",
+			url : "/user/signup/duplicate/email",
 			type : 'POST',
 			timeout : 60000,
 			data : JSON.stringify(user),
-			dataType : 'json',
 			dataType : "json",
 			beforeSend: function(xhr) {
 			    xhr.setRequestHeader("Accept", "application/json");
@@ -82,7 +81,8 @@ $(document).ready(function(){
 			    xhr.setRequestHeader(csrfHeader, csrfToken);
 			},
 			success: function(data) {
-				if(data){
+				console.log(data);
+				if(data.result=="success"){
 					$("#emailMsg").text(userEmail + " could be used");
 					$("#emailMsg").css("color", "blue");				
 				} else {
@@ -112,11 +112,10 @@ $(document).ready(function(){
 		var user = {}
 		user["userPhone"] = userPhone;
 		$.ajax({
-			url : "signup/duplicate/phone",
+			url : "/user/signup/duplicate/phone",
 			type : 'POST',
 			timeout : 60000,
 			data : JSON.stringify(user),
-			dataType : 'json',
 			dataType : "json",
 			beforeSend: function(xhr) {
 			    xhr.setRequestHeader("Accept", "application/json");
@@ -124,7 +123,8 @@ $(document).ready(function(){
 			    xhr.setRequestHeader(csrfHeader, csrfToken);
 			},
 			success: function(data) {
-				if(data){
+				console.log(data);
+				if(data.result=="success"){
 					$("#phoneMsg").text(userPhone + " could be used");
 					$("#phoneMsg").css("color", "blue");				
 				} else {

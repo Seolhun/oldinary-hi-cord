@@ -118,24 +118,6 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@ResponseBody
-	@RequestMapping(value = { "/signup/duplicate/email" }, method = RequestMethod.POST)
-	public String emailduDupl(@RequestBody User user, HttpServletRequest request, BindingResult result) {
-		if (!userService.isUserEmailUnique(user)) {
-			return "false";
-		} 
-		return "true";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = { "/signup/duplicate/phone" }, method = RequestMethod.POST)
-	public String phoneduDupl(@RequestBody User user, HttpServletRequest request, BindingResult result) {
-		if (!userService.isUserPhoneUnique(user)) {
-			return "false";
-		} 
-		return "true";
-	}
-	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

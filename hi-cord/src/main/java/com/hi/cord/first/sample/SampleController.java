@@ -10,7 +10,7 @@ import com.hi.cord.common.service.CommonService;
 import com.hi.cord.first.stadium.service.StadiumService;
 
 @Controller
-@RequestMapping("/stadium")
+@RequestMapping("/sample")
 public class SampleController {
 	static final Logger log = LoggerFactory.getLogger(SampleController.class);
 

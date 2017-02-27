@@ -13,7 +13,7 @@ import com.hi.cord.first.stadium.repository.StadiumDAO;
 
 
 @Transactional
-@Service("stadiumService")
+@Service("sampleService")
 public class SampleServiceImpl implements SampleService {
 	static final Logger log = LoggerFactory.getLogger(SampleServiceImpl.class);
 	
