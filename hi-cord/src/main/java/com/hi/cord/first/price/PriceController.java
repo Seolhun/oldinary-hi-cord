@@ -1,7 +1,5 @@
 package com.hi.cord.first.price;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hi.cord.common.model.Paging;
 import com.hi.cord.common.service.CommonService;
-import com.hi.cord.first.price.entity.Price;
 import com.hi.cord.first.price.service.PriceRecordService;
 import com.hi.cord.first.price.service.PriceService;
 
 @Controller
+@RequestMapping(value = "/price")
 public class PriceController {
 	@Autowired
 	private PriceService priceService;
@@ -28,49 +26,33 @@ public class PriceController {
 	@Autowired
 	private CommonService cFn;
 	
-	@RequestMapping(value = "/price", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String pricePage(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
-		int currentPage = cFn.checkVDInt(request.getParameter("cPage"), 1);
-		int sType = cFn.checkVDInt(request.getParameter("sType"), -1);
-		String rawQuestion = request.getParameter("sText");
-		int sDate = cFn.checkVDInt(request.getParameter("sDate"), 0);
-		int limit = cFn.checkVDInt(request.getParameter("limit"), 20);
-
-		Paging paging = new Paging(currentPage, sType, rawQuestion, sDate, limit);
-		int totalCount = priceService.getCount(paging);
-		paging.setTotalPage(totalCount);
-		setPaging(paging);
-
-		//답글 객체 저장
-		ArrayList<Price> priceList = (ArrayList<Price>) priceService.findAllPrices(paging);
-		
-		model.addAttribute("prices", priceList);
-		model.addAttribute("paging", paging);
-		return "views/price/list";
+		return "views/price/price-list";
 	}
 	
 	@RequestMapping(value = "/superadmin/price", method = RequestMethod.GET)
 	public String superAdminPriceList(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		
-		return "views/price/list";
+		return "views/price/price-list";
 	}
 	
 	@RequestMapping(value = "/superadmin/price/add", method = RequestMethod.GET)
 	public String superAdminPriceAdd(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		
-		return "views/price/list";
+		return "views/price/price-list";
 	}
 	
 	@RequestMapping(value = "/superadmin/price/edit", method = RequestMethod.GET)
 	public String superAdminPriceEdit(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		
-		return "views/price/list";
+		return "views/price/price-list";
 	}
 	
 	@RequestMapping(value = "/superadmin/price/delete", method = RequestMethod.GET)
 	public String superAdminPriceDelete(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		
-		return "views/price/list";
+		return "views/price/price-list";
 	}
 	
 	/*----------- 페이징 메소드 Start ------------------------------------------------------------*/

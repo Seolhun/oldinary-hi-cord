@@ -2191,6 +2191,30 @@ img.image-md {
 	max-height: 200px;
 }
 
+.max-height-250 {
+	max-height: 250px;
+}
+
+.max-height-300 {
+	max-height: 300px;
+}
+
+.max-height-350 {
+	max-height: 350px;
+}
+
+.max-height-400 {
+	max-height: 400px;
+}
+
+.max-height-450 {
+	max-height: 450px;
+}
+
+.max-height-500 {
+	max-height: 500px !important;
+}
+
 .min-height-100 {
 	min-height: 100px;
 }

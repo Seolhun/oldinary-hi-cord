@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,6 +34,7 @@ import com.hi.cord.first.user.servie.UserProfileService;
 import com.hi.cord.first.user.servie.UserService;
 
 @Controller
+@RequestMapping("/user")
 @Transactional(propagation = Propagation.REQUIRED, transactionManager = "txManager", noRollbackFor = {NullPointerException.class })
 public class UserController {
 
@@ -123,7 +125,23 @@ public class UserController {
 			persistentTokenBasedRememberMeServices.logout(request, response, auth);
 			SecurityContextHolder.getContext().setAuthentication(null);
 		}
-		return "redirect:/login?logout";
+		return "redirect:/user/login?logout";
+	}
+	
+
+	/**
+	 * 스타디움 페이지 이동.
+	 * 
+	 * @param -
+	 * @return String - view
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/myinfo", method = RequestMethod.GET)
+	public String myInfoPage(ModelMap model, Authentication auth) throws Exception {
+		log.info("MyInfo");
+		User user=userService.findByEmail(auth.getName());
+		model.addAttribute("user", user);
+		return "/views/user/user-myinfo";
 	}
 
 	private boolean isCurrentAuthenticationAnonymous() {
@@ -132,7 +150,7 @@ public class UserController {
 	}
 
 	//@Valid로 검사시 중복값 리다이렉트해주기.
-	void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String getValue, String objectName, String fieldName, String messagePropertyName) {
+	private void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String getValue, String objectName, String fieldName, String messagePropertyName) {
 		FieldError error = new FieldError(objectName, fieldName,
 				messageSource.getMessage(messagePropertyName, new String[] { getValue }, request.getLocale()));
 		result.addError(error);

@@ -1,55 +1,60 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
+	<head>
+		<title>Board Write</title>
+	</head>
 	<div layout:fragment="content">
 		<!-- 게시판 값 입력 -->
-		<div class="panel panel-success">
-			<div class="panel-heading">
-				<label class="panel-title font-20b" th:text="#{TEXT.BOARD.WRITE}"></label>
+		<div class="container">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<label class="panel-title font-20b" th:text="#{TEXT.BOARD.WRITE}"></label>
+				</div>
+				<div class="panel-body">
+					<form th:object="${board}" th:action="@{|/board/${bType}/write|}" id="boardForm" method="POST" enctype="multipart/form-data">
+						<div class="row margin-bottom-20">
+							<div class="col-sm-8">
+								<input type="text" class="form-control" th:field="*{boardSubject}" name="boardSubject" id="boardSubject" th:placeholder="#{TEXT.BPH.SUBJECT}"/>
+							</div>
+							<div class="col-sm-4">
+								<select class="form-control" th:field="*{boardType}" name="boardType" id="boardType">
+									<option th:each="i:${boardTypes}" th:value="${i.type}" th:text="${i.type}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="row margin-bottom-20">
+							<div class="col-sm-12">
+								<input type="file" class="form-control" th:field="*{boardWithFileList}" name="boardWithFileList" id="boardWithFileList" th:placeholder="#{TEXT.BPH.SUBJECT}" multiple="multiple"/>
+							</div>
+							<div class="col-sm-12" id="fileList" hidden="hidden">
+								
+							</div>
+						</div>
+						<div class="row margin-bottom-20">
+							<div class="col-sm-12">
+								<textarea class="form-control" th:field="*{boardContent}" id="boardContent" name="boardContent" th:placeholder="#{TEXT.BPH.CONTENT}"></textarea>
+							</div>
+							<div class="col-sm-12 text-right">
+								<input type="button" class="btn btn-info" th:value="#{TEXT.SAVE}" id="submitBoardBtn">
+								<input type="button" class="btn btn-default" th:value="#{TEXT.CANCEL}" >
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="panel-body">
-				<form th:object="${board}" th:action="@{|/board/${bType}/write|}" id="boardForm" method="POST" enctype="multipart/form-data">
-					<div class="row margin-bottom-20">
-						<div class="col-sm-8">
-							<input type="text" class="form-control" th:field="*{boardSubject}" name="boardSubject" id="boardSubject" th:placeholder="#{TEXT.BPH.SUBJECT}"/>
-						</div>
-						<div class="col-sm-4">
-							<select class="form-control" th:field="*{boardType}" name="boardType" id="boardType">
-								<option th:each="i:${boardTypes}" th:value="${i.type}" th:text="${i.type}"></option>
-							</select>
-						</div>
-					</div>
-					<div class="row margin-bottom-20">
-						<div class="col-sm-12">
-							<input type="file" class="form-control" th:field="*{boardWithFileList}" name="boardWithFileList" id="boardWithFileList" th:placeholder="#{TEXT.BPH.SUBJECT}" multiple="multiple"/>
-						</div>
-						<div class="col-sm-12" id="fileList" hidden="hidden">
-							
-						</div>
-					</div>
-					<div class="row margin-bottom-20">
-						<div class="col-sm-12">
-							<textarea class="form-control" th:field="*{boardContent}" id="boardContent" name="boardContent" th:placeholder="#{TEXT.BPH.CONTENT}"></textarea>
-						</div>
-						<div class="col-sm-12 text-right">
-							<input type="button" class="btn btn-info" th:value="#{TEXT.SUBMIT}" id="submitBoardBtn">
-							<input type="button" class="btn btn-default" th:value="#{TEXT.CANCEL}" >
-						</div>
-					</div>
-				</form>
-			</div>
+			<script type="text/javascript">
+				$('#boardContent').summernote({
+					lang : 'ko-KR', // default: 'en-US'		
+					height : 600, // set editor height
+					minHeight : 400, // set minimum height of editor
+					maxHeight : 1200, // set maximum height of editor
+					placeholder : 'Write board content here...',
+					focus : true, // set focus to editable area after initializing summernote
+					dialogsFade : true
+				});
+			</script>
+			<script type="text/javascript" src="/js/page/board/board-write.js"></script>
 		</div>
-		<script type="text/javascript">
-			$('#boardContent').summernote({
-				lang : 'ko-KR', // default: 'en-US'		
-				height : 600, // set editor height
-				minHeight : 400, // set minimum height of editor
-				maxHeight : 1200, // set maximum height of editor
-				placeholder : 'Write board content here...',
-				focus : true, // set focus to editable area after initializing summernote
-				dialogsFade : true
-			});
-		</script>
-		<script type="text/javascript" src="/js/page/board/board-write.js"></script>
 	</div>
 </html>
 

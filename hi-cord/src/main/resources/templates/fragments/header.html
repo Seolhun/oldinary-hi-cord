@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-8">
-			<label th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</label>
-			<a th:href="@{/logout}">LOG OUT <span class="sr-only"></span></a>
+		<div class="col-sm-6">
+			<!-- <label th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</label> -->
+			<span sec:authorize="isAuthenticated()">
+				<b>User : </b><span class="margin-right-10" sec:authentication="name"></span>
+				<b>Roles : </b><span class="margin-right-10" sec:authentication="principal.authorities"></span>
+				<a th:href="@{/user/logout}">LOG OUT</a>				
+			</span>
 		</div>
-		<div class="col-sm-4 text-right">
-			알림창 공간
+		
+		<div class="col-sm-4 text-center">
+			<span sec:authorize="isAuthenticated()">
+				<a class="margin-right-20" th:href="@{/user/myinfo/}" th:text="#{TEXT.MYINFO}"></a>
+				<a class="margin-right-20" th:href="@{/stadium/myclub}" th:text="#{TEXT.MYCLUB}"></a>
+			</span>
+		</div>
+		
+		<div class="col-sm-2 text-right">
+			<span sec:authorize="isAuthenticated()">
+				알림창 공간
+			</span>
+			<span sec:authorize="isAnonymous()">
+				<a class="margin-right-30" th:href="@{/user/login}" th:text="#{TEXT.LOGIN}">LOG IN</a>	
+				<a th:href="@{/user/signup}" th:text="#{TEXT.SIGHUP}">SIGN UP</a>
+			</span>
 		</div>
 	</div>
 </div>
@@ -34,8 +51,6 @@
 			      	</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">Link</a></li>
-						<li><a th:href="@{/login}">LOG IN</a></li>
-        				<li><a th:href="@{/signup}">SIGN UP</a></li>
 						<!-- 
 			        	<li class="dropdown">
 			          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></a>
@@ -57,4 +72,3 @@
 		</div>
 	</div><!-- /.container-fluid -->
 </nav>
-</html>

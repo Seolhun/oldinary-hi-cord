@@ -6,6 +6,7 @@ var root , csrfHeader, csrfToken, boardType;
 	
 $(document).ready(function() {
 	BoardList();
+	
 	function BoardList(){
 		//동적 환자 리스트 DataTable
 	    $("#boardJsGrid").jsGrid({

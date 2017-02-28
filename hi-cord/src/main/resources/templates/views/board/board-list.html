@@ -1,17 +1,22 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
+	<head>
+		<title>Board List</title>
+	</head>
 	<div layout:fragment="content">
-		<!-- 게시판 목록 Data -->
-		<div class="row">
-			<input id="bType" hidden="hidden" th:value="${bType}">
-			<div class="col-sm-12 margin-bottom-10">
-				<label class="panel-title font-20b" th:text="#{TEXT.BOARD.LIST}"></label>
-			</div>
-			<div class="col-sm-12 margin-bottom-10 text-right">
-				<a th:href="@{|/board/${bType}/write|}"><button class="btn btn-success" th:text="#{TEXT.BFB.WRITE}"></button></a>
-			</div>
-			<div class="col-sm-12" id="boardJsGrid">
-				
+		<div class="container">
+			<!-- 게시판 목록 Data -->
+			<div class="row">
+				<input id="bType" hidden="hidden" th:value="${bType}">
+				<div class="col-sm-12 margin-bottom-10">
+					<label class="panel-title font-20b" th:text="#{TEXT.BOARD.LIST}"></label>
+				</div>
+				<div class="col-sm-12 margin-bottom-10 text-right">
+					<a th:href="@{|/board/${bType}/write|}"><button class="btn btn-success" th:text="#{TEXT.BFB.WRITE}"></button></a>
+				</div>
+				<div class="col-sm-12" id="boardJsGrid">
+					
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" th:src="@{/js/page/board/board-list.js}"></script>

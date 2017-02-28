@@ -5,34 +5,36 @@
 	<link rel="stylesheet" href="/css/page/user/user.css"/>
 </head>
 	<div layout:fragment="content">
-		<div>
-	    	<h1>Login</h1>
+		<div class="container">
+			<div>
+		    	<h1>Login</h1>
+		    </div>
+		    <div class="col-sm-12">
+			    <form th:object="${user}" th:action="@{/login}" method="POST">
+			    	<div class="col-sm-12 margin-bottom-10">
+		   		    	<div>
+		   		    		<b th:text="#{TEXT.EMAIL}" class="margin-right-20"></b>
+							<input type="email" name="email" id="email" class="for-center-input form-control" placeholder="Email."/>
+						</div>
+			    	</div>
+			    	<div class="col-sm-12 margin-bottom-10">
+		   		    	<div>
+		   		    		<b th:text="#{TEXT.PASSWORD}" class="margin-right-20"></b>
+							<input type="password" name="password" id="password" class="for-center-input form-control" placeholder="Password."/>
+						</div>
+			    	</div>
+			    	<div class="errorMsg" id="loginMsg"></div>
+				    <div class="col-sm-12">
+				    	<p>
+				    		<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
+				    		<span th:text="#{TEXT.AUTO.LOGIN}"></span> 
+				    		<input type="checkbox" name="remember-me" value="1">
+				    	</p>
+		    			<input type="submit" class="btn btn-success pull-left" value="Login">
+			    	</div>
+		    	</form>
+		    </div>
+	    	<script type="text/javascript" src="/js/page/user/user-login.js"></script>
 	    </div>
-	    <div class="col-sm-12">
-		    <form th:object="${user}" th:action="@{/login}" method="POST">
-		    	<div class="col-sm-12 margin-bottom-10">
-	   		    	<div>
-	   		    		<b th:text="#{TEXT.EMAIL}" class="margin-right-20"></b>
-						<input type="email" name="email" id="email" class="for-center-input form-control" placeholder="Email."/>
-					</div>
-		    	</div>
-		    	<div class="col-sm-12 margin-bottom-10">
-	   		    	<div>
-	   		    		<b th:text="#{TEXT.PASSWORD}" class="margin-right-20"></b>
-						<input type="password" name="password" id="password" class="for-center-input form-control" placeholder="Password."/>
-					</div>
-		    	</div>
-		    	<div class="errorMsg" id="loginMsg"></div>
-			    <div class="col-sm-12">
-			    	<p>
-			    		<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
-			    		<span th:text="#{TEXT.AUTO.LOGIN}"></span> 
-			    		<input type="checkbox" name="remember-me" value="1">
-			    	</p>
-	    			<input type="submit" class="btn btn-success pull-left" value="Login">
-		    	</div>
-	    	</form>
-	    </div>
-	    <script type="text/javascript" src="/js/page/user/user-login.js"></script>
 	</div>
 </html>

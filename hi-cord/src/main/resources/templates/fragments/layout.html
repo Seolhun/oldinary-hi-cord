@@ -1,32 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
 	<head>
-		<meta name="keywords" th:content="iSyncBrain">
+		<meta name="keywords" th:content="Hi-Cord">
 		<meta id="csrfToken" th:content="${_csrf.token}" />
-		<meta id="csrfHeader" th:content="${_csrf.headerName}"/>
+		<meta id="csrfHeader" th:content="${_csrf.headerName}" />
 		<!--  Each token will be replaced by their respective titles in the resulting page. -->
 		<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Hi-Cord</title>
 		<link th:replace="/fragments/style"/>
 	</head>
-	<!-- Start Header -->
-	<header th:replace="/fragments/header">
 	
+	<!-- Start, Header -->
+	<header>
+		<div th:replace="/fragments/header">
+		
+		</div>
 	</header>
-	<!-- End Header -->
+	<!-- End, Header -->
 	
-	<!-- Body Start -->
+	<!-- Start, ImageSlide Part -->
 	<body>
-    	<div class="container content margin-bottom-30" layout:fragment="content">
-    		
-   		</div>
+		<div class="margin-bottom-30">
+			<div layout:fragment="slide">
+			
+			</div>
+		</div>
+		<!-- End, ImageSlide Part -->
+		
+		<!-- Start, Body -->
+		<div>
+			<div layout:fragment="content">
+			
+			</div>
+		</div>
 	</body>
-	<!-- Body End -->
+	<!-- End, Body -->
 	
 	<!-- Footer Start -->
-	<footer th:replace="/fragments/footer">
-	
+	<footer class="content">
+		<div th:replace="/fragments/footer">
+		
+		</div>
 	</footer>
 	<!-- Footer End -->
 	
-	<link th:replace="/fragments/js"></link>
+	<link th:replace="/fragments/js"/>
 </html>
