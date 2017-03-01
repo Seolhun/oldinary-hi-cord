@@ -16,6 +16,11 @@ import com.hi.cord.first.stadium.model.Stadium;
 public class SampleRepositoryImpl extends AbstractRepository<Long, Stadium> implements SampleRepository {
 	static final Logger log = LoggerFactory.getLogger(SampleRepositoryImpl.class);
 
+	@Override
+	public void insert(Stadium stadium) {
+		persist(stadium);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Stadium> findAll(Stadium stadium) {
@@ -31,11 +36,6 @@ public class SampleRepositoryImpl extends AbstractRepository<Long, Stadium> impl
 	public Stadium findById(Long id) {
 		Stadium stadium = getByKey(id);
 		return stadium;
-	}
-
-	@Override
-	public void insert(Stadium stadium) {
-		persist(stadium);
 	}
 
 	@Override

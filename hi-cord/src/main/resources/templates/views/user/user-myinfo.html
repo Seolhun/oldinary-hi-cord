@@ -8,29 +8,69 @@
 </head>
 <div layout:fragment="content">
 	<div class="container">
-		<div>
-			<h1 th:text="#{TEXT.MYINFO}"></h1>
-		</div>
-		<div class="col-sm-12">
-			<div th:object="${user}">
-				<div class="col-sm-12">
-					<label th:text="#{TEXT.EMAIL}">
+		<div class="row">
+			<div class="col-sm-6">
+				<div>
+					<h1 th:text="#{TEXT.MYINFO}"></h1>
+				</div>
+				<div th:object="${user}">
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.EMAIL}"></label>
 						<span th:text="*{userId}"></span>
-					</label>
-					<div th:value="*{userName}"></div>
+					</div>					
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.NAME}"></label>
+						<span th:text="*{userName}"></span>
+					</div>
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.PHONE}"></label>
+						<span th:text="*{userPhone}"></span>
+					</div>
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.STATE}"></label>
+						<span th:text="*{userState}"></span>
+					</div>
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.PAID.POINT}"></label>
+						<span th:text="*{userPaidPoint}"></span>
+					</div>
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.ACTIVE.POINT}"></label>
+						<span th:text="*{userActivePoint}"></span>
+					</div>
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.RECEIVE.EMAIL}"></label>
+						<span th:text="*{userReceiveEmail}"></span>
+					</div>
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.RECEIVE.PHONE}"></label>
+						<span th:text="*{userReceivePhone}"></span>
+					</div>
+					<div class="col-sm-12">
+						<label th:text="#{TEXT.PROFILE}"></label>
+						<span th:each="userProfile : *{userProfiles}">
+	                		<span th:text="${userProfile.userProfileType}"></span>
+	            		</span>
+					</div>
+						<!-- 
+							<div th:each="price : *{paidHistoryList}">
+		                		<p th:text="${price.id}"></p>
+		            		</div>
+		            		 -->
+						<!-- 
+						    <div th:object="${paidHistory}">
+						    	<div th:text="${id}"></div>
+						    </div>
+						     -->
+				</div>
+			</div>
+		
+			<div class="col-sm-6">
+				<div>
+					<h1 th:text="#{TEXT.MYCLUB}"></h1>
+				</div>
+				<div th:if="${greeting.list != null}">
 					
-					<div th:text="*{userPhone}"></div>
-					<div th:text="*{userCreatedDate}"></div>
-					<!-- 
-						<div th:each="price : *{paidHistoryList}">
-	                		<p th:text="${price.id}"></p>
-	            		</div>
-	            		 -->
-					<!-- 
-					    <div th:object="${paidHistory}">
-					    	<div th:text="${id}"></div>
-					    </div>
-					     -->
 				</div>
 			</div>
 		</div>

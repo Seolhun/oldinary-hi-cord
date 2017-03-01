@@ -17,7 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +30,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hi.cord.common.model.State;
+import com.hi.cord.first.club.entity.SportsClub;
 import com.hi.cord.first.price.entity.PriceRecord;
 import com.hi.cord.first.stadium.model.Stadium;
 
@@ -51,6 +54,15 @@ public class User implements Serializable {
 	// User, What did you paid money for service. or How many
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "paidByUser")
 	private List<PriceRecord> userPaidFor;
+	
+	//Club I joined
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(foreignKey=@ForeignKey(name="USER_SPORTS_CLUB_FK"), name="UESR_IN_SPORTS_CLUB", referencedColumnName="SPORTS_CLUB_ID", nullable = false)
+	private SportsClub userInSportsClub;
+	
+	//Club I found	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sportsClubMasterr")
+	private SportsClub userOfSportClub;
 
 	// User UK Email
 	@Pattern(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message = "Invalid Email")

@@ -6,7 +6,7 @@
 			<span sec:authorize="isAuthenticated()">
 				<b>User : </b><span class="margin-right-10" sec:authentication="name"></span>
 				<b>Roles : </b><span class="margin-right-10" sec:authentication="principal.authorities"></span>
-				<a th:href="@{/user/logout}">LOG OUT</a>				
+				<a th:href="@{/user/logout}" th:text="#{TEXT.LOGOUT}"></a>				
 			</span>
 		</div>
 		
@@ -23,7 +23,7 @@
 			</span>
 			<span sec:authorize="isAnonymous()">
 				<a class="margin-right-30" th:href="@{/user/login}" th:text="#{TEXT.LOGIN}">LOG IN</a>	
-				<a th:href="@{/user/signup}" th:text="#{TEXT.SIGHUP}">SIGN UP</a>
+				<a th:href="@{/user/signup}" th:text="#{TEXT.SIGNUP}">SIGN UP</a>
 			</span>
 		</div>
 	</div>
