@@ -19,18 +19,19 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	@Override
 	public UserProfile findById(int id) {
-		log.info("Parameter : "+id);
+		log.info("param : findById : {}",id);
 		return dao.findById(id);
 	}
 
 	@Override
 	public UserProfile findByType(String type) {
-		log.info("Parameter : "+type);
+		log.info("param : findByType : {}",type);
 		return dao.findByType(type);
 	}
 
 	@Override
 	public List<UserProfile> findAll() {
+		log.info("param : findAll");
 		return dao.findAll();
 	}
 }

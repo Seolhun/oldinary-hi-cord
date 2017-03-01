@@ -90,7 +90,7 @@ public class LimitingDaoAuthenticationProvider extends DaoAuthenticationProvider
 				dbUser.setType(1);
 				dbUser.setUserState(CommonState.LOCKED.getState());
 				dbUser.setUserLockedAuth(auth);
-				userService.updateUser(dbUser);
+				userService.update(dbUser);
 
 				// 메일을 보낸다.
 				try {

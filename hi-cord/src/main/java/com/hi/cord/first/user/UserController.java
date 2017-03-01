@@ -128,7 +128,7 @@ public class UserController {
 		up.setUserProfileType(UserProfileType.PLAYER.getType());
 		upSet.add(up);
 		user.setUserProfiles(upSet);
-		userService.saveUser(user);
+		userService.save(user);
 		
 		return "redirect:/";
 	}

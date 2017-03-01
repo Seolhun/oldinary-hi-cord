@@ -2,7 +2,6 @@ package com.hi.cord.first.user.repository;
 
 import java.util.List;
 
-import com.hi.cord.common.model.Paging;
 import com.hi.cord.first.user.entity.User;
 
 public interface UserRepository {
@@ -17,9 +16,7 @@ public interface UserRepository {
 	
 	void deleteByEmail(String email);
 	
-	int getCount(Paging paging);
-	
-	List<User> findAllUsers(Paging paging);
+	List<User> findAllUsers(User user);
 	
 }
 

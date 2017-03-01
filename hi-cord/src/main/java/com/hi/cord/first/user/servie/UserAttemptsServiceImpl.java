@@ -19,27 +19,31 @@ public class UserAttemptsServiceImpl implements UserAttemptsService {
 	
 	@Override
 	public void insert(UserAttempts userAttempts) {
+		log.info("param : insert"+userAttempts.toString());
 		userAttemptsRepository.insert(userAttempts);
 	}
 
 	@Override
 	public UserAttempts findById(Long id) {
+		log.info("param : findById"+id.toString());
 		return userAttemptsRepository.findById(id);
 	}
 	
 	@Override
 	public UserAttempts findByEmail(String email) {
+		log.info("param : findByEmail"+email.toString());
 		return userAttemptsRepository.findByEmail(email);
 	}
 
 	@Override
 	public List<UserAttempts> findAll(UserAttempts userAttempts) {
+		log.info("param : findAll"+userAttempts.toString());
 		return userAttemptsRepository.findAll(userAttempts);
 	}
 
 	@Override
 	public void update(UserAttempts userAttempts) {
-		log.info("Parameter : "+userAttempts.toString());
+		log.info("param : update"+userAttempts.toString());
 		UserAttempts entity = userAttemptsRepository.findByEmail(userAttempts.getUserAttemptsEmail());
 		if (entity != null) {
 			if(userAttempts.getUserAttemptsSuccessFlag()!=null) {

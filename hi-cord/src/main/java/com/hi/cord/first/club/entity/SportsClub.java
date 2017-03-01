@@ -23,8 +23,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -50,13 +48,12 @@ public class SportsClub implements Serializable {
 	@JsonProperty("sportClubName")
 	private String sportsClubName;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userInSportsClub")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userInSportsClub")
 	private List<User> sportsClubWithUser;
 	
-	@Fetch(FetchMode.SELECT)
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(foreignKey=@ForeignKey(name="SPORTS_CLUB_MASTER_USER_FK"), name="SPORTS_CLUB_MASTER", referencedColumnName="USER_ID", nullable = false)
-	private User sportsClubMaster;
+	@JoinColumn(foreignKey=@ForeignKey(name="SPORTS_CLUB_OWNER_USER_FK"), name="SPORTS_CLUB_OWNER_ID", referencedColumnName="USER_ID", nullable = false)
+	private User sportsClubOwner;
 
 	// User, How many have Privileges.
 	@ManyToMany(fetch = FetchType.LAZY)

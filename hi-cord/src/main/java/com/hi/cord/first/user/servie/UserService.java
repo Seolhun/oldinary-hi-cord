@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hi.cord.common.model.Paging;
 import com.hi.cord.first.user.entity.User;
 
 @Transactional(propagation=Propagation.REQUIRED, transactionManager="txManager", noRollbackFor={NullPointerException.class})
@@ -17,9 +16,9 @@ public interface UserService {
 	
 	User findByPhone(String userPhone);
 
-	void saveUser(User user);
+	void save(User user);
 
-	void updateUser(User user);
+	void update(User user);
 	
 	boolean isUserEmailUnique(User user);
 	
@@ -27,7 +26,5 @@ public interface UserService {
 	
 	void deleteUserByEmail(String userEmail);
 
-	List<User> findAllUsers(Paging paging);
-
-	int getCount(Paging paging);
+	List<User> findAllUsers(User uesr);
 }

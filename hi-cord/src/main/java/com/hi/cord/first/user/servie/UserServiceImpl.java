@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hi.cord.common.model.Paging;
 import com.hi.cord.common.model.CommonState;
 import com.hi.cord.first.user.entity.User;
 import com.hi.cord.first.user.repository.UserRepository;
@@ -27,35 +26,35 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User findById(Long usreId) {
-		log.info("Parameter : "+usreId);
+		log.info("param : findById : {} ", usreId.toString());
 		return dao.findById(usreId);
 	}
 	
 	@Override
 	public User findByEmail(String userEmail) {
-		log.info("Parameter : "+userEmail);
+		log.info("param : findByEmail : {} ", userEmail.toString());
 		User user = dao.findByEmail(userEmail);
 		return user;
 	}
 	
 	@Override
 	public User findByPhone(String userPhone) {
-		log.info("Parameter : "+userPhone);
+		log.info("param : findByPhone : {} ", userPhone.toString());
 		User user = dao.findByPhone(userPhone);
 		return user;
 	}
 	
 	@Override
-	public void saveUser(User user) {
-		log.info("Parameter : "+user.toString());
+	public void save(User user) {
+		log.info("param : save : {} ", user.toString());
 		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 		user.setUserState(CommonState.ACTIVE.getState());
 		dao.save(user);
 	}
 	
 	@Override
-	public void updateUser(User user) {
-		log.info("Parameter : "+user.toString());
+	public void update(User user) {
+		log.info("param : update : {} ", user.toString());
 		User entity = dao.findByEmail(user.getUserEmail());
 		if (entity != null) {
 			if(user.getUserPassword()!=null && user.getType()==1) {
@@ -75,14 +74,14 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void deleteUserByEmail(String userEmail) {
-		log.info("Parameter : "+ userEmail);
+		log.info("param : deleteUserByEmail : {} ", userEmail.toString());
 		dao.deleteByEmail( userEmail);
 	}
 	
 	@Override
 	//=> Or 일때 하나만이라도 true이면 true이다., And 일때 하나만이라도 false이면 false이다.
 	public boolean isUserEmailUnique(User user) {
-		log.info("Parameter : "+user.getUserEmail());
+		log.info("param : isUserEmailUnique : {} ", user.toString());
 		User dbUser = findByEmail(user.getUserEmail());
 		return (dbUser == null || ((dbUser.getUserEmail() == null && dbUser.getUserEmail() != user.getUserEmail())));
 	}
@@ -90,20 +89,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	//=> Or 일때 하나만이라도 true이면 true이다., And 일때 하나만이라도 false이면 false이다.
 	public boolean isUserPhoneUnique(User user) {
-		log.info("Parameter : "+user.getUserPhone());
+		log.info("param : isUserPhoneUnique : {} ", user.toString());
 		User dbUser = findByPhone(user.getUserPhone());
 		return (dbUser == null || ((dbUser.getUserPhone() == null && dbUser.getUserPhone() != user.getUserPhone())));
 	}
 	
 	@Override
-	public int getCount(Paging paging) {
-		log.info("Parameter : "+paging);
-		return dao.getCount(paging);
-	}
-	
-	@Override
-	public List<User> findAllUsers(Paging paging) {
-		log.info("Parameter : "+paging);
-		return dao.findAllUsers(paging);
+	public List<User> findAllUsers(User user) {
+		log.info("param : findAllUsers : {} ", user.toString());
+		return dao.findAllUsers(user);
 	}
 }

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,8 +27,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -50,15 +49,12 @@ public class User implements Serializable {
 	private Long userId;
 
 	// User, What did you paid money for service. or How many
-//	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "priceRecorPaidByUser")
-	private List<PriceRecord> userPaidForPrice;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "priceRecorPaidByUser", cascade=CascadeType.ALL)
+	private List<PriceRecord> userPaidForList;
 	
 	//Club I found	
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@Fetch(FetchMode.SELECT)
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "sportsClubMaster")
-	private SportsClub userOfSportClub;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "sportsClubOwner", cascade=CascadeType.ALL)
+	private SportsClub ownerOfSportClub;
 	
 	//Club I joined
 	@ManyToOne(fetch=FetchType.LAZY)
