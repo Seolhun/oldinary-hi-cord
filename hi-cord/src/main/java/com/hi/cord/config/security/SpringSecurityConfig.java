@@ -12,13 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.hi.cord.config.security.custom.CustomSuccessHandler;
+import com.hi.cord.config.security.custom.LimitingDaoAuthenticationProvider;
 
 @Configuration
 @EnableWebSecurity
@@ -43,11 +43,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.antMatchers("/board/**").hasRole("SUPERADMIN")
 			.antMatchers("/**").permitAll()
 			.and()
-				.formLogin().loginPage("/login")
-				.loginProcessingUrl("/login")
+				.formLogin().loginPage("/user/login")
+				.loginProcessingUrl("/user/login")
 					.usernameParameter("email").passwordParameter("password")
 				.successHandler(customSuccessHandler())
-				.failureUrl("/login?error")
+				.failureUrl("/user/login?error")
 			.and()
 				.logout()
 					.logoutUrl("/logout")
@@ -82,15 +82,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	//비밀번호 인코딩 방법 BCrypt
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
 	//로그인 시 인증정보 제공 프록시
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		LimitingDaoAuthenticationProvider authenticationProvider = new LimitingDaoAuthenticationProvider();
+		authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
 		authenticationProvider.setUserDetailsService(userDetailsService);
 		return authenticationProvider;
 	}

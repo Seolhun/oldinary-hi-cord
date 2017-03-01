@@ -15,9 +15,9 @@ import com.hi.cord.common.model.Paging;
 import com.hi.cord.common.repository.AbstractRepository;
 import com.hi.cord.first.user.entity.User;
 
-@Repository("userDao")
-public class UserDaoImpl extends AbstractRepository<Integer, User> implements UserDao {
-	static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
+@Repository("userRepository")
+public class UserRepositoryImpl extends AbstractRepository<Integer, User> implements UserRepository {
+	static final Logger log = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
 	public User findById(Long id) {
 		User user = getByKeyByLong(id);

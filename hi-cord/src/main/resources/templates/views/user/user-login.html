@@ -10,7 +10,7 @@
 		    	<h1>Login</h1>
 		    </div>
 		    <div class="col-sm-12">
-			    <form th:object="${user}" th:action="@{/login}" method="POST">
+			    <form th:object="${user}" th:action="@{/user/login}" method="POST">
 			    	<div class="col-sm-12 margin-bottom-10">
 		   		    	<div>
 		   		    		<b th:text="#{TEXT.EMAIL}" class="margin-right-20"></b>
@@ -30,6 +30,9 @@
 				    		<span th:text="#{TEXT.AUTO.LOGIN}"></span> 
 				    		<input type="checkbox" name="remember-me" value="1">
 				    	</p>
+				    	<div class="col-sm-12 margin-bottom-20">
+							<div class="erros-red" th:if="${errorMsg!=null}" th:text="${errorMsg}"></div>
+						</div>
 		    			<input type="submit" class="btn btn-success pull-left" value="Login">
 			    	</div>
 		    	</form>

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hi.cord.common.model.Paging;
-import com.hi.cord.common.model.State;
+import com.hi.cord.common.model.CommonState;
 import com.hi.cord.first.user.entity.User;
-import com.hi.cord.first.user.repository.UserDao;
+import com.hi.cord.first.user.repository.UserRepository;
 
 @Service("userService")
 @Transactional
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
-	private UserDao dao;
+	private UserRepository dao;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	public void saveUser(User user) {
 		log.info("Parameter : "+user.toString());
 		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-		user.setUserState(State.ACTIVE.getState());
+		user.setUserState(CommonState.ACTIVE.getState());
 		dao.save(user);
 	}
 	
@@ -58,12 +58,19 @@ public class UserServiceImpl implements UserService {
 		log.info("Parameter : "+user.toString());
 		User entity = dao.findByEmail(user.getUserEmail());
 		if (entity != null) {
-			if(user.getUserPassword()!=null) {
+			if(user.getUserPassword()!=null && user.getType()==1) {
 				entity.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 			}
+			if(user.getUserState()!=null) {
+				entity.setUserState(user.getUserState());
+			}
+			if(user.getUserProfiles()!=null) {
+				entity.setUserProfiles(user.getUserProfiles());
+			}
+			if(user.getUserLockedAuth()!=null) {
+				entity.setUserLockedAuth(user.getUserLockedAuth());
+			}
 		} 
-		entity.setUserState(user.getUserState());
-		entity.setUserProfiles(user.getUserProfiles());
 	}
 	
 	@Override

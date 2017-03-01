@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,10 +23,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hi.cord.common.model.State;
+import com.hi.cord.common.model.CommonState;
 import com.hi.cord.first.user.entity.User;
 
 import lombok.Data;
@@ -49,12 +50,13 @@ public class SportsClub implements Serializable {
 	@JsonProperty("sportClubName")
 	private String sportsClubName;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userInSportsClub")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userInSportsClub")
 	private List<User> sportsClubWithUser;
 	
+	@Fetch(FetchMode.SELECT)
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(foreignKey=@ForeignKey(name="SPORTS_CLUB_MASTER_USER_FK"), name="SPORTS_CLUB_MASTER", referencedColumnName="USER_ID", nullable = false)
-	private User sportsClubMasterr;
+	private User sportsClubMaster;
 
 	// User, How many have Privileges.
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -123,7 +125,7 @@ public class SportsClub implements Serializable {
 
 	// SportsClub, about Account state
 	@Column(name = "SPORTS_CLUB_STATE", length = 20, nullable = false)
-	private String sportsClubState = State.ACTIVE.getState();
+	private String sportsClubState = CommonState.ACTIVE.getState();
 
 	// SportsClub, Boolean account is NON_LOCKED or not.
 	@Column(name = "SPORTS_CLUB_PRIVATE_AGREE", length = 1, nullable = true)

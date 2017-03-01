@@ -19,8 +19,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override
-	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException {
+	protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 		String targetUrl = determineTargetUrl(authentication);
 		if (response.isCommitted()) {
 			System.out.println("Can't redirect");
@@ -37,8 +36,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 			roles.add(a.getAuthority());
 		}
 
-		if (isSuperAdmin(roles)) {
-			url = "/admin";
+		if (isMaster(roles)) {
+			url = "/";
 		} else {
 			url = "/";
 		}
@@ -54,8 +53,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		return redirectStrategy;
 	}
 
-	private boolean isSuperAdmin(List<String> roles) {
-		if (roles.contains("ROLE_SUPERADMIN")) {
+	private boolean isMaster(List<String> roles) {
+		if (roles.contains("ROLE_MASTER")) {
 			return true;
 		}
 		return false;

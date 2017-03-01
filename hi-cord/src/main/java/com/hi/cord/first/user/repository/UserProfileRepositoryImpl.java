@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.hi.cord.common.repository.AbstractRepository;
 import com.hi.cord.first.user.entity.UserProfile;
 
-@Repository("userProfileDao")
-public class UserProfileDaoImpl extends AbstractRepository<Integer, UserProfile> implements UserProfileDao {
+@Repository("userProfileRepository")
+public class UserProfileRepositoryImpl extends AbstractRepository<Integer, UserProfile> implements UserProfileRepository {
 
 	public UserProfile findById(int id) {
 		return getByKey(id);

@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
@@ -21,9 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hi.cord.common.service.CommonService;
 import com.hi.cord.first.price.service.PriceRecordService;
@@ -62,9 +64,13 @@ public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage(ModelMap model) throws Exception {
+	public String loginPage(ModelMap model, @RequestParam(value = "error", required = false) String error, HttpServletRequest request) throws Exception {
 		log.info("loginPage");
 		if (isCurrentAuthenticationAnonymous()) {
+			if (error != null) {
+				Exception exception = (Exception)request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+				model.addAttribute("errorMsg", getErrorMessage(exception));
+			}
 			return "views/user/user-login";
 		} else {
 			return "redirect:/";
@@ -81,10 +87,19 @@ public class UserController {
 	
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
 	public String signupDo(@Valid User user, BindingResult result, ModelMap model, HttpServletRequest request) throws Exception {
+		String mapping = "views/user/user-signup";
+		try {
+			if(user==null){
+				model.addAttribute("errorMsg", "공백을 입력하실 수 없습니다.");
+				return mapping;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		String email=user.getUserEmail();
 		String phone=user.getUserPhone();
 		String name=user.getUserName();
-		String mapping = "views/user/user-signup";
 		
 		// 개인 별로 에러메세지 띄우기 구현 예정(개인별로 해도 메세지가 2개뜨는 문제 발생)
 		model.addAttribute("user", user);
@@ -154,5 +169,20 @@ public class UserController {
 		FieldError error = new FieldError(objectName, fieldName,
 				messageSource.getMessage(messagePropertyName, new String[] { getValue }, request.getLocale()));
 		result.addError(error);
+	}
+	
+	// 커스텀 된 로그인 에러 메세지
+	private String getErrorMessage(Exception exception) {
+		String error = "";
+		if (exception instanceof LockedException) {
+			error = "현재 계정이 잠겼습니다.";
+		} else if (exception instanceof DisabledException) {
+			error = "현재 계정이 이용 불가능합니다.";
+//		} else if (exception instanceof RecapException) {
+//			error = "현재 계정이 이용 불가능합니다.";
+		} else {
+			error = "계정과 비밀번호를 올바르게 입력해주세요,.";
+		}
+		return error;
 	}
 }

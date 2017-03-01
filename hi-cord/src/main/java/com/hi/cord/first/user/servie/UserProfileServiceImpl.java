@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hi.cord.first.user.entity.UserProfile;
-import com.hi.cord.first.user.repository.UserProfileDao;
+import com.hi.cord.first.user.repository.UserProfileRepository;
 
 @Service("userProfileService")
 public class UserProfileServiceImpl implements UserProfileService {
 	static final Logger log = LoggerFactory.getLogger(UserProfileServiceImpl.class);
 	
 	@Autowired
-	UserProfileDao dao;
+	UserProfileRepository dao;
 
 	@Override
 	public UserProfile findById(int id) {

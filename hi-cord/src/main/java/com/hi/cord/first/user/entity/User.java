@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,16 +22,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hi.cord.common.model.State;
+import com.hi.cord.common.model.CommonState;
 import com.hi.cord.first.club.entity.SportsClub;
 import com.hi.cord.first.price.entity.PriceRecord;
-import com.hi.cord.first.stadium.model.Stadium;
 
 import lombok.Data;
 
@@ -48,21 +49,28 @@ public class User implements Serializable {
 	@Column(name = "USER_ID")
 	private Long userId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "stadiumWithUser")
-	private List<Stadium> userWithStardium;
-
 	// User, What did you paid money for service. or How many
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "paidByUser")
-	private List<PriceRecord> userPaidFor;
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "priceRecorPaidByUser")
+	private List<PriceRecord> userPaidForPrice;
+	
+	//Club I found	
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@Fetch(FetchMode.SELECT)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "sportsClubMaster")
+	private SportsClub userOfSportClub;
 	
 	//Club I joined
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(foreignKey=@ForeignKey(name="USER_SPORTS_CLUB_FK"), name="UESR_IN_SPORTS_CLUB", referencedColumnName="SPORTS_CLUB_ID", nullable = false)
+	@JoinColumn(foreignKey=@ForeignKey(name="USER_SPORTS_CLUB_FK"), name="UESR_IN_SPORTS_CLUB_ID", referencedColumnName="SPORTS_CLUB_ID")
 	private SportsClub userInSportsClub;
 	
-	//Club I found	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sportsClubMasterr")
-	private SportsClub userOfSportClub;
+	// User, How many have Privileges.
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "TB_USER_PROFILE_REFER", foreignKey = @ForeignKey(name = "USER_REFER_FK"), joinColumns = {
+			@JoinColumn(name = "USER_ID", columnDefinition = "BIGINT(20)") }, inverseForeignKey = @ForeignKey(name = "USER_PROFILE_REFER_FK"), inverseJoinColumns = {
+					@JoinColumn(name = "USER_PROFILE_ID") })
+	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 	// User UK Email
 	@Pattern(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message = "Invalid Email")
@@ -138,7 +146,7 @@ public class User implements Serializable {
 
 	// User, about Account state
 	@Column(name = "USER_STATE", length = 20, nullable = false)
-	private String userState = State.ACTIVE.getState();
+	private String userState = CommonState.ACTIVE.getState();
 
 	// User, Boolean account is NON_EXPIRED or not.
 	@Column(name = "USER_ACCOUNT_NON_EXPIRED", length = 1, nullable = true)
@@ -159,11 +167,11 @@ public class User implements Serializable {
 	// User, Boolean account is NON_LOCKED or not.
 	@Column(name = "USER_SERVICE_AGREE", length = 1, nullable = true)
 	private Integer userServiceAgree=0;
-
-	// User, How many have Privileges.
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "TB_USER_PROFILE_REFER", foreignKey = @ForeignKey(name = "USER_REFER_FK"), joinColumns = {
-			@JoinColumn(name = "USER_ID", columnDefinition = "BIGINT(20)") }, inverseForeignKey = @ForeignKey(name = "USER_PROFILE_REFER_FK"), inverseJoinColumns = {
-					@JoinColumn(name = "USER_PROFILE_ID") })
-	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+	
+	@Column(name = "USER_LOCKED_AUTH", length = 100, nullable = true)
+	private String userLockedAuth;
+	
+	//Type==1이면 Password를 바꾼다.
+	@Transient
+	private Integer type;
 }

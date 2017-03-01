@@ -3,6 +3,7 @@ package com.hi.cord.first.club.repository;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -21,6 +22,15 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 		persist(sportsClub);
 	}
 	
+	@Override
+	public SportsClub findById(Long id) {
+		SportsClub sportsClub = getByKeyByLong(id);
+		if (sportsClub != null) {
+			Hibernate.initialize(sportsClub.getSportsClubWithUser());
+		}
+		return sportsClub;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SportsClub> findAll(SportsClub sportsClub) {
@@ -32,12 +42,6 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 		return SportsClubs;
 	}
 	
-	@Override
-	public SportsClub findById(Long id) {
-		SportsClub sportsClub = getByKeyByLong(id);
-		return sportsClub;
-	}
-
 	@Override
 	public boolean delete(Long id) {
 		return delete(id);

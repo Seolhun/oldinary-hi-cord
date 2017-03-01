@@ -5,7 +5,7 @@ import java.util.List;
 import com.hi.cord.common.model.Paging;
 import com.hi.cord.first.user.entity.User;
 
-public interface UserDao {
+public interface UserRepository {
 
 	User findById(Long id);
 	

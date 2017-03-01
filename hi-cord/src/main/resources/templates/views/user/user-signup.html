@@ -3,7 +3,7 @@
 	<div layout:fragment="content">
 		<link rel="stylesheet" href="/css/page/user/user.css"/>
 		<div class="container">
-			<form th:object="${user}" th:action="@{/signup}" id="saveUserFrm" method="POST">
+			<form th:object="${user}" th:action="@{/user/signup}" id="saveUserFrm" method="POST">
 				<div th:replace="/views/user/user-agree"></div>
 				<div class="row">
 			    	<div class="col-sm-12 margin-bottom-10">
@@ -103,6 +103,11 @@
 	   						</span>
 		    			</div>
 					</div>
+					
+					<div class="col-sm-12 margin-bottom-20">
+						<div class="erros-red" th:if="${errorMsg!=null}" th:text="${errorMsg}"></div>
+					</div>
+					
 				    <div class="col-sm-12 margin-bottom-10">
 			    		<input type="button" class="btn btn-success" name="saveUser" value="Save">
 			    	</div>

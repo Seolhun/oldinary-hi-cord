@@ -1,6 +1,6 @@
 package com.hi.cord.common.model;
 
-public enum State {
+public enum CommonState {
 
 	ACTIVE("active"),
 	EXPIRED("expired"),
@@ -9,7 +9,7 @@ public enum State {
 	
 	private String state;
 	
-	private State(final String state){
+	private CommonState(final String state){
 		this.state = state;
 	}
 	

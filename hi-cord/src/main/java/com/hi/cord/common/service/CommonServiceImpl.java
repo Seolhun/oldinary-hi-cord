@@ -1,13 +1,20 @@
 package com.hi.cord.common.service;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -22,8 +29,10 @@ import com.hi.cord.common.model.Paging;
 
 @Service
 public class CommonServiceImpl implements CommonService {
-	
 	static final Logger log = LoggerFactory.getLogger(CommonServiceImpl.class);
+	
+	@Autowired
+	JavaMailSender mailSender;
 
 	@Override
 	public int checkVDInt(String parameter, int default_value) {
@@ -144,23 +153,6 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public boolean getLoginAuthValidation(Authentication auth, String authNameYouWant) {
-		boolean valid=false;
-		try {
-			for (GrantedAuthority authority: auth.getAuthorities()) {
-				String authName=authority.getAuthority();
-				if(authName.equals(authNameYouWant)){
-					valid=true;
-				}
-			}	
-		} catch (NullPointerException e) {
-			log.error("ERROR NullPointException - getLoginAuthValidation = "+valid);
-		}
-		log.info("TEST : getLoginAuthValidation = "+valid);
-		return valid;
-	}
-
-	@Override
 	public String buildSHA256(String str) {
 		try {
 			MessageDigest sh = MessageDigest.getInstance("SHA-256");
@@ -176,5 +168,77 @@ public class CommonServiceImpl implements CommonService {
 			str = null;
 		}
 		return str;
+	}
+	
+	@Override
+	public boolean getLoginAuthValidation(Authentication auth, String authNameYouWant) {
+		boolean valid=false;
+		try {
+			for (GrantedAuthority authority: auth.getAuthorities()) {
+				String authName=authority.getAuthority();
+				if(authName.equals(authNameYouWant)){
+					valid=true;
+				}
+			}	
+		} catch (NullPointerException e) {
+			log.error("ERROR NullPointException - getLoginAuthValidation = "+valid);
+		}
+		log.info("TEST : getLoginAuthValidation = "+valid);
+		return valid;
+	}
+	
+	@Override
+	public void sendEmailLockingUser(String toEmail, String userName, String authentication, String httpPath, String password) throws IOException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.KOREA);
+		Date date = new Date();
+		String currentTime = formatter.format(date);
+		String from = "imedisyndev@gmail.com";
+		String mailSubject = "안녕하세요. (주)Hi-Cord입니다. "+userName+"의 계정이 5회 로그인 실패로 잠금설정 되었습니다.";
+		String mailContent = 
+				userName+"님 안녕하세요."+" (주)Hi-Cord입니다."
+				+ "<br>회원님의 아이디에 누군가가 "+currentTime+"에 로그인 시도를 하여, 5회 이상 실패로 계정이 잠금처리 되었습니다."
+				+ "<br>먼저, 비밀번호를 바꾸시길 요청드립니다. 밑의 비밀번호 변경 버튼을 눌러 1회용 Password를 입력하여 비밀번호 변경해주시기 바랍니다."
+				+ "<h4>Password : "+password+"</h4>"
+				+ "<br><a href="+httpPath+"?key="+authentication+"><button>비밀번호 변경</button></a>"
+				+ "<br>추가로 로그인 시도된 정보를 제공해드리오니, 확인하시고 궁금하신 것이 있으시면 문의부탁드립니다.";
+		mainSendMail(toEmail, from, mailSubject, mailContent);
+	}
+	
+	public void mainSendMail(String toEmail, String from, String mailSubject, String mailContent) {
+		new Thread(){
+			public void run(){
+				String emailregex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+				if (toEmail.matches(emailregex)) {
+					try {
+						MimeMessage message = mailSender.createMimeMessage();
+						// true로서 멀티파트 메세지라는 의미
+						MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+						messageHelper.setFrom(from);
+						messageHelper.setTo(toEmail);
+						messageHelper.setSubject(mailSubject);
+						messageHelper.setText(
+							"<html>"
+								+ "<body>"
+									+ "<div style='text-align : left; font-color:black; font-size : 14px;'>"
+										+ mailContent
+									+ "</div>"
+								+ "</body>"
+							+ "</html>", true);
+						// 파일첨부하기 하지만, Url위치가 틀려서 파일을 찾을 수 없다고 에러가 발생...수정 요망
+						// FileSystemResource fileImage=new
+						// FileSystemResource("/resources/img/google.png");
+						// messageHelper.addAttachment("Google Png", fileImage);
+		
+						// 로고 넣기
+						// ClassPathResource image=new
+						// ClassPathResource("/resources/img/google.png");
+						// messageHelper.addInline("Google_Logo", image);
+						mailSender.send(message);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}.start();
 	}
 }

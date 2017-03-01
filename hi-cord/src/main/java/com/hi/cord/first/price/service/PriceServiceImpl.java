@@ -6,32 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hi.cord.common.model.Paging;
 import com.hi.cord.first.price.entity.Price;
-import com.hi.cord.first.price.repository.PriceDao;
+import com.hi.cord.first.price.repository.PriceRepository;
 
 @Service("priceService")
 @Transactional
 public class PriceServiceImpl implements PriceService {
 
 	@Autowired
-	private PriceDao pDao;
+	private PriceRepository priceRepository;
 
 	@Override
 	public Price findById(Long id) {
-		Price price = pDao.findById(id);
+		Price price = priceRepository.findById(id);
 		return price;
 	}
 
 	@Override
 	public void savePrice(Price price) {
-		pDao.save(price);
+		priceRepository.insert(price);
 	}
 
 	@Override
 	public void updatePrice(Price price) {
-		Price dbPrice = pDao.findById(price.getPriceId());
-		if (price.getPriceDelCheck().equals("N")) {
+		Price dbPrice = priceRepository.findById(price.getPriceId());
+		if (price.getPriceDelCheck().equals("0")) {
 			dbPrice.setPriceDelCheck(price.getPriceDelCheck());
 			dbPrice.setPriceId(dbPrice.getPriceId());
 		} else {
@@ -42,19 +41,12 @@ public class PriceServiceImpl implements PriceService {
 
 	@Override
 	public void deletePriceById(Long id) {
-		pDao.deleteById(id);
+		priceRepository.deleteById(id);
 	}
 
 	@Override
-	public List<Price> findAllPrices(Paging paging) {
-		List<Price> prices = pDao.findAllPrices(paging);
+	public List<Price> findAllPrices(Price price) {
+		List<Price> prices = priceRepository.findAllPrices(price);
 		return prices;
 	}
-
-	@Override
-	public int getCount(Paging paging) {
-		int count = pDao.getCount(paging);
-		return count;
-	}
-
 }

@@ -3234,3 +3234,9 @@ div#addBindingGroupModal {
 .grid-border {
 	border: solid 1px black;
 }
+
+.erros-red {
+	font-size: 14px;
+	font-weight: 400;
+	color: red;
+}

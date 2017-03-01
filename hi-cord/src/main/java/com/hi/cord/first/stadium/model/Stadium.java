@@ -7,13 +7,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,8 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.hi.cord.common.model.State;
-import com.hi.cord.first.user.entity.User;
+import com.hi.cord.common.model.CommonState;
 
 import lombok.Data;
 
@@ -40,10 +36,6 @@ public class Stadium implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "STADIUM_ID")
 	private Long stadiumId;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(foreignKey = @ForeignKey(name = "STADIUM_USER_FK"), name = "STADIUM_WITH_USER_ID", referencedColumnName = "USER_ID", nullable = false)
-	private User stadiumWithUser;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="stadiumTracksWithStardium")
 	private List<StadiumAvailableTracks> stadiumWithStardiumTracks;
@@ -131,5 +123,5 @@ public class Stadium implements Serializable {
 
 	// stadium, about Account state
 	@Column(name = "STADIUM_STATE", nullable = false, length = 20)
-	private String stadiumState = State.ACTIVE.getState();
+	private String stadiumState = CommonState.ACTIVE.getState();
 }
