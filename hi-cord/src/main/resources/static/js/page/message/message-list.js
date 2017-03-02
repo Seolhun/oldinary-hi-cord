@@ -14,7 +14,7 @@ function connect() {
 //	var url='http://'+ window.location.host + '/message';
 	/* Stomp Client Created */;
 	
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/message');
 	/* Stomp Client Created */;
 	stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {

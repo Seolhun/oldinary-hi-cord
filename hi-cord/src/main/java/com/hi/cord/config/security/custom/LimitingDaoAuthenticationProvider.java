@@ -64,25 +64,34 @@ public class LimitingDaoAuthenticationProvider extends DaoAuthenticationProvider
 		catch (DisabledException e) {
 			throw e;
 		}
+		catch (NullPointerException e) {
+			throw e;
+		}
 	}
 
 	// attemp 테이블에 몇번 시도했는지를 넣고, 5회 이상이 되면 state를 locked으로 변경하면 된다.
-	private void insertFailAttempts(String username) {
+	private void insertFailAttempts(String username) throws BadCredentialsException{
 		log.info("param - username : {} "+username.toString());
 		
 		// 로그인하는 아이디 값으로 유저정보를 담아온다.
 		User dbUser = userService.findByEmail(username);
 		
 		// 유저가 로그인 시도를 실패한 정보가 있는지를 조회한다.
-		UserAttempts userDBAttempts = userAttemptsService.findByEmail(dbUser.getUserEmail());
-		String ip = commonService.getUserIP();
-
+		UserAttempts userDBAttempts=new UserAttempts();
+		String loginIp="";
+		try {
+			userDBAttempts = userAttemptsService.findByEmail(dbUser.getUserEmail());
+			loginIp = commonService.getUserIP();
+		} catch (NullPointerException e) {
+			throw new BadCredentialsException("error");
+		}
+		
 		//유저 로그인 시도를 실패한 정보가 있다면, 최고값을 찾아서 +1를 인서트해준다.
 		if (userDBAttempts != null) {
 			Integer maxUserAttempts = userDBAttempts.getUserAttemptsCounts();
 			// 5 이하일 경우
 			if (maxUserAttempts < 5) {
-				UserAttempts userAttempts = new UserAttempts(dbUser.getUserEmail(), maxUserAttempts + 1, ip, 1);
+				UserAttempts userAttempts = new UserAttempts(dbUser.getUserEmail(), maxUserAttempts + 1, loginIp, 1);
 				userAttemptsService.insert(userAttempts);
 			} else {
 				// 5 이상일 경우 계정을 Locked으로 바꾸기.
@@ -103,7 +112,7 @@ public class LimitingDaoAuthenticationProvider extends DaoAuthenticationProvider
 		} 
 		//유저 로그인 시도를 실패한 정보가 없다면, 로그인 정보를 인서트한다.
 		else {
-			UserAttempts UserAttempts = new UserAttempts(dbUser.getUserEmail(), 1, ip, 1);
+			UserAttempts UserAttempts = new UserAttempts(dbUser.getUserEmail(), 1, loginIp, 1);
 			userAttemptsService.insert(UserAttempts);
 		}
 	}
