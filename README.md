@@ -12,7 +12,7 @@
 
 ## 1. 프로젝트 목표.
 - 스프링의 최신버전인 부트에 대해서 이해하는 것
-- XML이 아닌 Java Config를 통한  
+- XML이 아닌 Java Config로 설정하기. 장단점 이해하기.
 - SQL 맵핑 프레임워크인 `MyBatis를 배제`하고 자바 표준  퍼시스턴스 기술인 `JPA를 적용`하여 효율적으로 객체지향 프로그래밍을 접목한다. 
 - Spring Security를 Java Config와 JPA(Hibernate) 에서 적용시키기.
 - Jsoup을 통한 웹 크롤링 맛보기 
