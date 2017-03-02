@@ -4,8 +4,10 @@ import java.security.Principal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +25,26 @@ public class MessageController {
 	public String textChat() {
 		return "/views/message/message-list";
 	}
+	
+	//채팅전용
+	@MessageMapping("/send")
+	@SendTo("/queue/message")
+	public Result sendChat(Result result, Principal principal) throws Exception {
+		logger.info("param sendChat : {}", result.getMessage()+ " : " + result.getToUser());
+		return result;
+	}
 
 	@RequestMapping("/gift")
 	public String sendGift(Principal principal, ModelMap model) {
 		model.addAttribute("principal", principal.getName());
 		return "message/gift";
+	}
+	
+	@MessageMapping("/gift/{toUser}")
+	@SendToUser(broadcast=true)
+	public void sendGift(Result result, Principal principal, @DestinationVariable String toUser) throws Exception {
+		logger.info("param sendGift : {}", result.getMessage()+ " : " + result.getToUser());
+//		messaging.convertAndSendToUser(toUser, "/topic/message", result);
 	}
 	
 	@RequestMapping("/post")
@@ -42,22 +59,8 @@ public class MessageController {
 		return "message/subscribe";
 	}
 	
-	@MessageMapping("/send")
-	@SendTo("/queue/message")
-	public Result sendChat(Result result, Principal principal) throws Exception {
-		logger.info("TEST sendChat : " + result.getMessage()+ " : " + result.getToUser());
-		
-		return result;
-	}
 //
-//	@MessageMapping("/gift/{toUser}")
-//	@SendToUser(broadcast=true)
-//	public void sendGift(Message message, Principal principal, @DestinationVariable String toUser) throws Exception {
-//		logger.info("TEST sendGift : Message : " + message.getText() + " : toUser : "+toUser);
-//		Result result = new Result(message.getText(), principal.getName(), toUser);
-//		mDao.saveMessage(result);
-//		messaging.convertAndSendToUser(toUser, "/topic/message", result);
-//	}
+
 //
 //	@MessageExceptionHandler
 //	@SendToUser("/topic/errors")

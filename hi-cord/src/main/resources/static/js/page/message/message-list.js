@@ -6,7 +6,7 @@ function setConnected(connected) {
     document.getElementById('connect').disabled = connected;
     document.getElementById('disconnect').disabled = !connected;
     document.getElementById('chatDiv').style.visibility = connected ? 'visible' : 'hidden';
-    document.getElementById('chatRes').innerHTML = '';
+    $("#chatRes").html('');
 }
 
 function connect() {
@@ -35,11 +35,11 @@ function disconnect() {
 
 /* 설정부분에서의 application-destination-prefix 부분 */
 function sendText() {
-	var text = document.getElementById('text').value;
+	var message = $("#message").val();
     //Message Broker + MessageMapping -> SendTo (subscribe);
-    stompClient.send("/app/send", {}, JSON.stringify({ 'text': text }));
-    document.getElementById('text').value = '';
-    document.getElementById('text').focus();
+    stompClient.send("/hi-cord/send", {}, JSON.stringify({ 'message': message }));
+    $("#message").val('');
+    $("#message").focus();
 }
 
 function showResult(message) {
