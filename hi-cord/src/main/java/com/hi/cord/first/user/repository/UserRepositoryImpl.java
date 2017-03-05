@@ -17,8 +17,8 @@ import com.hi.cord.first.user.entity.User;
 public class UserRepositoryImpl extends AbstractRepository<Integer, User> implements UserRepository {
 	static final Logger log = LoggerFactory.getLogger(UserRepositoryImpl.class);
 
-	public User findById(Long id) {
-		log.info("param : findById : {}", id);
+	public User selectById(Long id) {
+		log.info("param : selectById : {}", id);
 		User user = getByKeyByLong(id);
 		if (user != null) {
 			Hibernate.initialize(user.getUserProfiles());
@@ -27,8 +27,8 @@ public class UserRepositoryImpl extends AbstractRepository<Integer, User> implem
 		return user;
 	}
 
-	public User findByEmail(String email) {
-		log.info("param : findByEmail : {}", email);
+	public User selectByEmail(String email) {
+		log.info("param : selectByEmail : {}", email);
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("userEmail", email));
 		User user = (User) crit.uniqueResult();
@@ -39,8 +39,8 @@ public class UserRepositoryImpl extends AbstractRepository<Integer, User> implem
 		return user;
 	}
 
-	public User findByPhone(String phone) {
-		log.info("param : findByPhone : {}", phone);
+	public User selectByPhone(String phone) {
+		log.info("param : selectByPhone : {}", phone);
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("userPhone", phone));
 		User user = (User) crit.uniqueResult();

@@ -42,7 +42,7 @@ public class LimitingDaoAuthenticationProvider extends DaoAuthenticationProvider
 			Authentication auth = super.authenticate(authentication);
 			
 			//로그인 시도한 유저정보를 찾기.
-			User user = userService.findByEmail(authentication.getName());
+			User user = userService.selectByEmail(authentication.getName());
 			String ip = commonService.getUserIP();
 			log.info("param : "+user.toString());
 			
@@ -74,13 +74,13 @@ public class LimitingDaoAuthenticationProvider extends DaoAuthenticationProvider
 		log.info("param - username : {} "+username.toString());
 		
 		// 로그인하는 아이디 값으로 유저정보를 담아온다.
-		User dbUser = userService.findByEmail(username);
+		User dbUser = userService.selectByEmail(username);
 		
 		// 유저가 로그인 시도를 실패한 정보가 있는지를 조회한다.
 		UserAttempts userDBAttempts=new UserAttempts();
 		String loginIp="";
 		try {
-			userDBAttempts = userAttemptsService.findByEmail(dbUser.getUserEmail());
+			userDBAttempts = userAttemptsService.selectByEmail(dbUser.getUserEmail());
 			loginIp = commonService.getUserIP();
 		} catch (NullPointerException e) {
 			throw new BadCredentialsException("error");

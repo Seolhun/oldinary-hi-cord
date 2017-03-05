@@ -8,11 +8,11 @@ public interface UserAttemptsRepository {
 	
 	void insert(UserAttempts userAttempts);
 	
-	UserAttempts findById(Long id);
+	UserAttempts selectById(Long id);
 	
-	UserAttempts findByEmail(String email);
+	UserAttempts selectByEmail(String email);
 	
-	List<UserAttempts> findAll(UserAttempts userAttempts);
+	List<UserAttempts> selectList(UserAttempts userAttempts);
 	
 	boolean delete(Long id);
 }

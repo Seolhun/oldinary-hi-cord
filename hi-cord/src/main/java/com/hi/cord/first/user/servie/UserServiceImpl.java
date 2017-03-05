@@ -25,27 +25,27 @@ public class UserServiceImpl implements UserService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public User findById(Long usreId) {
-		log.info("param : findById : {} ", usreId.toString());
-		return dao.findById(usreId);
+	public User selectById(Long usreId) {
+		log.info("param : selectById : {} ", usreId.toString());
+		return dao.selectById(usreId);
 	}
 	
 	@Override
-	public User findByEmail(String userEmail) {
-		log.info("param : findByEmail : {} ", userEmail.toString());
-		User user = dao.findByEmail(userEmail);
+	public User selectByEmail(String userEmail) {
+		log.info("param : selectByEmail : {} ", userEmail.toString());
+		User user = dao.selectByEmail(userEmail);
 		return user;
 	}
 	
 	@Override
-	public User findByPhone(String userPhone) {
-		log.info("param : findByPhone : {} ", userPhone.toString());
-		User user = dao.findByPhone(userPhone);
+	public User selectByPhone(String userPhone) {
+		log.info("param : selectByPhone : {} ", userPhone.toString());
+		User user = dao.selectByPhone(userPhone);
 		return user;
 	}
 	
 	@Override
-	public void save(User user) {
+	public void insert(User user) {
 		log.info("param : save : {} ", user.toString());
 		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
 		user.setUserState(CommonState.ACTIVE.getState());
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void update(User user) {
 		log.info("param : update : {} ", user.toString());
-		User entity = dao.findByEmail(user.getUserEmail());
+		User entity = dao.selectByEmail(user.getUserEmail());
 		if (entity != null) {
 			if(user.getUserPassword()!=null && user.getType()==1) {
 				entity.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void deleteUserByEmail(String userEmail) {
+	public void deleteByEmail(String userEmail) {
 		log.info("param : deleteUserByEmail : {} ", userEmail.toString());
 		dao.deleteByEmail( userEmail);
 	}
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 	//=> Or 일때 하나만이라도 true이면 true이다., And 일때 하나만이라도 false이면 false이다.
 	public boolean isUserEmailUnique(User user) {
 		log.info("param : isUserEmailUnique : {} ", user.toString());
-		User dbUser = findByEmail(user.getUserEmail());
+		User dbUser = selectByEmail(user.getUserEmail());
 		return (dbUser == null || ((dbUser.getUserEmail() == null && dbUser.getUserEmail() != user.getUserEmail())));
 	}
 	
@@ -90,12 +90,12 @@ public class UserServiceImpl implements UserService {
 	//=> Or 일때 하나만이라도 true이면 true이다., And 일때 하나만이라도 false이면 false이다.
 	public boolean isUserPhoneUnique(User user) {
 		log.info("param : isUserPhoneUnique : {} ", user.toString());
-		User dbUser = findByPhone(user.getUserPhone());
+		User dbUser = selectByPhone(user.getUserPhone());
 		return (dbUser == null || ((dbUser.getUserPhone() == null && dbUser.getUserPhone() != user.getUserPhone())));
 	}
 	
 	@Override
-	public List<User> findAllUsers(User user) {
+	public List<User> selectList(User user) {
 		log.info("param : findAllUsers : {} ", user.toString());
 		return dao.findAllUsers(user);
 	}

@@ -2,7 +2,11 @@ package com.hi.cord.common.service;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.BindingResult;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +27,8 @@ public interface CommonService {
 	
 	//JsonData를 VO에 매핑하기.
 	ObjectMapper setJSONMapper() throws JsonProcessingException;
-
+	
+	//VO에 있는 값들 JSON으로 변환하기,
 	String getJSONData(Object rawData) throws JsonProcessingException;
 	
 	//User IP를 가져오기.	
@@ -35,5 +40,9 @@ public interface CommonService {
 	//get Validation about logiun User 	
 	boolean getLoginAuthValidation(Authentication auth, String authNameYouWant);
 	
+	//Post Email Locked user.
 	void sendEmailLockingUser(String toEmail, String userName, String authentication, String httpPath, String password) throws IOException;
+	
+	//@Valid로 검사시 중복값 리다이렉트해주기.
+	void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String getValue, String objectName, String fieldName, String messagePropertyName);
 }

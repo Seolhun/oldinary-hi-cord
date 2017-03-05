@@ -23,12 +23,12 @@ public class UserAttemptsRepositoryImpl extends AbstractRepository<Integer, User
 	}
 	
 	@Override
-	public UserAttempts findById(Long id) {
+	public UserAttempts selectById(Long id) {
 		return getByKeyByLong(id);
 	}
 	
 	@Override
-	public UserAttempts findByEmail(String email) {
+	public UserAttempts selectByEmail(String email) {
 		log.info("Parameter : {}", email);
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("userAttemptsEmail", email))
@@ -40,7 +40,7 @@ public class UserAttemptsRepositoryImpl extends AbstractRepository<Integer, User
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserAttempts> findAll(UserAttempts userAttempts) {
+	public List<UserAttempts> selectList(UserAttempts userAttempts) {
 		log.info("param : "+userAttempts.toString());
 		Criteria criteria = createEntityCriteria().addOrder(Order.desc("userAttemptsId")).add(Restrictions.eq("userAttemptsDelCheck", 0)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<UserAttempts> attempts = criteria.list();

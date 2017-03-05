@@ -58,7 +58,7 @@ public class BoardController {
 	/**
 	 * Board Data Insert
 	 * 
-	 * @param Board
+	 * @param CommonAddress
 	 *            board
 	 * @return List<Board>
 	 * @throws Exception
@@ -74,7 +74,7 @@ public class BoardController {
 	/**
 	 * 게시판 상세보기 출력.
 	 * 
-	 * @param Board
+	 * @param CommonAddress
 	 *            board
 	 * @return List<Board>
 	 * @throws Exception
@@ -107,7 +107,7 @@ public class BoardController {
 		return "views/board/detail";
 	}
 
-	@RequestMapping(value = "/{tableName}/edit/{path}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{tableName}/modify/{path}", method = RequestMethod.GET)
 	public String boardEditGet(Model model, @PathVariable("path") Long path,
 			@PathVariable("tableName") String tableName) {
 		model.addAttribute("board", new Board());
@@ -115,18 +115,17 @@ public class BoardController {
 		return "views/board/add";
 	}
 
-	@RequestMapping(value = "/{tableName}/edit/{path}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{tableName}/modify/{path}", method = RequestMethod.POST)
 	public String boardEditPost(Model model, Board board, @PathVariable("path") Long path,
 			@PathVariable("tableName") String tableName, final RedirectAttributes redirectAttributes) {
 		board.setBoardId(path);
 		if (boardService.update(board) != null) {
-			redirectAttributes.addFlashAttribute("editBoard", "success");
+			redirectAttributes.addFlashAttribute("modifyBoard", "success");
 
 			Board temp = boardService.findById(path);
 			model.addAttribute("item", temp);
-
 		} else {
-			redirectAttributes.addFlashAttribute("editBoard", "unsuccess");
+			redirectAttributes.addFlashAttribute("modifyBoard", "unsuccess");
 
 			return "redirect:/talk/" + tableName + "/reply/" + path;
 		}

@@ -7,9 +7,13 @@ import com.hi.cord.first.club.entity.SportsClub;
 public interface SportsClubRepository {
 	void insert(SportsClub sportsClub);
 	
-	SportsClub findById(Long id);
+	SportsClub selectById(Long id);
 	
-	List<SportsClub> findAll(SportsClub sportsClub);
+	SportsClub selectByName(String name);
+	
+	SportsClub selectByTel(String tel);
+	
+	List<SportsClub> selectList(SportsClub sportsClub);
 	
 	boolean delete(Long id);
 }

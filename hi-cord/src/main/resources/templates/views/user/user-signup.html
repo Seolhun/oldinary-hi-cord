@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
-	<div layout:fragment="content">
+	<head>
+		<title th:text="#{TEXT-SIGNUP}"></title>
 		<link rel="stylesheet" href="/css/page/user/user.css"/>
+	</head>
+	<div layout:fragment="content">
 		<div class="container">
 			<form th:object="${user}" th:action="@{/user/signup}" id="saveUserFrm" method="POST">
+				<div class="row">
+					<div class="col-sm-12 margin-bottom-10">
+						<h1 th:text="#{TEXT-SIGNUP}"></h1>
+					</div>
+				</div>
 				<div th:replace="/views/user/user-agree"></div>
 				<div class="row">
 			    	<div class="col-sm-12 margin-bottom-10">
 			    		<div>
-			    			<b class="margin-right-20" th:text="#{TEXT.EMAIL}"></b>
-							<input class="for-center-input form-control" type="email" id="userEmail" name="userEmail" placeholder="Email." th:value="${user.userEmail}"/>
-							<button class="btn btn-info" id="emailDupl" type="button" th:text="#{TEXT.DUPL}" disabled="disabled"></button>
+			    			<b class="margin-right-20" th:text="#{TEXT-EMAIL}"></b>
+							<input class="for-center-input form-control" type="email" id="userEmail" name="userEmail" placeholder="Email."/>
+							<button class="btn btn-info" id="emailDupl" type="button" th:text="#{TEXT-DUPL}" disabled="disabled"></button>
 						</div>
 						<div class="error" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></div>
 						<div class="error" id="emailMsg"></div>
@@ -18,9 +26,9 @@
 			    	
 			    	<div class="col-sm-12 margin-bottom-10">
 			    		<div>
-			    			<b class="margin-right-20" th:text="#{TEXT.PHONE}"></b>
+			    			<b class="margin-right-20" th:text="#{TEXT-PHONE}"></b>
 							<input class="for-center-input form-control" type="text" id="userPhone" name="userPhone" placeholder="Phone" th:value="${user.userPhone}"/>
-							<button class="btn btn-info" id="phoneDupl" type="button" disabled="disabled" th:text="#{TEXT.DUPL}"></button>
+							<button class="btn btn-info" id="phoneDupl" type="button" disabled="disabled" th:text="#{TEXT-DUPL}"></button>
 						</div>
 						<div class="error" th:if="${#fields.hasErrors('userPhone')}" th:errors="*{userPhone}"></div>
 						<div class="error" id="phoneMsg"></div>
@@ -28,7 +36,7 @@
 			    	
 			    	<div class="col-sm-12 margin-bottom-10">
 				    	<div>
-				    		<b th:text="#{TEXT.NAME}" class="margin-right-20"></b>
+				    		<b th:text="#{TEXT-NAME}" class="margin-right-20"></b>
 							<input type="text" name="userName" th:value="${user.userName}" class="for-center-input form-control" placeholder="Name."/>
 				    	</div>
 				    	<div class="error" id="nameMsg"></div>
@@ -36,7 +44,7 @@
 				    
 				    <div class="col-sm-12 margin-bottom-10">
 				    	<div>
-				    		<b th:text="#{TEXT.PASSWORD}" class="margin-right-20"></b>
+				    		<b th:text="#{TEXT-PASSWORD}" class="margin-right-20"></b>
 							<input type="password" name="userPassword" th:value="${user.userPassword}" class="for-center-input form-control" placeholder="Password."/>
 							<p class="erros-red" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}"></p>
 				    	</div>
@@ -46,7 +54,7 @@
 				    
 				    <div class="col-sm-12 margin-bottom-10">
 				    	<div>
-							<b class="margin-right-20" th:text="#{TEXT.NATIONCODE}"></b>
+							<b class="margin-right-20" th:text="#{TEXT-NATIONCODE}"></b>
 							<input class="for-center-input form-control" type="text" name="userNationCode" placeholder="NationCode" th:value="${user.userNationCode}"/>
 						</div>
 						<div class="error" th:if="${#fields.hasErrors('userNationCode')}" th:errors="*{userNationCode}"></div>
@@ -56,16 +64,16 @@
 				    <!-- Address && ZipCod -->
 			    	<div class="col-sm-12 margin-bottom-10">
 			    		<div class="margin-bottom-10">
-			    			<b class="margin-right-20" th:text="#{TEXT.ZIPCODE}"></b>
-							<input class="for-center-input form-control" type="text" id="userZipCode" name="userZipCode" placeholder="ZipCode" th:value="${user.userZipCode}"/>
-							<button class="btn btn-info" id="checkZipCode" type="button" onclick="sample4_execDaumPostcode()" th:text="#{TEXT.ZIPCODE}"></button>
+			    			<b class="margin-right-20" th:text="#{TEXT-ZIPCODE}"></b>
+							<input class="for-center-input form-control" type="text" id="userZipCode" name="userZipCode" th:value="${user.userZipCode}" placeholder="ZipCode" />
+							<button class="btn btn-info" id="checkZipCode" type="button" onclick="daumZipCode();" th:text="#{TEXT-ZIPCODE}"></button>
 						</div>
 						<div class="error" th:if="${#fields.hasErrors('userZipCode')}" th:errors="*{userZipCode}"></div>
 						<div class="error" id="zipCodeMsg"></div>
 						
 						<div class="col-sm-12 margin-bottom-10">	
 							<div class="margin-bottom-10">
-								<b class="margin-right-20" th:text="#{TEXT.ADDRESS}"></b>
+								<b class="margin-right-20" th:text="#{TEXT-ADDRESS}"></b>
 								<input class="for-center-input form-control" type="text" name="userAddress" id="userAddress" placeholder="New Address" th:value="${user.userAddress}"/>
 								<input class="for-center-input form-control" type="text" name="userAddress2" id="userAddress2" placeholder="Detail Address" th:value="${user.userAddress2}"/>
 							</div>
@@ -77,14 +85,14 @@
 				    <!-- Get message or Not -->
 					<div class="col-sm-12 margin-top-20 margin-bottom-20">
 						<p>
-							<b><span th:text="#{TEXT.AGREE}"></span></b>
+							<b><span th:text="#{TEXT-AGREE}"></span></b>
 						</p>
 						<div>
-							<span th:text="#{TEXT.IMPORTANT}"></span>
+							<span th:text="#{TEXT-IMPORTANT}"></span>
 						</div>
 			    		<div>
 	    					<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
-	    					<span th:text="#{TEXT.EMAIL}"></span>
+	    					<span th:text="#{TEXT-EMAIL}"></span>
 	    					<span th:if="${user.userReceiveEmail==1}">
 	    						<input type="checkbox" name="userReceiveEmail" value="1" checked="checked">
 	    					</span>
@@ -94,7 +102,7 @@
 	    					
 	    					
 	    					<span class="glyphicon glyphicon-ok-circle margin-right-5 margin-left-10"></span>
-	    					<span th:text="#{TEXT.PHONE}"></span>
+	    					<span th:text="#{TEXT-PHONE}"></span>
 	    					<span th:if="${user.userReceivePhone==1}">
 	    						<input type="checkbox" name="userReceivePhone" value="1" checked="checked">
 	    					</span>
@@ -115,6 +123,6 @@
 			</form>
 		</div>
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-		<script type="text/javascript" src="/js/page/user/user-signup.min.js"></script>
+		<script type="text/javascript" src="/js/page/user/user-signup.js"></script>
 	</div>
 </html>

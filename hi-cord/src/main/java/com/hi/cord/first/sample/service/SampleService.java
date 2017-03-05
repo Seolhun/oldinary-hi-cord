@@ -11,9 +11,9 @@ import com.hi.cord.first.stadium.model.Stadium;
 public interface SampleService {
 	public void insert(Stadium stadium);
 
-	public Stadium findById(Long id);
+	public Stadium selectById(Long id);
 	
-	public List<Stadium> findAll(Stadium stadium);
+	public List<Stadium> selectList(Stadium stadium);
 	
 	public Stadium update(Stadium stadium);
 

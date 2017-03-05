@@ -105,7 +105,7 @@ public class BoardRestController {
 	/**
 	 * 게시판 Json 리스트 출력.
 	 * 
-	 * @param Board
+	 * @param CommonAddress
 	 *            board
 	 * @return List<Board>
 	 * @throws Exception

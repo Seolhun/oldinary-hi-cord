@@ -6,11 +6,11 @@ import com.hi.cord.first.user.entity.User;
 
 public interface UserRepository {
 
-	User findById(Long id);
+	User selectById(Long id);
 	
-	User findByEmail(String email);
+	User selectByEmail(String email);
 	
-	User findByPhone(String phone);
+	User selectByPhone(String phone);
 	
 	void save(User user);
 	

@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -55,6 +58,7 @@ public class CommonServiceImpl implements CommonService {
 		}
 		return int_value;
 	}
+	
 
 	@Override
 	public String checkVDQuestion(String question) {
@@ -240,5 +244,11 @@ public class CommonServiceImpl implements CommonService {
 				}
 			}
 		}.start();
+	}
+
+	@Override
+	public void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String getValue, String objectName, String fieldName, String messagePropertyName) {
+		FieldError error = new FieldError(objectName, fieldName, messageSource.getMessage(messagePropertyName, new String[] { getValue }, request.getLocale()));
+		result.addError(error);
 	}
 }

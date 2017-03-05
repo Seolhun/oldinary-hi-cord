@@ -9,13 +9,21 @@ import com.hi.cord.first.club.entity.SportsClub;
 
 @Transactional(propagation=Propagation.REQUIRED, transactionManager="txManager", noRollbackFor={NullPointerException.class})
 public interface SportsClubService {
-	public void insert(SportsClub sportsClub);
+	void insert(SportsClub sportsClub);
 
-	public SportsClub findById(Long id);
+	SportsClub selectById(Long id);
 	
-	public List<SportsClub> findAll(SportsClub sportsClub);
+	SportsClub selectByName(String name);
+		
+	SportsClub selectByTel(String tel);
 	
-	public SportsClub update(SportsClub sportsClub);
+	List<SportsClub> selectList(SportsClub sportsClub);
+	
+	SportsClub update(SportsClub sportsClub);
 
-	public Boolean delete(Long id);
+	Boolean delete(Long id);
+	
+	boolean isSportsClubNameUnique(SportsClub sportsClub);
+	
+	boolean isSportsClubTelUnique(SportsClub sportsClub);
 }

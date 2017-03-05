@@ -10,13 +10,13 @@ import com.hi.cord.first.user.entity.User;
 @Transactional(propagation=Propagation.REQUIRED, transactionManager="txManager", noRollbackFor={NullPointerException.class})
 public interface UserService {
 
-	User findById(Long usreId);
+	User selectById(Long usreId);
 
-	User findByEmail(String userEmail);
+	User selectByEmail(String userEmail);
 	
-	User findByPhone(String userPhone);
+	User selectByPhone(String userPhone);
 
-	void save(User user);
+	void insert(User user);
 
 	void update(User user);
 	
@@ -24,7 +24,7 @@ public interface UserService {
 	
 	boolean isUserPhoneUnique(User user);
 	
-	void deleteUserByEmail(String userEmail);
+	void deleteByEmail(String userEmail);
 
-	List<User> findAllUsers(User uesr);
+	List<User> selectList(User uesr);
 }

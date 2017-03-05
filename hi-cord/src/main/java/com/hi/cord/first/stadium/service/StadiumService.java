@@ -10,11 +10,11 @@ import com.hi.cord.first.stadium.model.Stadium;
 
 @Transactional(propagation=Propagation.REQUIRED, transactionManager="txManager", noRollbackFor={NullPointerException.class})
 public interface StadiumService {
-	public void save(Stadium stadium);
+	public void insert(Stadium stadium);
 
-	public List<Stadium> findAll(Stadium stadium);
+	public List<Stadium> selectList(Stadium stadium);
 	
-	public Stadium findById(Long id);
+	public Stadium selectById(Long id);
 
 	public Stadium update(Stadium stadium);
 

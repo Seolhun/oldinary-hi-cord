@@ -105,6 +105,9 @@ public class User implements Serializable {
 
 	@Column(name = "USER_NATION_CODE", length = 10, nullable = false)
 	private String userNationCode;
+	
+//	@Embedded
+//	private CommonAddress commonAddress;
 
 	@Column(name = "USER_ACTIVE_POINT", length = 10, nullable = true)
 	private Integer userActivePoint=0;
@@ -139,6 +142,9 @@ public class User implements Serializable {
 	// User, Boolean account is deleted or not
 	@Column(name = "USER_DELCHECK", length = 1, nullable = true)
 	private Integer userDelCheck=0;
+	
+//	@Embedded
+//	private CommonByDate commonByDate;
 
 	// User, about Account state
 	@Column(name = "USER_STATE", length = 20, nullable = false)

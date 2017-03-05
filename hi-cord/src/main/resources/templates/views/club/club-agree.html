@@ -203,11 +203,11 @@
 		<div>
 			<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
 			<span th:text="#{TEXT-AGREE-USE}"></span>
-			<span th:if="${user.userServiceAgree==1}">
-				<input type="checkbox" class="signAgree" name="userServiceAgree" value="1" checked="checked"/>
+			<span th:if="${sportsClub.sportsClubServiceAgree==1}">
+				<input type="checkbox" class="signAgree" name="sportsClubServiceAgree" value="1" checked="checked"/>
 			</span>
-			<span th:if="${user.userServiceAgree!=1}">
-				<input type="checkbox" class="signAgree" name="userServiceAgree" value="1"/>
+			<span th:if="${sportsClub.sportsClubServiceAgree!=1}">
+				<input type="checkbox" class="signAgree" name="sportsClubServiceAgree" value="1"/>
 			</span>
 		</div>
 	</div>
@@ -235,11 +235,11 @@
 		<div>
 			<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
 			<span th:text="#{TEXT-AGREE-PRIVATE}"></span> 
-			<span th:if="${user.userServiceAgree==1}">
-				<input type="checkbox" class="signAgree" name="userPrivateAgree" value="1" checked="checked"/>
+			<span th:if="${sportsClub.sportsClubServiceAgree==1}">
+				<input type="checkbox" class="signAgree" name="sportsClubPrivateAgree" value="1" checked="checked"/>
 			</span>
-			<span th:if="${user.userServiceAgree!=1}">
-				<input type="checkbox" class="signAgree" name="userPrivateAgree" value="1"/>
+			<span th:if="${sportsClub.sportsClubServiceAgree!=1}">
+				<input type="checkbox" class="signAgree" name="sportsClubPrivateAgree" value="1"/>
 			</span>
 		</div>
 	</div>

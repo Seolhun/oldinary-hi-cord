@@ -23,7 +23,7 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 	}
 	
 	@Override
-	public SportsClub findById(Long id) {
+	public SportsClub selectById(Long id) {
 		SportsClub sportsClub = getByKeyByLong(id);
 		if (sportsClub != null) {
 			Hibernate.initialize(sportsClub.getSportsClubWithUser());
@@ -31,9 +31,33 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 		return sportsClub;
 	}
 	
+	@Override
+	public SportsClub selectByName(String name) {
+		log.info("param : selectByName : {}", name);
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("sportsClubName", name));
+		SportsClub sportsClub = (SportsClub)crit.uniqueResult();
+		if (sportsClub != null) {
+			Hibernate.initialize(sportsClub.getSportsClubOwner());
+		}
+		return sportsClub;
+	}
+	
+	@Override
+	public SportsClub selectByTel(String tel) {
+		log.info("param : selectByTel : {}", tel);
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("sportsClubTel", tel));
+		SportsClub sportsClub = (SportsClub)crit.uniqueResult();
+		if (sportsClub != null) {
+			Hibernate.initialize(sportsClub.getSportsClubOwner());
+		}
+		return sportsClub;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SportsClub> findAll(SportsClub sportsClub) {
+	public List<SportsClub> selectList(SportsClub sportsClub) {
 		log.info("TEST : findAll"+sportsClub.toString());
 		Criteria criteria = createEntityCriteria().addOrder(Order.desc("stadiumId")).add(Restrictions.eq("stadiumDelCheck", 0))
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);

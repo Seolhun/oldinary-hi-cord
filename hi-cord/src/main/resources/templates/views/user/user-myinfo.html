@@ -11,43 +11,43 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div>
-					<h1 th:text="#{TEXT.MYINFO}"></h1>
+					<h1 th:text="#{TEXT-MYINFO}"></h1>
 				</div>
 				<div th:object="${user}">
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.EMAIL}"></label>
+						<label th:text="#{TEXT-EMAIL}"></label>
 						<span th:text="*{userId}"></span>
 					</div>					
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.NAME}"></label>
+						<label th:text="#{TEXT-NAME}"></label>
 						<span th:text="*{userName}"></span>
 					</div>
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.PHONE}"></label>
+						<label th:text="#{TEXT-PHONE}"></label>
 						<span th:text="*{userPhone}"></span>
 					</div>
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.STATE}"></label>
+						<label th:text="#{TEXT-STATE}"></label>
 						<span th:text="*{userState}"></span>
 					</div>
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.PAID.POINT}"></label>
+						<label th:text="#{TEXT-PAID-POINT}"></label>
 						<span th:text="*{userPaidPoint}"></span>
 					</div>
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.ACTIVE.POINT}"></label>
+						<label th:text="#{TEXT-ACTIVE-POINT}"></label>
 						<span th:text="*{userActivePoint}"></span>
 					</div>
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.RECEIVE.EMAIL}"></label>
+						<label th:text="#{TEXT-RECEIVE-EMAIL}"></label>
 						<span th:text="*{userReceiveEmail}"></span>
 					</div>
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.RECEIVE.PHONE}"></label>
+						<label th:text="#{TEXT-RECEIVE-PHONE}"></label>
 						<span th:text="*{userReceivePhone}"></span>
 					</div>
 					<div class="col-sm-12">
-						<label th:text="#{TEXT.PROFILE}"></label>
+						<label th:text="#{TEXT-PROFILE}"></label>
 						<span th:each="userProfile : *{userProfiles}">
 	                		<span th:text="${userProfile.userProfileType}"></span>
 	            		</span>
@@ -67,7 +67,17 @@
 		
 			<div class="col-sm-6">
 				<div>
-					<h1 th:text="#{TEXT.MYCLUB}"></h1>
+					<h1 th:text="#{TEXT-MYCLUB}"></h1>
+					<div th:if="${ownerOfSportClub==null}">
+						<div class="margin-bottom-10" th:text="#{TEXT-MYCLUB-EMPTY}"></div>
+						<div>
+							<a th:href="@{/club/insert}"><button class="btn btn-primary">클럽 창설</button></a>
+							<button class="btn btn-info">클럽 탐색</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					
 				</div>
 			</div>
 		</div>

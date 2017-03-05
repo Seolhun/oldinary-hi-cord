@@ -6,14 +6,14 @@
 			<span sec:authorize="isAuthenticated()">
 				<b>User : </b><span class="margin-right-10" sec:authentication="name"></span>
 				<b>Roles : </b><span class="margin-right-10" sec:authentication="principal.authorities"></span>
-				<a th:href="@{/user/logout}" th:text="#{TEXT.LOGOUT}"></a>				
+				<a th:href="@{/user/logout}" th:text="#{TEXT-LOGOUT}"></a>				
 			</span>
 		</div>
 		
 		<div class="col-sm-4 text-center">
 			<span sec:authorize="isAuthenticated()">
-				<a class="margin-right-20" th:href="@{/user/myinfo/}" th:text="#{TEXT.MYINFO}"></a>
-				<a class="margin-right-20" th:href="@{/stadium/myclub}" th:text="#{TEXT.MYCLUB}"></a>
+				<a class="margin-right-20" th:href="@{/user/myinfo/}" th:text="#{TEXT-MYINFO}"></a>
+				<a class="margin-right-20" th:href="@{/stadium/myclub}" th:text="#{TEXT-MYCLUB}"></a>
 			</span>
 		</div>
 		
@@ -22,8 +22,8 @@
 				알림창 공간
 			</span>
 			<span sec:authorize="isAnonymous()">
-				<a class="margin-right-30" th:href="@{/user/login}" th:text="#{TEXT.LOGIN}">LOG IN</a>	
-				<a th:href="@{/user/signup}" th:text="#{TEXT.SIGNUP}">SIGN UP</a>
+				<a class="margin-right-30" th:href="@{/user/login}" th:text="#{TEXT-LOGIN}">LOG IN</a>	
+				<a th:href="@{/user/signup}" th:text="#{TEXT-SIGNUP}">SIGN UP</a>
 			</span>
 		</div>
 	</div>
@@ -45,9 +45,10 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a th:href="@{/board/notice}">Board</a></li>
-						<li><a th:href="@{/stadium/main}">Stadium</a></li>
-						<li><a th:href="@{/price}">Price</a></li>
+						<li><a th:href="@{/board/notice}" th:text="#{TEXT-BOARD}">ㅇㄴ</a></li>
+						<li><a th:href="@{/stadium/main}" th:text="#{TEXT-SD}">ㅇㅁ</a></li>
+						<li><a th:href="@{/stadium/main}" th:text="#{TEXT-SC}">ㅇㄴ</a></li>
+						<li><a th:href="@{/price}" th:text="#{TEXT-PRICE}">ㅇㅁ</a></li>
 						<li><a th:href="@{/message}">Message</a></li>
 			      	</ul>
 					<ul class="nav navbar-nav navbar-right">

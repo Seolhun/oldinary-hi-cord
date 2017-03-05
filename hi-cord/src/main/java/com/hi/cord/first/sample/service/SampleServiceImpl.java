@@ -25,23 +25,23 @@ public class SampleServiceImpl implements SampleService {
 		log.info("param : "+stadium.toString());
 		stadiumDao.save(stadium);
 	}
-
-	@Override
-	public List<Stadium> findAll(Stadium stadium) {
-		log.info("param : "+stadium.toString());
-		
-		List<Stadium> stadiumList = stadiumDao.findAll(stadium);
-		log.info("return : "+stadiumList.toString());
-		return stadiumList;
-	}
 	
 	@Override
-	public Stadium findById(Long id) {
+	public Stadium selectById(Long id) {
 		log.info("param : "+id.toString());
 		
 		Stadium stadium=stadiumDao.findById(id);
 		log.info("return : "+stadium.toString());
 		return stadium;
+	}
+
+	@Override
+	public List<Stadium> selectList(Stadium stadium) {
+		log.info("param : "+stadium.toString());
+		
+		List<Stadium> stadiumList = stadiumDao.findAll(stadium);
+		log.info("return : "+stadiumList.toString());
+		return stadiumList;
 	}
 
 	@Override

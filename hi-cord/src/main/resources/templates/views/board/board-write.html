@@ -1,20 +1,20 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
 	<head>
-		<title>Board Write</title>
+		<title th:text="#{TEXT-BOARD-WRITE}"></title>
 	</head>
 	<div layout:fragment="content">
 		<!-- 게시판 값 입력 -->
 		<div class="container">
 			<div class="panel panel-success">
 				<div class="panel-heading">
-					<label class="panel-title font-20b" th:text="#{TEXT.BOARD.WRITE}"></label>
+					<label class="panel-title font-20b" th:text="#{TEXT-BOARD-WRITE}"></label>
 				</div>
 				<div class="panel-body">
 					<form th:object="${board}" th:action="@{|/board/${bType}/write|}" id="boardForm" method="POST" enctype="multipart/form-data">
 						<div class="row margin-bottom-20">
 							<div class="col-sm-8">
-								<input type="text" class="form-control" th:field="*{boardSubject}" name="boardSubject" id="boardSubject" th:placeholder="#{TEXT.BPH.SUBJECT}"/>
+								<input type="text" class="form-control" th:field="*{boardSubject}" name="boardSubject" id="boardSubject" th:placeholder="#{TEXT-BPH-SUBJECT}"/>
 							</div>
 							<div class="col-sm-4">
 								<select class="form-control" th:field="*{boardType}" name="boardType" id="boardType">
@@ -24,7 +24,7 @@
 						</div>
 						<div class="row margin-bottom-20">
 							<div class="col-sm-12">
-								<input type="file" class="form-control" th:field="*{boardWithFileList}" name="boardWithFileList" id="boardWithFileList" th:placeholder="#{TEXT.BPH.SUBJECT}" multiple="multiple"/>
+								<input type="file" class="form-control" th:field="*{boardWithFileList}" name="boardWithFileList" id="boardWithFileList" th:placeholder="#{TEXT-BPH-SUBJECT}" multiple="multiple"/>
 							</div>
 							<div class="col-sm-12" id="fileList" hidden="hidden">
 								
@@ -32,11 +32,11 @@
 						</div>
 						<div class="row margin-bottom-20">
 							<div class="col-sm-12">
-								<textarea class="form-control" th:field="*{boardContent}" id="boardContent" name="boardContent" th:placeholder="#{TEXT.BPH.CONTENT}"></textarea>
+								<textarea class="form-control" th:field="*{boardContent}" id="boardContent" name="boardContent" th:placeholder="#{TEXT-BPH-CONTENT}"></textarea>
 							</div>
 							<div class="col-sm-12 text-right">
-								<input type="button" class="btn btn-info" th:value="#{TEXT.SAVE}" id="submitBoardBtn">
-								<input type="button" class="btn btn-default" th:value="#{TEXT.CANCEL}" >
+								<input type="button" class="btn btn-info" th:value="#{TEXT-SAVE}" id="submitBoardBtn">
+								<input type="button" class="btn btn-default" th:value="#{TEXT-CANCEL}" >
 							</div>
 						</div>
 					</form>

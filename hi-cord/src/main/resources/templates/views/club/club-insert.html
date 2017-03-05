@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="/fragments/layout">
+	<head>
+		<title th:text="#{TEXT-SC}"></title>
+		<link rel="stylesheet" href="/css/page/sportsClub/club-insert.css"/>
+	</head>
+	<div layout:fragment="content">
+		<div class="container">
+			<form th:object="${sportsClub}" th:action="@{/club/insert}" id="insertClubFrm" method="POST">
+				<div th:replace="/views/club/club-agree"></div>
+				<div class="row">
+			    	<div class="col-sm-12 margin-bottom-10">
+			    		<div>
+			    			<b class="margin-right-20" th:text="#{TEXT-SC-NAME}"></b>
+							<input class="for-center-input form-control" type="text" id="sportsClubName" name="sportsClubName" th:value="${sportsClub.sportsClubName}" placeholder="sportsClubName" />
+							<button class="btn btn-info" type="button" id="nameDupl" th:text="#{TEXT-DUPL}"></button>
+						</div>
+						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubName')}" th:errors="*{sportsClubName}"></div>
+						<div class="error" id="nameMsg"></div>
+			    	</div>
+			    	
+				    <div class="col-sm-12 margin-bottom-10">
+				    	<div>
+				    		<b th:text="#{TEXT-PASSWORD}" class="margin-right-20"></b>
+							<input class="for-center-input form-control" type="password" name="sportsClubPassword" th:value="${sportsClub.sportsClubPassword}" placeholder="Password."/>
+				    	</div>
+						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubPassword')}" th:errors="*{sportsClubPassword}"></div>
+						<div class="error" id="passwordMsg"></div>
+				    </div>
+				    
+				    <div class="col-sm-12 margin-bottom-10">
+				    	<div>
+				    		<b th:text="#{TEXT-TEL}" class="margin-right-20"></b>
+							<input type="password" name="sportsClubTel" th:value="${sportsClub.sportsClubTel}" class="for-center-input form-control" placeholder="Tel."/>
+							<button class="btn btn-info" type="button" id="telDupl" th:text="#{TEXT-DUPL}"></button>
+				    	</div>
+						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubTel')}" th:errors="*{sportsClubTel}"></div>
+						<div class="error" id="passwordMsg"></div>
+				    </div>
+				    
+				    <div class="col-sm-12 margin-bottom-10">
+				    	<div>
+							<b class="margin-right-20" th:text="#{TEXT-NATIONCODE}"></b>
+							<input class="for-center-input form-control" type="text" name="sportsClubNationCode" placeholder="NationCode" th:value="${sportsClub.sportsClubNationCode}"/>
+						</div>
+						<div class="error" th:if="${#fields.hasErrors('sportsClubNationCode')}" th:errors="*{sportsClubNationCode}"></div>
+						<div class="error" id="nationCodeMsg"></div>
+			    	</div>
+				    
+				    <!-- Address && ZipCod -->
+			    	<div class="col-sm-12 margin-bottom-10">
+			    		<div class="margin-bottom-10">
+			    			<b class="margin-right-20" th:text="#{TEXT-ZIPCODE}"></b>
+							<input class="for-center-input form-control" type="text" id="sportsClubZipCode" name="sportsClubZipCode" placeholder="ZipCode" th:value="${sportsClub.sportsClubZipCode}"/>
+							<button class="btn btn-info" id="checkZipCode" type="button" onclick="daumZipCode();" th:text="#{TEXT-ZIPCODE}"></button>
+						</div>
+						<div class="error" th:if="${#fields.hasErrors('sportsClubZipCode')}" th:errors="*{sportsClubZipCode}"></div>
+						<div class="error" id="zipCodeMsg"></div>
+						
+						<div class="col-sm-12 margin-bottom-10">	
+							<div class="margin-bottom-10">
+								<b class="margin-right-20" th:text="#{TEXT-ADDRESS}"></b>
+								<input class="for-center-input form-control" type="text" name="sportsClubAddress" id="sportsClubAddress" placeholder="New Address" th:value="${sportsClub.sportsClubAddress}"/>
+								<input class="for-center-input form-control" type="text" name="sportsClubAddress2" id="sportsClubAddress2" placeholder="Detail Address" th:value="${sportsClub.sportsClubAddress2}"/>
+							</div>
+							<div class="error" th:if="${#fields.hasErrors('sportsClubAddress')}" th:errors="*{sportsClubAddress}"></div>
+							<div class="error" id="addressMsg"></div>
+						</div>
+			    	</div>
+				    
+				    <!-- Get message or Not -->
+					<div class="col-sm-12 margin-top-20 margin-bottom-20">
+						<p>
+							<b><span th:text="#{TEXT-AGREE}"></span></b>
+						</p>
+						<div>
+							<span th:text="#{TEXT-IMPORTANT}"></span>
+						</div>
+			    		<div>
+	    					<span class="glyphicon glyphicon-ok-circle margin-right-5"></span>
+	    					<span th:text="#{TEXT-EMAIL}"></span>
+	    					<span th:if="${sportsClub.sportsClubReceiveEmail==1}">
+	    						<input type="checkbox" name="sportsClubReceiveEmail" value="1" checked="checked">
+	    					</span>
+	    					<span th:if="${sportsClub.sportsClubReceiveEmail!=1}">
+	    						<input type="checkbox" name="sportsClubReceiveEmail" value="1">
+	    					</span>
+	    					
+	    					
+	    					<span class="glyphicon glyphicon-ok-circle margin-right-5 margin-left-10"></span>
+	    					<span th:text="#{TEXT-PHONE}"></span>
+	    					<span th:if="${sportsClub.sportsClubReceivePhone==1}">
+	    						<input type="checkbox" name="sportsClubReceivePhone" value="1" checked="checked">
+	    					</span>
+	    					<span th:if="${sportsClub.sportsClubReceivePhone!=1}">
+	    						<input type="checkbox" name="sportsClubReceivePhone" value="1">
+	   						</span>
+		    			</div>
+					</div>
+					
+					<div class="col-sm-12 margin-bottom-20">
+						<div class="erros-red" th:if="${errorMsg!=null}" th:text="${errorMsg}"></div>
+					</div>
+					
+				    <div class="col-sm-12 margin-bottom-10">
+			    		<input type="button" class="btn btn-success" name="saveSportsClub" value="Save">
+			    	</div>
+			    </div>
+			</form>
+		</div>
+		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+		<script type="text/javascript" src="/js/page/sportsClub/club-insert.js"></script>
+	</div>
+</html>

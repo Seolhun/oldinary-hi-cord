@@ -24,27 +24,27 @@ public class UserAttemptsServiceImpl implements UserAttemptsService {
 	}
 
 	@Override
-	public UserAttempts findById(Long id) {
-		log.info("param : findById"+id.toString());
-		return userAttemptsRepository.findById(id);
+	public UserAttempts selectById(Long id) {
+		log.info("param : selectById"+id.toString());
+		return userAttemptsRepository.selectById(id);
 	}
 	
 	@Override
-	public UserAttempts findByEmail(String email) {
-		log.info("param : findByEmail"+email.toString());
-		return userAttemptsRepository.findByEmail(email);
+	public UserAttempts selectByEmail(String email) {
+		log.info("param : selectByEmail"+email.toString());
+		return userAttemptsRepository.selectByEmail(email);
 	}
 
 	@Override
-	public List<UserAttempts> findAll(UserAttempts userAttempts) {
+	public List<UserAttempts> selectList(UserAttempts userAttempts) {
 		log.info("param : findAll"+userAttempts.toString());
-		return userAttemptsRepository.findAll(userAttempts);
+		return userAttemptsRepository.selectList(userAttempts);
 	}
 
 	@Override
 	public void update(UserAttempts userAttempts) {
 		log.info("param : update"+userAttempts.toString());
-		UserAttempts entity = userAttemptsRepository.findByEmail(userAttempts.getUserAttemptsEmail());
+		UserAttempts entity = userAttemptsRepository.selectByEmail(userAttempts.getUserAttemptsEmail());
 		if (entity != null) {
 			if(userAttempts.getUserAttemptsSuccessFlag()!=null) {
 				entity.setUserAttemptsSuccessFlag(userAttempts.getUserAttemptsSuccessFlag());

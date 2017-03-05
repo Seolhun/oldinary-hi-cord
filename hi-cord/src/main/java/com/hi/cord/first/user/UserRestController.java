@@ -1,5 +1,6 @@
 package com.hi.cord.first.user;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hi.cord.common.model.AjaxResult;
 import com.hi.cord.common.service.CommonService;
+import com.hi.cord.first.club.entity.SportsClub;
 import com.hi.cord.first.price.service.PriceRecordService;
 import com.hi.cord.first.stadium.model.Stadium;
 import com.hi.cord.first.user.entity.User;
@@ -53,24 +56,22 @@ public class UserRestController {
 	@Autowired
 	CommonService cFn;
 
-
+	
 	/**
-	 * 스타디움 인서트
+	 * User insert
 	 * 
 	 * @param Stadium
 	 * @return AjaxResult
 	 * @throws Exception
 	 */
 	@RequestMapping(value = { "/insert" }, method = RequestMethod.POST)
-	public AjaxResult insertStadium(@Valid Stadium stadium, ModelMap model, AjaxResult ajaxResult) throws Exception{
-		ajaxResult.setResult("fail");
-		
+	public AjaxResult insertStadium(@RequestBody @Valid SportsClub sportsClub, ModelMap model, BindingResult result, Principal principal, AjaxResult ajaxResult) throws Exception{
 		
 		return ajaxResult;
 	}
-	
+
 	/**
-	 * 스타디움 Select
+	 * 유저 Select
 	 * 
 	 * @param Stadium
 	 * @return AjaxResult
@@ -84,7 +85,7 @@ public class UserRestController {
 	}
 	
 	/**
-	 * 스타디움 SelectList
+	 * User SelectList
 	 * 
 	 * @param Stadium
 	 * @return AjaxResult
@@ -98,7 +99,7 @@ public class UserRestController {
 	}
 	
 	/**
-	 * 스타디움 Update
+	 * 유저 Update
 	 * 
 	 * @param Stadium
 	 * @return AjaxResult
@@ -114,7 +115,7 @@ public class UserRestController {
 	
 	
 	/**
-	 * 스타디움 delete
+	 * User delete
 	 * 
 	 * @param Stadium
 	 * @return AjaxResult
@@ -135,7 +136,7 @@ public class UserRestController {
 	 * @return AjaxResult
 	 * @throws Exception
 	 */
-	@RequestMapping(value = { "/signup/duplicate/email" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/signup/duplicate/email-json" }, method = RequestMethod.POST)
 	public AjaxResult emailduDupl(@RequestBody User user, HttpServletRequest request, AjaxResult ajaxResult) {
 		if (!userService.isUserEmailUnique(user)) {
 			ajaxResult.setResult("fail");
@@ -152,7 +153,7 @@ public class UserRestController {
 	 * @return AjaxResult
 	 * @throws Exception
 	 */
-	@RequestMapping(value = { "/signup/duplicate/phone" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/signup/duplicate/phone-json" }, method = RequestMethod.POST)
 	public AjaxResult phoneduDupl(@RequestBody User user, HttpServletRequest request, AjaxResult ajaxResult) {
 		if (!userService.isUserPhoneUnique(user)) {
 			ajaxResult.setResult("fail");

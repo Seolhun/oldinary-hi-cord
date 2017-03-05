@@ -22,13 +22,13 @@ public class StadiumServiceImpl implements StadiumService {
 	protected StadiumDAO stadiumDao;
 	
 	@Override
-	public void save(Stadium stadium) {
+	public void insert(Stadium stadium) {
 		log.info("param : "+stadium.toString());
 		stadiumDao.save(stadium);
 	}
 
 	@Override
-	public List<Stadium> findAll(Stadium stadium) {
+	public List<Stadium> selectList(Stadium stadium) {
 		log.info("param : "+stadium.toString());
 		
 		List<Stadium> stadiumList = stadiumDao.findAll(stadium);
@@ -37,7 +37,7 @@ public class StadiumServiceImpl implements StadiumService {
 	}
 	
 	@Override
-	public Stadium findById(Long id) {
+	public Stadium selectById(Long id) {
 		log.info("param : "+id.toString());
 		
 		Stadium stadium=stadiumDao.findById(id);
