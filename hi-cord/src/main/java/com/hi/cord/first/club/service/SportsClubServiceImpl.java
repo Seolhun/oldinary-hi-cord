@@ -31,7 +31,6 @@ public class SportsClubServiceImpl implements SportsClubService {
 		log.info("param : "+sportsClub.toString());
 		
 		List<SportsClub> sportsClubList = sportsClubRepository.selectList(sportsClub);
-		log.info("return : "+sportsClubList.toString());
 		return sportsClubList;
 	}
 	
@@ -40,25 +39,20 @@ public class SportsClubServiceImpl implements SportsClubService {
 		log.info("param : "+id.toString());
 		
 		SportsClub sportsClub=sportsClubRepository.selectById(id);
-		log.info("return : "+sportsClub.toString());
 		return sportsClub;
 	}
 	
 	@Override
 	public SportsClub selectByName(String name) {
 		log.info("param : "+name.toString());
-		
 		SportsClub sportsClub=sportsClubRepository.selectByName(name);
-		log.info("return : "+sportsClub.toString());
 		return sportsClub;
 	}
 	
 	@Override
 	public SportsClub selectByTel(String tel) {
 		log.info("param : "+tel.toString());
-		
 		SportsClub sportsClub=sportsClubRepository.selectByTel(tel);
-		log.info("return : "+sportsClub.toString());
 		return sportsClub;
 	}
 
@@ -66,7 +60,6 @@ public class SportsClubServiceImpl implements SportsClubService {
 	public Boolean delete(Long id) {
 		log.info("param : "+id.toString());
 		SportsClub dbSportsClub = sportsClubRepository.selectById(id);
-		log.info("return : "+dbSportsClub);
 		if (dbSportsClub != null) {
 			sportsClubRepository.delete(dbSportsClub.getSportsClubId());
 			return true;
@@ -78,7 +71,6 @@ public class SportsClubServiceImpl implements SportsClubService {
 	public SportsClub update(SportsClub sportsClub) {
 		log.info("param : "+sportsClub.toString());
 		SportsClub dbSportsClub = sportsClubRepository.selectById(sportsClub.getSportsClubId());
-		log.info("return : "+dbSportsClub);
 		if (dbSportsClub != null) {
 			dbSportsClub.setSportsClubName(sportsClub.getSportsClubName());
 		}

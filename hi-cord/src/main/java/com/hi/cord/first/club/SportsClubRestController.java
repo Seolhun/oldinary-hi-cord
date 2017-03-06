@@ -106,6 +106,7 @@ public class SportsClubRestController {
 	
 	@RequestMapping(value = { "/insert/duplicate/name-json" }, method = RequestMethod.POST)
 	public AjaxResult sportsClubNameDupl(@RequestBody SportsClub sportsClub, HttpServletRequest request, AjaxResult ajaxResult) {
+		log.info("param : sportsClubNameDupl : {}", sportsClub.toString());
 		if (!sportsClubService.isSportsClubNameUnique(sportsClub)) {
 			ajaxResult.setResult("fail");
 			return ajaxResult;
@@ -116,6 +117,7 @@ public class SportsClubRestController {
 	
 	@RequestMapping(value = { "/insert/duplicate/tel-json" }, method = RequestMethod.POST)
 	public AjaxResult sportsClubTelDupl(@RequestBody SportsClub sportsClub, HttpServletRequest request, AjaxResult ajaxResult) {
+		log.info("param : sportsClubTelDupl : {}", sportsClub.toString());
 		if (!sportsClubService.isSportsClubTelUnique(sportsClub)) {
 			ajaxResult.setResult("fail");
 			return ajaxResult;

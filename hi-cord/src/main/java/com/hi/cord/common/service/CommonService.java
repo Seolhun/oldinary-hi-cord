@@ -1,6 +1,7 @@
 package com.hi.cord.common.service;
 
 import java.io.IOException;
+import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,6 +35,10 @@ public interface CommonService {
 	//User IP를 가져오기.	
 	String getUserIP();
 
+//	void sendMessageToUser(String toUser, String primaryKey, HttpServletRequest request, Principal principal) throws Exception;
+//	
+//	void saveWhatIDid(String primaryKey, HttpServletRequest request, Principal principal) throws Exception;
+	
 	//Encode SHA256
 	String buildSHA256(String str);
 	
@@ -44,5 +49,5 @@ public interface CommonService {
 	void sendEmailLockingUser(String toEmail, String userName, String authentication, String httpPath, String password) throws IOException;
 	
 	//@Valid로 검사시 중복값 리다이렉트해주기.
-	void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String getValue, String objectName, String fieldName, String messagePropertyName);
+	void validCheckAndSendError(MessageSource messageSource, BindingResult result, HttpServletRequest request, String objectValidValue, String fieldObjectName, String fieldName, String messagePropertyName);
 }

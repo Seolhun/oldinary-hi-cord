@@ -25,7 +25,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hi.cord.common.model.CommonState;
 import com.hi.cord.first.user.entity.User;
 
@@ -45,7 +44,6 @@ public class SportsClub implements Serializable {
 
 	// User Name
 	@Column(name = "SPORTS_CLUB_NAME", unique = true, length = 30, nullable = false)
-	@JsonProperty("sportClubName")
 	private String sportsClubName;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userInSportsClub")

@@ -65,7 +65,7 @@ public class SportsClubController {
 			cFn.validCheckAndSendError(messageSource, result, request, sportsClubPassowrd, "sportsClub", "sportsClubPassowrd", "INVALID-PASSWORD");
 			return mapping;
 		} else if(sportsClubTel==null || sportsClubTel.length()==0){
-			cFn.validCheckAndSendError(messageSource, result, request, sportsClubName, "sportsClubTel", "sportsClubTel", "INVALID-TEL");
+			cFn.validCheckAndSendError(messageSource, result, request, sportsClubName, "sportsClub", "sportsClubTel", "INVALID-TEL");
 			return mapping;
 		} else if((sportsClubAddress==null || sportsClubAddress.length()==0) || (sportsClubAddres2s==null || sportsClubAddres2s.length()==0)){
 			cFn.validCheckAndSendError(messageSource, result, request, sportsClubName, "sportsClub", "sportsClubAddress", "INVALID-ADDRESS");

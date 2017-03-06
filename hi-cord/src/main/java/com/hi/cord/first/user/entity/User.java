@@ -69,7 +69,7 @@ public class User implements Serializable {
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 	// User UK Email
-	@Pattern(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message = "Invalid Email")
+	@Pattern(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message = "INVALID-EMAIL")
 	@Column(name = "USER_EMAIL", length = 60, unique = true, nullable = false)
 	@JsonProperty("userEmail")
 	private String userEmail;

@@ -83,27 +83,35 @@ public class UserController {
 	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
 	public String signupDo(@Valid User user, BindingResult result, ModelMap model, HttpServletRequest request) throws Exception {
 		String mapping = "views/user/user-signup";
-		String email=user.getUserEmail();
-		String phone=user.getUserPhone();
-		String name=user.getUserName();
+		String userEmail=user.getUserEmail();
+		String userPhone=user.getUserPhone();
+		String userName=user.getUserName();
+		String userAddress=user.getUserAddress();
+		String userAddress2=user.getUserAddress2();
 		
 		// 개인 별로 에러메세지 띄우기 구현 예정(개인별로 해도 메세지가 2개뜨는 문제 발생)
 		model.addAttribute("user", user);
-		if (email==null || email.length()==0) {
+		if (userEmail==null || userEmail.length()==0) {
+			cFn.validCheckAndSendError(messageSource, result, request, userEmail, "user", "userEmail", "INVALID-EMAIL");
 			return mapping;
-		} else if(phone==null || phone.length()==0){
+		} else if(userPhone==null || userPhone.length()==0){
+			cFn.validCheckAndSendError(messageSource, result, request, userPhone, "user", "userPhone", "INVALID-PHONE");
 			return mapping;
-		} else if(name==null || name.length()==0){
+		} else if(userName==null || userName.length()==0){
+			cFn.validCheckAndSendError(messageSource, result, request, userName, "user", "userName", "INVALID-NAME");
+			return mapping;
+		} else if((userAddress==null || userAddress.length()==0) || (userAddress2==null || userAddress2.length()==0)){
+			cFn.validCheckAndSendError(messageSource, result, request, userAddress, "user", "userAddress", "INVALID-ADDRESS");
 			return mapping;
 		} else if (result.hasErrors()) {
 			return mapping;
 		}
 		
 		if (!userService.isUserEmailUnique(user)) {
-			cFn.validCheckAndSendError(messageSource, result, request, email, "user", "userEmail", "NON-UNIQUE-USER-EMAIL");
+			cFn.validCheckAndSendError(messageSource, result, request, userEmail, "user", "userEmail", "NON-UNIQUE-USER-EMAIL");
 			return mapping;
 		} else if (!userService.isUserPhoneUnique(user)) {
-			cFn.validCheckAndSendError(messageSource, result, request, phone, "user", "userPhone", "NON-UNIQUE-USER-PHONE");
+			cFn.validCheckAndSendError(messageSource, result, request, userPhone, "user", "userPhone", "NON-UNIQUE-USER-PHONE");
 			return mapping;
 		}
 		

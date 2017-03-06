@@ -52,7 +52,7 @@ $(document).ready(function(){
 				}
 			},
 			error : function(e){
-				swal("Error","이메일 중복확인이 올바르게 작동하지 않았습니다.");
+				swal("Error","이름 중복확인이 올바르게 작동하지 않았습니다.");
 			}
 		});	
 	});
@@ -100,21 +100,21 @@ $(document).ready(function(){
 		});	
 	});
 
-	$("input[name=saveUser]").click(function(){
-		var emailDupl=$("#emailDupl");
-		var phoneDupl=$("#phoneDupl");
-		var userEmail=$("#userEmail");
-		var userPhone=$("#userPhone");
+	$("input[name=saveSportsClub]").click(function(){
+		var nameDupl=$("#emailDupl");
+		var telDupl=$("#phoneDupl");
+		var sportsClubName=$("#sportsClubName");
+		var sportsClubTel=$("#sportsClubTel");
 		if(!agreeCheck()){
 			return;
-		} else if(userEmail.disabled){
-			userEmail.focus();
+		} else if(sportsClubName.disabled){
+			sportsClubName.focus();
 			return;
-		}  else if(userPhone.disabled){
-			userPhone.focus();
+		}  else if(sportsClubTel.disabled){
+			sportsClubTel.focus();
 			return;
 		} 
-		$("#saveUserFrm").submit();
+		$("#insertClubFrm").submit();
 	});
 })
 
@@ -149,11 +149,11 @@ function daumZipCode() {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('userZipCode').value = data.zonecode; // 5자리
+            document.getElementById('sportsClubZipCode').value = data.zonecode; // 5자리
 																			// 새우편번호
 																			// 사용
-            document.getElementById('userAddress').value = fullRoadAddr;
-            document.getElementById('userAddress2').value = data.jibunAddress;
+            document.getElementById('sportsClubAddress').value = fullRoadAddr;
+            document.getElementById('sportsClubAddress2').value = data.jibunAddress;
 
             // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
             if(data.autoRoadAddress) {

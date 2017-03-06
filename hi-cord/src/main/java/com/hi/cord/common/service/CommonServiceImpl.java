@@ -3,6 +3,7 @@ package com.hi.cord.common.service;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.cord.common.model.Paging;
+import com.hi.cord.first.message.entity.HistoryMessage;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -155,6 +158,47 @@ public class CommonServiceImpl implements CommonService {
 		}
 		return ip;
 	}
+	
+//	@Override
+//	@MessageMapping("/whisper")
+//	public void sendMessageToUser(String toUser, String primaryKey, HttpServletRequest request, Principal principal) throws Exception {
+//		HistoryMessage messageData=new HistoryMessage();
+//		String logUser=principal.getName();
+//		messageData.setMessageCreatedBy(logUser);
+//		messageData.setMessageToUser(toUser);
+//		messageData.setMessageKeyValue(primaryKey);
+//		String uri=request.getRequestURI();
+//		messageData.setMessageUri(uri);
+//		messageData.setMessageContent(toUser+"님의 글에"+logUser+ "님의 글이 달렸습니다.");
+//
+//		//시간계산 로직.
+//		
+//		logger.info("param sendMessageToUser : {}", messageData.toString());
+//		logger.info("param toUser : {}", toUser);
+//		
+//		messageService.insertMessageData(messageData);
+//		messaging.convertAndSendToUser(toUser, "/queue/whisper-message", messageData);
+//	}
+//	
+//	@Override
+//	@MessageMapping("/whisper")
+//	public void saveWhatIDid(String primaryKey, HttpServletRequest request, Principal principal) throws Exception {
+//		HistoryMessage messageData=new HistoryMessage();
+//		String logUser=principal.getName();
+//		messageData.setMessageCreatedBy(logUser);
+//		messageData.setMessageToUser(logUser);
+//		messageData.setMessageKeyValue(primaryKey);
+//		String uri=request.getRequestURI();
+//		messageData.setMessageUri(uri);
+//		messageData.setMessageContent(logUser+"님께서 "+uri+"에 새글을 등록하셨습니다.");
+//
+//		//시간계산 로직.
+//		logger.info("param sendMessageToUser : {}", messageData.toString());
+//		logger.info("param toUser : {}", logUser);
+//		
+//		messageService.insertMessageData(messageData);
+//		messaging.convertAndSendToUser(logUser, "/queue/whisper-message", messageData);
+//	}
 
 	@Override
 	public String buildSHA256(String str) {

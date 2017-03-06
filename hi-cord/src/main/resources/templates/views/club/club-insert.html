@@ -31,11 +31,11 @@
 				    <div class="col-sm-12 margin-bottom-10">
 				    	<div>
 				    		<b th:text="#{TEXT-TEL}" class="margin-right-20"></b>
-							<input type="password" name="sportsClubTel" th:value="${sportsClub.sportsClubTel}" class="for-center-input form-control" placeholder="Tel."/>
+							<input type="text" name="sportsClubTel" id="sportsClubTel" th:value="${sportsClub.sportsClubTel}" class="for-center-input form-control" placeholder="Tel."/>
 							<button class="btn btn-info" type="button" id="telDupl" th:text="#{TEXT-DUPL}"></button>
 				    	</div>
 						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubTel')}" th:errors="*{sportsClubTel}"></div>
-						<div class="error" id="passwordMsg"></div>
+						<div class="error" id="telMsg"></div>
 				    </div>
 				    
 				    <div class="col-sm-12 margin-bottom-10">
@@ -43,7 +43,7 @@
 							<b class="margin-right-20" th:text="#{TEXT-NATIONCODE}"></b>
 							<input class="for-center-input form-control" type="text" name="sportsClubNationCode" placeholder="NationCode" th:value="${sportsClub.sportsClubNationCode}"/>
 						</div>
-						<div class="error" th:if="${#fields.hasErrors('sportsClubNationCode')}" th:errors="*{sportsClubNationCode}"></div>
+						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubNationCode')}" th:errors="*{sportsClubNationCode}"></div>
 						<div class="error" id="nationCodeMsg"></div>
 			    	</div>
 				    
@@ -54,7 +54,7 @@
 							<input class="for-center-input form-control" type="text" id="sportsClubZipCode" name="sportsClubZipCode" placeholder="ZipCode" th:value="${sportsClub.sportsClubZipCode}"/>
 							<button class="btn btn-info" id="checkZipCode" type="button" onclick="daumZipCode();" th:text="#{TEXT-ZIPCODE}"></button>
 						</div>
-						<div class="error" th:if="${#fields.hasErrors('sportsClubZipCode')}" th:errors="*{sportsClubZipCode}"></div>
+						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubZipCode')}" th:errors="*{sportsClubZipCode}"></div>
 						<div class="error" id="zipCodeMsg"></div>
 						
 						<div class="col-sm-12 margin-bottom-10">	
@@ -63,7 +63,7 @@
 								<input class="for-center-input form-control" type="text" name="sportsClubAddress" id="sportsClubAddress" placeholder="New Address" th:value="${sportsClub.sportsClubAddress}"/>
 								<input class="for-center-input form-control" type="text" name="sportsClubAddress2" id="sportsClubAddress2" placeholder="Detail Address" th:value="${sportsClub.sportsClubAddress2}"/>
 							</div>
-							<div class="error" th:if="${#fields.hasErrors('sportsClubAddress')}" th:errors="*{sportsClubAddress}"></div>
+							<div class="erros-red" th:if="${#fields.hasErrors('sportsClubAddress')}" th:errors="*{sportsClubAddress}"></div>
 							<div class="error" id="addressMsg"></div>
 						</div>
 			    	</div>
@@ -85,7 +85,6 @@
 	    					<span th:if="${sportsClub.sportsClubReceiveEmail!=1}">
 	    						<input type="checkbox" name="sportsClubReceiveEmail" value="1">
 	    					</span>
-	    					
 	    					
 	    					<span class="glyphicon glyphicon-ok-circle margin-right-5 margin-left-10"></span>
 	    					<span th:text="#{TEXT-PHONE}"></span>
