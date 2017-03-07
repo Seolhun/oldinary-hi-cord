@@ -4,7 +4,7 @@
 		<div class="col-sm-6">
 			<!-- <label th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</label> -->
 			<span sec:authorize="isAuthenticated()">
-				<b>User : </b><span class="margin-right-10" sec:authentication="name"></span>
+				<b>User : </b><span class="margin-right-10" id="loginUser" sec:authentication="name"></span>
 				<b>Roles : </b><span class="margin-right-10" sec:authentication="principal.authorities"></span>
 				<a th:href="@{/user/logout}" th:text="#{TEXT-LOGOUT}"></a>				
 			</span>
@@ -19,7 +19,10 @@
 		
 		<div class="col-sm-2 text-right">
 			<span sec:authorize="isAuthenticated()">
-				알림창 공간
+				<i class="popover-icon" data-toggle="popover" id="openPopover">
+					<span class="glyphicon glyphicon-envelope text-right" aria-hidden="true"></span>
+				</i>
+				<button class="btn btn-info" onclick="MessageModule.sendMessage()"></button>
 			</span>
 			<span sec:authorize="isAnonymous()">
 				<a class="margin-right-30" th:href="@{/user/login}" th:text="#{TEXT-LOGIN}">LOG IN</a>	

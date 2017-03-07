@@ -3,7 +3,6 @@ package com.hi.cord.common.service;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -17,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -31,7 +29,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.cord.common.model.Paging;
-import com.hi.cord.first.message.entity.HistoryMessage;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -159,16 +156,21 @@ public class CommonServiceImpl implements CommonService {
 		return ip;
 	}
 	
+//	/**
+//	 * 자기 기록시 타인에게 메세지 남기기.(아직 미구현 상태)
+//	 * @param MessageData, String primaryKey, String toUser
+//	 * @return
+//	 * @throws Exception
+//	 */
 //	@Override
 //	@MessageMapping("/whisper")
 //	public void sendMessageToUser(String toUser, String primaryKey, HttpServletRequest request, Principal principal) throws Exception {
-//		HistoryMessage messageData=new HistoryMessage();
 //		String logUser=principal.getName();
 //		messageData.setMessageCreatedBy(logUser);
 //		messageData.setMessageToUser(toUser);
 //		messageData.setMessageKeyValue(primaryKey);
 //		String uri=request.getRequestURI();
-//		messageData.setMessageUri(uri);
+//		messageData.setMessageFromUri(uri);
 //		messageData.setMessageContent(toUser+"님의 글에"+logUser+ "님의 글이 달렸습니다.");
 //
 //		//시간계산 로직.
@@ -180,17 +182,50 @@ public class CommonServiceImpl implements CommonService {
 //		messaging.convertAndSendToUser(toUser, "/queue/whisper-message", messageData);
 //	}
 //	
+//	/**
+//	 * 알림 메세지에 자기기록 남기기.
+//	 * @param MessageData, String primaryKey
+//	 * @return
+//	 * @throws Exception
+//	 */
 //	@Override
 //	@MessageMapping("/whisper")
 //	public void saveWhatIDid(String primaryKey, HttpServletRequest request, Principal principal) throws Exception {
-//		HistoryMessage messageData=new HistoryMessage();
+//		//이동해야 할 데이터의 PK값.
+//		messageData.setMessageKeyValue(primaryKey);
+//		
+//		//로그인 한 유저(기록을 남겨야 할 유저)
 //		String logUser=principal.getName();
 //		messageData.setMessageCreatedBy(logUser);
+//		//메세지를 보내야 할 유저(다른 메소드에서 바뀔 수 있게 만든 것뿐)
 //		messageData.setMessageToUser(logUser);
-//		messageData.setMessageKeyValue(primaryKey);
-//		String uri=request.getRequestURI();
-//		messageData.setMessageUri(uri);
-//		messageData.setMessageContent(logUser+"님께서 "+uri+"에 새글을 등록하셨습니다.");
+//		//POST메세지가 발생한 URI
+//		String fromUri=request.getRequestURI();
+//		messageData.setMessageFromUri(fromUri);
+//		String[] uri=fromUri.split("/");		
+//		String messageUri="";
+//		String toMoveUri="";
+//		//	ex) /tunner/board/notice/insert
+//		//	[0] "" : [1] tunner : [2] board : [3]notice
+//		switch (uri[2]) {
+//		case "board": messageUri="게시판";
+//			//Split Uri를 재결합한다.(이동 할 페이지로) - 2까지가 기본 Page의 Mapping공통된 속성.
+//			for (int i = 0; i <= 2; i++) {
+//				String defaultParam="/";
+//				toMoveUri+=defaultParam+uri[i];
+//			}
+//			messageData.setMessageToMoveUri(toMoveUri);
+//			//게시판 타입데이터.
+//			messageData.setMessageParamType(uri[3]);
+//			break;
+//		case "survey": messageUri="설문지";
+//			break;
+//		case "diagnosis": messageUri="진단";
+//			break;
+////		default:
+////			break;
+//		}
+//		messageData.setMessageContent(logUser+"님께서 "+messageUri+"에 새글을 등록하셨습니다.");
 //
 //		//시간계산 로직.
 //		logger.info("param sendMessageToUser : {}", messageData.toString());

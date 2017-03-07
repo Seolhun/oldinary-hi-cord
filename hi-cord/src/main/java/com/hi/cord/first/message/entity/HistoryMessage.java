@@ -26,7 +26,7 @@ public class HistoryMessage implements Serializable {
 	@Column(name = "HISTORY_MESSAGE_ID")
 	private Long id;
 	
-	@Column(name = "HISTORY_MESSAGE_CONTENT", nullable = false, length = 60)
+	@Column(name = "HISTORY_MESSAGE_CONTENT", nullable = false, length = 100)
 	private String content;
 
 	@Column(name = "HISTORY_MESSAGE_TO_USER", nullable = false, length = 60)

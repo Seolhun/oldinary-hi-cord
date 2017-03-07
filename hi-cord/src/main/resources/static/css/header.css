@@ -1,0 +1,35 @@
+.alertPopOver {
+    width:100%;
+    height: auto;
+    min-width : 450px;
+    max-width : 450px;
+    
+    min-height: 100px;
+    max-height: 550px;
+}
+
+.message-div{
+	height: 34px; 
+	padding-top: 10px;	
+}
+
+.popover-icon{
+	cursor: pointer;
+	
+}
+
+.moveMessageHref {
+	color : #a9a9a9;
+}
+
+.moveMessageHref:hover {
+	color : #337ab7;
+}
+
+.untilNotRead {
+	color : #337ab7;
+}
+
+.untilNotRead:hover {
+	color : #5bc0de;
+}

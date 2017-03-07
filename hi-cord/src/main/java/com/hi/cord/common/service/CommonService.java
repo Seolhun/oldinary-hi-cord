@@ -1,7 +1,6 @@
 package com.hi.cord.common.service;
 
 import java.io.IOException;
-import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,7 +37,7 @@ public interface CommonService {
 //	void sendMessageToUser(String toUser, String primaryKey, HttpServletRequest request, Principal principal) throws Exception;
 //	
 //	void saveWhatIDid(String primaryKey, HttpServletRequest request, Principal principal) throws Exception;
-	
+//	
 	//Encode SHA256
 	String buildSHA256(String str);
 	
