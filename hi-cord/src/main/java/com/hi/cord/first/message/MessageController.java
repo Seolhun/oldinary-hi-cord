@@ -1,10 +1,6 @@
 package com.hi.cord.first.message;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,10 +14,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hi.cord.first.message.entity.HistoryMessage;
 import com.hi.cord.first.message.entity.Result;

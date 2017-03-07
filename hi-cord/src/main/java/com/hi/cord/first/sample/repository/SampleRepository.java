@@ -7,9 +7,9 @@ import com.hi.cord.first.stadium.model.Stadium;
 public interface SampleRepository {
 	void insert(Stadium stadium);
 	
-	Stadium findById(Long id);
+	Stadium selectById(Long id);
 	
-	List<Stadium> findAll(Stadium stadium);
+	List<Stadium> selectList(Stadium stadium);
 	
 	boolean delete(Long id);
 }

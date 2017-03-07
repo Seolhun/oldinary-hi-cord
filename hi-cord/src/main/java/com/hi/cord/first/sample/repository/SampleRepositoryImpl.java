@@ -23,7 +23,7 @@ public class SampleRepositoryImpl extends AbstractRepository<Long, Stadium> impl
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Stadium> findAll(Stadium stadium) {
+	public List<Stadium> selectList(Stadium stadium) {
 		log.info("TEST : findAll"+stadium.toString());
 		Criteria criteria = createEntityCriteria().addOrder(Order.desc("stadiumId")).add(Restrictions.eq("stadiumDelCheck", 0))
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
@@ -33,7 +33,7 @@ public class SampleRepositoryImpl extends AbstractRepository<Long, Stadium> impl
 	}
 	
 	@Override
-	public Stadium findById(Long id) {
+	public Stadium selectById(Long id) {
 		Stadium stadium = getByKey(id);
 		return stadium;
 	}
