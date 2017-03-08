@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hi.cord.common.model.AjaxResult;
@@ -48,7 +47,7 @@ public class BoardRestController {
 		try {
 			loginNameSetToObject(board, auth);
 			board.setBoardType(bType);
-			boardService.save(board);
+			boardService.insert(board);
 		} catch (NullPointerException e) {
 			log.error("ERROR : NullPointerException");
 			ajaxResult.setResult("fail");
@@ -115,7 +114,7 @@ public class BoardRestController {
 		Board board) throws Exception {
 		// 답글 객체 저장
 		board.setBoardType(bType);
-		List<Board> boardList = boardService.findAll(board);
+		List<Board> boardList = boardService.selectList(board);
 
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("bType", bType);
@@ -124,7 +123,7 @@ public class BoardRestController {
 	
 	@RequestMapping(value = "/{bType}/delete/{path}", method = RequestMethod.POST)
 	public String boardAjaxDelete(@RequestBody Board board, HttpServletRequest request, @PathVariable("bType") String bType, @PathVariable Long path) {
-		Board temp = boardService.findById(board.getBoardId());
+		Board temp = boardService.selectById(board.getBoardId());
 		temp.setBoardDelCheck(0);
 		if (boardService.update(temp) == null)
 			;

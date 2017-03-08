@@ -19,6 +19,10 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 
 	@Override
 	public void insert(SportsClub sportsClub) {
+		if (sportsClub != null) {
+			Hibernate.initialize(sportsClub.getSportsClubWithUser());
+			Hibernate.initialize(sportsClub.getSportsClubOwner());
+		}
 		persist(sportsClub);
 	}
 	
@@ -27,6 +31,7 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 		SportsClub sportsClub = getByKeyByLong(id);
 		if (sportsClub != null) {
 			Hibernate.initialize(sportsClub.getSportsClubWithUser());
+			Hibernate.initialize(sportsClub.getSportsClubOwner());
 		}
 		return sportsClub;
 	}
@@ -38,6 +43,7 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 		crit.add(Restrictions.eq("sportsClubName", name));
 		SportsClub sportsClub = (SportsClub)crit.uniqueResult();
 		if (sportsClub != null) {
+			Hibernate.initialize(sportsClub.getSportsClubWithUser());
 			Hibernate.initialize(sportsClub.getSportsClubOwner());
 		}
 		return sportsClub;
@@ -50,6 +56,7 @@ public class SportsClubRepositoryImpl extends AbstractRepository<Long, SportsClu
 		crit.add(Restrictions.eq("sportsClubTel", tel));
 		SportsClub sportsClub = (SportsClub)crit.uniqueResult();
 		if (sportsClub != null) {
+			Hibernate.initialize(sportsClub.getSportsClubWithUser());
 			Hibernate.initialize(sportsClub.getSportsClubOwner());
 		}
 		return sportsClub;

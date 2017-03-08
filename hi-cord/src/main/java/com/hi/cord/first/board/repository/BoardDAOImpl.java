@@ -20,7 +20,7 @@ public class BoardDAOImpl extends AbstractRepository<Long, Board> implements Boa
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Board> findAll(Board board) {
+	public List<Board> selectList(Board board) {
 		log.info("TEST : findAll"+board.toString());
 		Criteria criteria = createEntityCriteria().addOrder(Order.desc("boardId")).add(Restrictions.eq("boardDelCheck", 0)).add(Restrictions.eq("boardType", board.getBoardType()))
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
@@ -30,13 +30,13 @@ public class BoardDAOImpl extends AbstractRepository<Long, Board> implements Boa
 	}
 	
 	@Override
-	public Board findById(Long id) {
+	public Board selectById(Long id) {
 		Board board = getByKey(id);
 		return board;
 	}
 
 	@Override
-	public void save(Board board) {
+	public void insert(Board board) {
 		persist(board);
 	}
 
@@ -45,7 +45,6 @@ public class BoardDAOImpl extends AbstractRepository<Long, Board> implements Boa
 		delete(id);
 	}
 
-	
 	@Override
 	public int getCount(Paging paging) {
 		String condition = "";

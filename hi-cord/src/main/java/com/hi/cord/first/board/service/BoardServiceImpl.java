@@ -22,25 +22,25 @@ public class BoardServiceImpl implements BoardService {
 	protected BoardDAO boardDao;
 	
 	@Override
-	public void save(Board board) {
+	public void insert(Board board) {
 		log.info("param : "+board.toString());
-		boardDao.save(board);
+		boardDao.insert(board);
 	}
 
 	@Override
-	public List<Board> findAll(Board board) {
+	public List<Board> selectList(Board board) {
 		log.info("param : "+board.toString());
 		
-		List<Board> boardList = boardDao.findAll(board);
+		List<Board> boardList = boardDao.selectList(board);
 		log.info("return : "+boardList.toString());
 		return boardList;
 	}
 	
 	@Override
-	public Board findById(Long id) {
+	public Board selectById(Long id) {
 		log.info("param : "+id.toString());
 		
-		Board board=boardDao.findById(id);
+		Board board=boardDao.selectById(id);
 		log.info("return : "+board.toString());
 		return board;
 	}
@@ -49,7 +49,7 @@ public class BoardServiceImpl implements BoardService {
 	public Boolean delete(Long id) {
 		log.info("param : "+id.toString());
 		
-		Board dbBoard = boardDao.findById(id);
+		Board dbBoard = boardDao.selectById(id);
 		log.info("return : "+dbBoard);
 		if (dbBoard != null) {
 			boardDao.delete(dbBoard.getBoardId());
@@ -61,7 +61,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board update(Board board) {
 		log.info("param : "+board.toString());
-		Board dbBoard = boardDao.findById(board.getBoardId());
+		Board dbBoard = boardDao.selectById(board.getBoardId());
 		log.info("return : "+dbBoard);
 		if (dbBoard != null) {
 			dbBoard.setBoardSubject(board.getBoardSubject());

@@ -103,15 +103,21 @@ $(document).ready(function(){
 	$("input[name=saveSportsClub]").click(function(){
 		var nameDupl=$("#emailDupl");
 		var telDupl=$("#phoneDupl");
-		var sportsClubName=$("#sportsClubName");
-		var sportsClubTel=$("#sportsClubTel");
+		
+		var sportsClubName=$("#sportsClubName").val();
+		var sportsClubTel=$("#sportsClubTel").val();
+		var sportsClubPassword=$("#sportsClubPassword").val();
+		
 		if(!agreeCheck()){
 			return;
-		} else if(sportsClubName.disabled){
-			sportsClubName.focus();
+		} else if(sportsClubName.length<1){
+			$("#sportsClubName").focus();
 			return;
-		}  else if(sportsClubTel.disabled){
-			sportsClubTel.focus();
+		} else if(sportsClubPassword.length<1){
+			$("#sportsClubPassword").focus();
+			return;
+		} else if(sportsClubTel.length<1){
+			$("#sportsClubTel").focus();
 			return;
 		} 
 		$("#insertClubFrm").submit();

@@ -24,30 +24,44 @@ public class HistoryMessage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "HISTORY_MESSAGE_ID")
-	private Long id;
+	private Long historyMessageId;
 	
+	//Sending Message Content
 	@Column(name = "HISTORY_MESSAGE_CONTENT", nullable = false, length = 100)
-	private String content;
+	private String historyMessageContent;
+	
+	//Moving where we want Page
+	@Column(name = "HISTORY_MESSAGE_TO_MOVE_URI", nullable = false, length = 100)
+	private String historyMessageToMoveUri;
+	
+	//Moving where we want core Entity Name
+	@Column(name = "HISTORY_MESSAGE_PARAM_TYPE", nullable = false, length = 20)
+	private String historyMessageParamType;
+		
+	//Moving where we want PK data
+	@Column(name = "HISTORY_MESSAGE_TO_MOVE_PK", nullable = false, length = 20)
+	private Long historyMessageToMovePK;
 
+	//Sending message to Who?
 	@Column(name = "HISTORY_MESSAGE_TO_USER", nullable = false, length = 60)
-	private String toUser;
+	private String historyMessageToUser;
 
 	@Column(name = "HISTORY_MESSAGE_CREATED_BY", nullable = false, length = 60)
-	private String createdBy;
-	
-	@Column(name = "HISTORY_MESSAGE_MODIFIED_BY", length = 60)
-	private String modifiedBy;
+	private String historyMessageCreatedBy;
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "HISTORY_MESSAGE_CREATED_DATE")
-	private Date createdDate;
+	private Date historyMessageCreatedDate;
+	
+	@Column(name = "HISTORY_MESSAGE_MODIFIED_BY", length = 60)
+	private String historyMessageModifiedBy;
 	
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "HISTORY_MESSAGE_MODIFIED_DATE")
-	private Date modifiedDate;
+	private Date historyMessageModifiedDate;
 
 	@Column(name = "HISTORY_MESSAGE_DELCHECK", length=5, nullable=false)
-	private String delCheck;
+	private String historyMessageDelCheck;
 }

@@ -7,11 +7,11 @@ import com.hi.cord.first.board.entity.Board;
 
 public interface BoardDAO {
 	
-	List<Board> findAll(Board board);
+	List<Board> selectList(Board board);
 	
-	Board findById(Long id);
+	Board selectById(Long id);
 	
-	void save(Board board);
+	void insert(Board board);
 
 	void delete(Long id);
 	

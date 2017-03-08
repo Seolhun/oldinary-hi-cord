@@ -58,10 +58,10 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public HistoryMessage update(HistoryMessage historyMessage) {
 		log.info("param : "+historyMessage.toString());
-		HistoryMessage dbHistoryMessage = messageRepository.selectById(historyMessage.getId());
+		HistoryMessage dbHistoryMessage = messageRepository.selectById(historyMessage.getHistoryMessageId());
 		log.info("return : "+dbHistoryMessage);
 		if (dbHistoryMessage != null) {
-			dbHistoryMessage.setContent(historyMessage.getContent());
+			dbHistoryMessage.setHistoryMessageContent(historyMessage.getHistoryMessageContent());
 		}
 		return dbHistoryMessage;
 	}

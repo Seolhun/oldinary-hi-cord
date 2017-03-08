@@ -2,6 +2,7 @@ package com.hi.cord.config.websocket;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
@@ -28,7 +29,12 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
 	@Override
 	public boolean configureMessageConverters(List<MessageConverter> messageConverters) {
-		messageConverters.add(new MappingJackson2MessageConverter());
+		messageConverters.add(converter());
 		return super.configureMessageConverters(messageConverters);
+	}
+	
+	@Bean
+	public MessageConverter converter(){
+		return new MappingJackson2MessageConverter();
 	}
 }

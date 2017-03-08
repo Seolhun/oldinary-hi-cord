@@ -1,7 +1,8 @@
 // 메세지 알림창.
 $(document).ready(function(){
 	//WebSocket서버 연결
-	MessageModule.connectMessage();
+//	MessageModule.connectMessage();
+	
 	//Ajax에서 결과값가져와서 Message창에 뿌려주기.
 	var $popover=$('#openPopover').popover({
 		placement: 'left',
@@ -9,13 +10,24 @@ $(document).ready(function(){
 		html: '알림창',
 		title : '<span class="text-info">알림창</span>'+
 				'<button type="button" id="closePopover" class="close">&times;</button>',
-		content : MessageModule.getMessageList()
+//		content : MessageModule.getMessageList()
 	}).on('shown.bs.popover', function () {
 		var $popup = $(this);
 		$(this).next('.popover').find('button.close').click(function (e) {
 			$popup.popover('hide');
 		});
 	})
+	
+//	//sendMessage요청
+//	//게시물 작성 시
+//	$("#submit").click(function(){
+//		MessageModule.sendMessage();
+//	});
+//	
+//	//댓글 작성 시
+//	$("#commentParentSubmit").click(function(){
+//		MessageModule.sendMessage();
+//	});
 });
 
 //Message Module
@@ -28,7 +40,7 @@ var MessageModule=(function(){
 			async : false,
 			global : false,
 			type : "GET",
-			url : "/tunner/message/from/user",
+			url : "/message/from/user",
 			success : function(response) {
 				if(response.length==0){
 					return innerHtml+='<div class="row margin-top-10 margin-left-5">알림이 없습니다.</div>';
@@ -43,7 +55,7 @@ var MessageModule=(function(){
 				});
 			},
 			error : function(e) {
-				
+				console.log("Error");
 			}
 		})
 		return innerHtml;
@@ -99,16 +111,20 @@ var MessageModule=(function(){
 	
 	//private Method
 	var _showGetMessage = function (message){
+		var messageCreatedDate=new Date();
 		var innerHtml="";
 			if(message.messageReadFlag=='N'){
-				innerHtml+='<div class="row margin-bottom-10"><a class="untilNotRead" href="/tunner/message/move/'+message.messageIdx+'"><span class="col-sm-9">'+message.messageContent+'</span><span class="col-sm-3 text-center">'+_getTimeBetweenObjectAndDb(message.messageCreatedDate)+'</span></a></div>';						
+				innerHtml+='<div class="row margin-bottom-10"><a class="untilNotRead" href="/tunner/message/move/'+message.messageIdx+'"><span class="col-sm-9">'+message.messageContent+'</span><span class="col-sm-3 text-center">'+_getTimeBetweenObjectAndDb(messageCreatedDate)+'</span></a></div>';						
 			}else {
-				innerHtml+='<div class="row margin-bottom-10"><a class="moveMessageHref" href="/tunner/message/move/'+message.messageIdx+'"><span class="col-sm-9">'+message.messageContent+'</span><span class="col-sm-3 text-center">'+_getTimeBetweenObjectAndDb(message.messageCreatedDate)+'</span></a></div>';
+				innerHtml+='<div class="row margin-bottom-10"><a class="moveMessageHref" href="/tunner/message/move/'+message.messageIdx+'"><span class="col-sm-9">'+message.messageContent+'</span><span class="col-sm-3 text-center">'+_getTimeBetweenObjectAndDb(messageCreatedDate)+'</span></a></div>';
 			}
 		$("#popover-content").prepend(innerHtml);
 		
-		//Last Message Remove		
-		$('.popover-content').children().last().remove();
+		//Last Message Remove
+		var contentLength=$('.popover-content').children().length;
+		if(contentLength>=5){
+			$('.popover-content').children().last().remove();			
+		}
 		
 		//Popover의 새로운 메세지리스트 출력하기.
 		var popover = $('#openPopover').data('bs.popover');
@@ -117,14 +133,15 @@ var MessageModule=(function(){
 	
 	//public Method
 	var sendMessage = function(){
-		var message = {}, messageLogName;
-		messageToUser = $('#loginUser').html();
+		var messageData = {}, messageFromUri, messageCreatedDate;
 		
-		console.log(messageToUser);
+		messageFromUri=window.location.pathname;
+		messageCreatedDate=new Date();
 		
-		message['createdBy'] = messageToUser;
+		messageData['messageFromUri'] = messageFromUri;
+		messageData['messageCreatedDate'] = messageCreatedDate;
 		
-		stompClient.send("/hi-cord/whisper-user", {}, JSON.stringify(message));
+		stompClient.send("/tunner-app/whisper-user", {}, JSON.stringify(messageData));
 	}
 	
 	var getMessageList = function(){
@@ -132,17 +149,15 @@ var MessageModule=(function(){
 	}
 	
 	var connectMessage = function(){
-		var url = 'http://' + window.location.host + '/message';
-	
+		var url = window.location.protocol+'//'+ window.location.host + '/tunner/message';
+		
 		/* Stomp Client Created */;
 		var socket = new SockJS(url);
 
 		/* Stomp Client Created */;
 		stompClient = Stomp.over(socket);
 		stompClient.connect({}, function(frame) {
-			stompClient.subscribe("/user-message/queue/whisper-message", function(calResult) {
-				console.log(calResult);
-				console.log("subscribe 정상 작동");
+			stompClient.subscribe("/from-user/queue/whisper-message", function(calResult) {
 				_showGetMessage(JSON.parse(calResult.body));
 			});
 		});

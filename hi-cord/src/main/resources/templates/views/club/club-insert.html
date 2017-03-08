@@ -22,7 +22,7 @@
 				    <div class="col-sm-12 margin-bottom-10">
 				    	<div>
 				    		<b th:text="#{TEXT-PASSWORD}" class="margin-right-20"></b>
-							<input class="for-center-input form-control" type="password" name="sportsClubPassword" th:value="${sportsClub.sportsClubPassword}" placeholder="Password."/>
+							<input class="for-center-input form-control" type="password" name="sportsClubPassword" id="sportsClubPassword" th:value="${sportsClub.sportsClubPassword}" placeholder="Password."/>
 				    	</div>
 						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubPassword')}" th:errors="*{sportsClubPassword}"></div>
 						<div class="error" id="passwordMsg"></div>
@@ -52,7 +52,7 @@
 			    		<div class="margin-bottom-10">
 			    			<b class="margin-right-20" th:text="#{TEXT-ZIPCODE}"></b>
 							<input class="for-center-input form-control" type="text" id="sportsClubZipCode" name="sportsClubZipCode" placeholder="ZipCode" th:value="${sportsClub.sportsClubZipCode}"/>
-							<button class="btn btn-info" id="checkZipCode" type="button" onclick="daumZipCode();" th:text="#{TEXT-ZIPCODE}"></button>
+							<button class="btn btn-info" type="button" id="checkZipCode" onclick="daumZipCode();" th:text="#{TEXT-ZIPCODE}"></button>
 						</div>
 						<div class="erros-red" th:if="${#fields.hasErrors('sportsClubZipCode')}" th:errors="*{sportsClubZipCode}"></div>
 						<div class="error" id="zipCodeMsg"></div>

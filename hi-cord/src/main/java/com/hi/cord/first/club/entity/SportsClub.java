@@ -21,6 +21,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -68,8 +70,8 @@ public class SportsClub implements Serializable {
 	private String sportsClubPassword;
 
 	// How many users can join here.
-	@Column(name = "SPORTS_CLUB_CAPACITY", length = 20, nullable = false)
-	private Integer sportsClubCapacity = 30;
+	@Column(name = "SPORTS_CLUB_CAPACITY", length = 20, nullable=false)
+	private int sportsClubCapacity = 30;
 
 	// How many users can join here.
 	@Column(name = "SPORTS_CLUB_TEL", length = 20, nullable = true)
@@ -91,19 +93,19 @@ public class SportsClub implements Serializable {
 	// @Embedded
 	// private CommonAddress commonAddress;
 
-	@Column(name = "SPORTS_CLUB_ACTIVE_POINT", length = 10, nullable = true)
-	private Integer sportsClubActivePoint = 0;
+	@Column(name = "SPORTS_CLUB_ACTIVE_POINT", length = 10, nullable=false)
+	private int sportsClubActivePoint = 0;
 
-	@Column(name = "SPORTS_CLUB_PAID_POINT", length = 10, nullable = true)
-	private Integer sportsClubPaidPoint = 0;
+	@Column(name = "SPORTS_CLUB_PAID_POINT", length = 10, nullable=false)
+	private int sportsClubPaidPoint = 0;
 
 	// Owner of SportsClub boolean if receive mail or not through the Email
-	@Column(name = "SPORTS_CLUB_RECEIVE_MAIL", length = 1, nullable = true)
-	private Integer sportsClubReceiveEmail = 0;
+	@Column(name = "SPORTS_CLUB_RECEIVE_MAIL", length = 1, nullable=false)
+	private int sportsClubReceiveEmail = 0;
 
 	// Owner of SportsClub boolean if receive message or not through the Phone
-	@Column(name = "SPORTS_CLUB_RECEIVE_PHONE", length = 1, nullable = true)
-	private Integer sportsClubReceivePhone = 0;
+	@Column(name = "SPORTS_CLUB_RECEIVE_PHONE", length = 1, nullable=false)
+	private int sportsClubReceivePhone = 0;
 
 	// SportsClub, Who did their's data modified?
 	@Column(name = "SPORTS_CLUB_MODIFIED_BY", length = 60, nullable = true)
@@ -122,8 +124,8 @@ public class SportsClub implements Serializable {
 	private Date sportsClubModifiedDate;
 
 	// SportsClub, Boolean account is deleted or not
-	@Column(name = "SPORTS_CLUB_DELCHECK", length = 1, nullable = true)
-	private Integer sportsClubDelCheck = 0;
+	@Column(name = "SPORTS_CLUB_DELCHECK", length = 1, nullable=false)
+	private int sportsClubDelCheck = 0;
 	// @Embedded
 	// private CommonByDate commonByDate;
 
@@ -132,10 +134,19 @@ public class SportsClub implements Serializable {
 	private String sportsClubState = CommonState.ACTIVE.getState();
 
 	// SportsClub, Boolean account is NON_LOCKED or not.
-	@Column(name = "SPORTS_CLUB_PRIVATE_AGREE", length = 1, nullable = true)
-	private Integer sportsClubPrivateAgree = 0;
+	@Column(name = "SPORTS_CLUB_PRIVATE_AGREE", length = 1, nullable=false)
+	private int sportsClubPrivateAgree = 0;
 
 	// SportsClub, Boolean account is NON_LOCKED or not.
-	@Column(name = "SPORTS_CLUB_SERVICE_AGREE", length = 1, nullable = true)
-	private Integer sportsClubServiceAgree = 0;
+	@Column(name = "SPORTS_CLUB_SERVICE_AGREE", length = 1, nullable=false)
+	private int sportsClubServiceAgree = 0;
+	
+	//Type==1이면 Password를 바꾼다.
+	@Transient
+	private int type;
+	
+	@Version
+	@Column(name = "SPORTS_CLUB_VERSION", nullable=false)
+	private int sportsClubVersion;
+	
 }

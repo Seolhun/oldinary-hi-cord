@@ -22,7 +22,6 @@
 				<i class="popover-icon" data-toggle="popover" id="openPopover">
 					<span class="glyphicon glyphicon-envelope text-right" aria-hidden="true"></span>
 				</i>
-				<button class="btn btn-info" onclick="MessageModule.sendMessage()"></button>
 			</span>
 			<span sec:authorize="isAnonymous()">
 				<a class="margin-right-30" th:href="@{/user/login}" th:text="#{TEXT-LOGIN}">LOG IN</a>	

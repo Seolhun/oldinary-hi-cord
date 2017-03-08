@@ -82,7 +82,7 @@ public class BoardController {
 	@RequestMapping(value = "/{bType}/detail/{path}", method = RequestMethod.GET)
 	public String boardDetail(Model model, @PathVariable("path") Long path, @PathVariable("bType") String bType,
 			HttpServletRequest request, HttpServletResponse response) {
-		Board board = boardService.findById(path);
+		Board board = boardService.selectById(path);
 
 		// 저장된 hit 쿠키 불러오기
 		Cookie cookies[] = request.getCookies();
@@ -122,7 +122,7 @@ public class BoardController {
 		if (boardService.update(board) != null) {
 			redirectAttributes.addFlashAttribute("modifyBoard", "success");
 
-			Board temp = boardService.findById(path);
+			Board temp = boardService.selectById(path);
 			model.addAttribute("item", temp);
 		} else {
 			redirectAttributes.addFlashAttribute("modifyBoard", "unsuccess");
@@ -144,7 +144,7 @@ public class BoardController {
 		replyService.save(reply);
 
 		// 게시판 ReplyDepth 증가
-		board = boardService.findById(path);
+		board = boardService.selectById(path);
 		board.setBoardReplyDepth(board.getBoardReplyDepth() + 1);
 		boardService.update(board);
 

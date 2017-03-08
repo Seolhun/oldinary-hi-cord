@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -71,17 +72,14 @@ public class User implements Serializable {
 	// User UK Email
 	@Pattern(regexp = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,3})$", message = "INVALID-EMAIL")
 	@Column(name = "USER_EMAIL", length = 60, unique = true, nullable = false)
-	@JsonProperty("userEmail")
 	private String userEmail;
 
 	// User UK Value
 	@Column(name = "USER_PHONE", length = 30, unique = true, nullable = false)
-	@JsonProperty("userPhone")
 	private String userPhone;
 
 	// User Name
 	@Column(name = "USER_NAME", length = 30, nullable = false)
-	@JsonProperty("userName")
 	private String userName;
 
 //	// User Photo to show others
@@ -109,19 +107,19 @@ public class User implements Serializable {
 //	@Embedded
 //	private CommonAddress commonAddress;
 
-	@Column(name = "USER_ACTIVE_POINT", length = 10, nullable = true)
-	private Integer userActivePoint=0;
+	@Column(name = "USER_ACTIVE_POINT", length = 10, nullable=false)
+	private int userActivePoint=0;
 
-	@Column(name = "USER_PAID_POINT", length = 10, nullable = true)
-	private Integer userPaidPoint=0;
+	@Column(name = "USER_PAID_POINT", length = 10, nullable=false)
+	private int userPaidPoint=0;
 
 	// User boolean if receive mail or not through the Email
-	@Column(name = "USER_RECEIVE_MAIL", length = 1, nullable = true)
-	private Integer userReceiveEmail=0;
+	@Column(name = "USER_RECEIVE_MAIL", length = 1, nullable=false)
+	private int userReceiveEmail=0;
 
 	// User boolean if receive message or not through the Phone
-	@Column(name = "USER_RECEIVE_PHONE", length = 1, nullable = true)
-	private Integer userReceivePhone=0;
+	@Column(name = "USER_RECEIVE_PHONE", length = 1, nullable=false)
+	private int userReceivePhone=0;
 
 	// User, Who did their's data modified?
 	@Column(name = "USER_MODIFIED_BY", length = 60, nullable = true)
@@ -140,8 +138,8 @@ public class User implements Serializable {
 	private Date userModifiedDate;
 
 	// User, Boolean account is deleted or not
-	@Column(name = "USER_DELCHECK", length = 1, nullable = true)
-	private Integer userDelCheck=0;
+	@Column(name = "USER_DELCHECK", length = 1, nullable=false)
+	private int userDelCheck=0;
 	
 //	@Embedded
 //	private CommonByDate commonByDate;
@@ -151,29 +149,33 @@ public class User implements Serializable {
 	private String userState = CommonState.ACTIVE.getState();
 
 	// User, Boolean account is NON_EXPIRED or not.
-	@Column(name = "USER_ACCOUNT_NON_EXPIRED", length = 1, nullable = true)
-	private Integer userAccountNonExpired=0;
+	@Column(name = "USER_ACCOUNT_NON_EXPIRED", length = 1, nullable=false)
+	private int userAccountNonExpired=0;
 
 	// User, Boolean account is CREDENTIALS_NON_EXPIRED or not.
-	@Column(name = "USER_CREDENTIALS_NON_EXPIRED", length = 1, nullable = true)
-	private Integer userCredentialsNonExpired=0;
+	@Column(name = "USER_CREDENTIALS_NON_EXPIRED", length = 1, nullable=false)
+	private int userCredentialsNonExpired=0;
 
 	// User, Boolean account is NON_LOCKED or not.
-	@Column(name = "USER_ACCOUNT_NON_LOCKED", length = 1, nullable = true)
-	private Integer userAccountNonLocked=0;
+	@Column(name = "USER_ACCOUNT_NON_LOCKED", length = 1, nullable=false)
+	private int userAccountNonLocked=0;
 	
 	// User, Boolean account is NON_LOCKED or not.
-	@Column(name = "USER_PRIVATE_AGREE", length = 1, nullable = true)
-	private Integer userPrivateAgree=0;
+	@Column(name = "USER_PRIVATE_AGREE", length = 1, nullable=false)
+	private int userPrivateAgree=0;
 	
 	// User, Boolean account is NON_LOCKED or not.
-	@Column(name = "USER_SERVICE_AGREE", length = 1, nullable = true)
-	private Integer userServiceAgree=0;
+	@Column(name = "USER_SERVICE_AGREE", length = 1, nullable=false)
+	private int userServiceAgree=0;
 	
 	@Column(name = "USER_LOCKED_AUTH", length = 100, nullable = true)
 	private String userLockedAuth;
 	
 	//Type==1이면 Password를 바꾼다.
 	@Transient
-	private Integer type;
+	private int type;
+	
+	@Version
+	@Column(name = "USER_VERSION", nullable=false)
+	private int userVersion;
 }

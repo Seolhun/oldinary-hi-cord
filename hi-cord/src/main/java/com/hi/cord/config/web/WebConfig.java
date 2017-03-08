@@ -21,5 +21,4 @@ public class WebConfig extends WebMvcAutoConfiguration{
 	public MultipartResolver multipartResolver(){
 		return new StandardServletMultipartResolver();
 	}
-	
 }
