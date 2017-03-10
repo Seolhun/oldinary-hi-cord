@@ -53,6 +53,8 @@ dependencies {
 	//MariaDB
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	runtime('mysql:mysql-connector-java')
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-redis', version: '1.4.5.RELEASE'
+	
 	
 	//Lombok
 	compile("org.projectlombok:lombok:1.16.12")

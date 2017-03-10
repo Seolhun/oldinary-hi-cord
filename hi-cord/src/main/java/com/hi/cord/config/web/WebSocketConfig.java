@@ -1,4 +1,4 @@
-package com.hi.cord.config.websocket;
+package com.hi.cord.config.web;
 
 import java.util.List;
 
