@@ -6,7 +6,7 @@
 - IDE : Spring Tool Suite
 - WAS : Tomcat 9.0
 - OS : OSX  
-- Framework : Spring Boot(Security, JPA, Thymleaf, MongoDB, Stomp), Bootstrap, AngularJS  
+- Framework : Spring Boot(Security, JPA, Thymleaf), Bootstrap, AngularJS(사용 예정),  MongoDB(사용 예정), Stomp(사용 예정)
 - Library : Summernote, JsGrid
 
 
