@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hi-cord.iml" filepath="$PROJECT_DIR$/hi-cord.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hi-cord_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hi-cord_main.iml" group="hi-cord" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hi-cord_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hi-cord_test.iml" group="hi-cord" />
+    </modules>
+  </component>
+</project>
